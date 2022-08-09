@@ -5,7 +5,9 @@ require "hanami/routes"
 module Palaver
   class Routes < Hanami::Routes
     define do
-      root { "Hello from Hanami" }
+      slice :discussion, at: "/" do
+        root to: "index.home"
+      end
     end
   end
 end
