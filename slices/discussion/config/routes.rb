@@ -1,5 +1,5 @@
 module Discussion
   class Routes < Hanami::Routes
-    root to: "index.home"
+    root to: "home.index"
   end
 end

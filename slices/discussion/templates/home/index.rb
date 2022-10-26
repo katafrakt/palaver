@@ -1,4 +1,4 @@
-class Discussion::Components::Home::IndexPage < Phlex::View
+class Discussion::Templates::Home::Index < Phlex::View
   def initialize(target:)
     @target = target
   end
