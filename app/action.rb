@@ -4,7 +4,7 @@
 require "hanami/action"
 require "phlex"
 
-class Layout < Phlex::Component
+class Layout < Phlex::View
   def initialize(component, args)
     @component = component
     @args = args
@@ -13,11 +13,11 @@ class Layout < Phlex::Component
   def template
     html do
       head do
-        title "Palaver"
+        title { "Palaver" }
         link rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
       end
       body do
-        component @component, **@args
+        render @component.new(**@args)
       end
     end
   end

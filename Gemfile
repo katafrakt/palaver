@@ -20,3 +20,5 @@ group :test do
   gem "rack-test"
 end
 
+
+gem "dry-types", "~> 1.6"

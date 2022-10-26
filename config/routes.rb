@@ -4,10 +4,6 @@ require "hanami/routes"
 
 module Palaver
   class Routes < Hanami::Routes
-    define do
-      slice :discussion, at: "/" do
-        root to: "index.home"
-      end
-    end
+    slice :discussion, at: "/"
   end
 end
