@@ -1,9 +1,18 @@
-class Discussion::Templates::Home::Index < Phlex::View
-  def initialize(target:)
-    @target = target
+ class Discussion::Templates::Home::Index < Phlex::View
+  attr_reader :categories
+
+  def initialize(categories:)
+    @categories = categories
   end
 
   def template
-    p { "Hello #{@target}!" }
+    div do
+      h4(class: "is-size-2") { "Categories" }
+      div(class: "section") do
+        categories.each do |category|
+          render Discussion::Components::CategoryRow.new(category: category)
+        end    
+      end
+    end
   end
 end

@@ -16,8 +16,19 @@ class Layout < Phlex::View
         title { "Palaver" }
         link rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
       end
+
       body do
-        render @view.new(**@args)
+        nav(class: "navbar", role: "navigation") do
+          div(class: "navbar-brand") do
+            div(class: "navbar-item") do
+              a(href: "/") { "Home" }
+            end
+          end
+        end
+
+        section(class: "section") do
+          render @view.new(**@args)
+        end
       end
     end
   end
