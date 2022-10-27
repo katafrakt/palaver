@@ -18,6 +18,7 @@ end
 
 group :cli, :development, :test do
   gem "hanami-rspec"
+  gem "dotenv", "~> 2.7"
 end
 
 group :development do
@@ -28,5 +29,8 @@ group :test do
   gem "rack-test"
 end
 
-
 gem "dry-types", "~> 1.6"
+
+gem "rom-sql", "~> 3.5"
+
+gem "sqlite3", "~> 1.5"

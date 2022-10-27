@@ -22,16 +22,16 @@ class Discussion::Components::CategoryRow < Phlex::View
   def template
     article(class: 'category mb-5') do
       h4(class: "is-size-4") do 
-        a(href: "/") { category.title }
+        a(href: "/") { category.name }
       end
 
       div do
-        render Detail.new("Topics", category.num_topics)
+        render Detail.new("Topics", category.topics.size)
         raw " &middot; "
-        render Detail.new("Posts", category.num_posts)
+        render Detail.new("Messages", 129)
         raw " &middot; "
         span do
-          text "Last post by "
+          text "Last message by "
           a(href: "/") { "@geronimo" }
           whitespace
           text "in"
