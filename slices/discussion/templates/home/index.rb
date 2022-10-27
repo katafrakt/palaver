@@ -1,4 +1,4 @@
- class Discussion::Templates::Home::Index < Phlex::View
+class Discussion::Templates::Home::Index < Phlex::View
   attr_reader :categories
 
   def initialize(categories:)
@@ -11,7 +11,7 @@
       div(class: "section") do
         categories.each do |category|
           render Discussion::Components::CategoryRow.new(category: category)
-        end    
+        end
       end
     end
   end

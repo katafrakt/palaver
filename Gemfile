@@ -8,7 +8,7 @@ gem "hanami-router", "~> 2.0.0.beta"
 gem "hanami-controller", "~> 2.0.0.beta"
 gem "hanami", "~> 2.0.0.beta"
 
-gem 'phlex'
+gem "phlex"
 
 gem "puma"
 
@@ -19,6 +19,7 @@ end
 group :cli, :development, :test do
   gem "hanami-rspec"
   gem "dotenv", "~> 2.7"
+  gem "standard"
 end
 
 group :development do
