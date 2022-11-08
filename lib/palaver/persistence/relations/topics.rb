@@ -6,6 +6,7 @@ module Persistence
       schema(:topics, infer: true) do
         associations do
           belongs_to :categories, as: :category
+          has_many :posts
         end
       end
     end

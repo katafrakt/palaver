@@ -6,6 +6,10 @@ module Discussion
       def all
         categories.combine(:topics).to_a
       end
+
+      def get(id)
+        categories.by_pk(id).one!
+      end
     end
   end
 end

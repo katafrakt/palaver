@@ -22,7 +22,7 @@ class Discussion::Components::CategoryRow < Phlex::View
   def template
     article(class: "category mb-5") do
       h4(class: "is-size-4") do
-        a(href: "/") { category.name }
+        a(href: "/cat/#{category.id}") { category.name }
       end
 
       div do
