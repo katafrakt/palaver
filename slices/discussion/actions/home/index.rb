@@ -6,6 +6,6 @@ class Discussion::Actions::Home::Index < Palaver::Action
           ]
 
   def handle(req, res)
-    res.body = render(Discussion::Templates::Home::Index, categories: repo.all)
+    res.body = render(Discussion::Templates::Home::Index, categories: repo.homepage)
   end
 end

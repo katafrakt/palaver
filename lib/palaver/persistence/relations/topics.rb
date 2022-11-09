@@ -7,7 +7,12 @@ module Persistence
         associations do
           belongs_to :categories, as: :category
           has_many :posts
+          has_one :categories, as: :latest_topic
         end
+      end
+
+      def with_posts
+        left_join(posts)
       end
     end
   end

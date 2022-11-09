@@ -13,6 +13,7 @@ Hanami.app.register_provider :persistence, namespace: true do
     end
 
     rom_config.plugin(:sql, relations: :auto_restrictions)
+    rom_config.gateways[:default].use_logger(Logger.new($stdout)) if ENV['LOG_SQL']
 
     register "config", rom_config
     register "db", rom_config.gateways[:default].connection

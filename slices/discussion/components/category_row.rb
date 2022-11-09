@@ -26,17 +26,19 @@ class Discussion::Components::CategoryRow < Phlex::View
       end
 
       div do
-        render Detail.new("Topics", category.topics.size)
+        render Detail.new("Topics", category.topic_count)
         raw " &middot; "
-        render Detail.new("Messages", 129)
+        render Detail.new("Messages", category.post_count)
         raw " &middot; "
+        if category.latest_topic
         span do
           text "Last message by "
           a(href: "/") { "@geronimo" }
           whitespace
           text "in"
           whitespace
-          a(href: "/") { "What's going on here?" }
+          a(href: "/") { category.latest_topic.title }
+        end
         end
       end
     end

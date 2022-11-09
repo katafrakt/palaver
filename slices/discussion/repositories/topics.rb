@@ -4,13 +4,15 @@ module Discussion
       def create(title:, content:, category_id:)
         topics.transaction do
           topic = topics.changeset(:create, title: title, category_id: category_id).commit
-          posts.changeset(:create, text: content).associate(topic).commit
+          post = posts.changeset(:create, text: content).associate(topic).commit
+          topics.by_pk(topic.id).changeset(:update, first_post_id: post.id, last_post_id: post.id).commit
+          categories.by_pk(category_id).changeset(:update, latest_topic_id: topic.id).commit
           topic
         end
       end
 
       def by_category(category_id)
-        topics.where(category_id: category_id).to_a
+        topics.where(category_id: category_id).combine(:latest_topic).to_a
       end
     end
   end

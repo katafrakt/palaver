@@ -3,8 +3,8 @@ module Discussion
     class Categories < Palaver::Repository[:categories]
       commands :create
 
-      def all
-        categories.combine(:topics).to_a
+      def homepage
+        categories.with_counts.combine(:latest_topic).to_a
       end
 
       def get(id)

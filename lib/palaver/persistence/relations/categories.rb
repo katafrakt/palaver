@@ -6,7 +6,18 @@ module Persistence
       schema(:categories, infer: true) do
         associations do
           has_many :topics
+          belongs_to :topics, as: :latest_topic
         end
+      end
+
+      def with_counts
+        left_join(topics).left_join(:posts, topic_id: :id).select_append {
+          topics = schema.associations[:topics].target
+          [
+            integer::count(topics.associations[:posts].target[:topic_id]).as(:post_count),
+            integer::count(topics[:category_id]).as(:topic_count)
+          ]
+        }.group(:id)
       end
     end
   end
