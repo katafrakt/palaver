@@ -29,18 +29,24 @@ class Discussion::Components::CategoryRow < Phlex::View
         render Detail.new("Topics", category.topic_count)
         raw " &middot; "
         render Detail.new("Messages", category.post_count)
-        raw " &middot; "
         if category.latest_topic
-        span do
-          text "Last message by "
-          a(href: "/") { category.latest_topic.last_post.author.nickname }
-          whitespace
-          text "in"
-          whitespace
-          a(href: "/") { category.latest_topic.title }
-        end
+          raw " &middot; "
+          span do
+            text "Last message by "
+            a(href: "/") { most_recent_topic.last_post.author.nickname }
+            whitespace
+            text "in"
+            whitespace
+            a(href: "/") { most_recent_topic.title }
+          end
         end
       end
     end
+  end
+
+  private
+
+  def most_recent_topic
+    category.latest_topic
   end
 end
