@@ -5,7 +5,9 @@ require "rom/sql/rake_task"
 
 namespace :db do
   task setup: :environment do
-    ROM::SQL::RakeSupport.env = Hanami.app["persistence.config"]
+    require "rom/core"
+    rom_config = ROM::Configuration.new(:sql, Hanami.app["settings"].database_url)
+    ROM::SQL::RakeSupport.env = rom_config
   end
 
   task seeds: :reset do
