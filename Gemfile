@@ -34,4 +34,4 @@ gem "dry-types", "~> 1.6"
 
 gem "rom-sql", "~> 3.5"
 
-gem "sqlite3", "~> 1.5"
+gem "pg"
