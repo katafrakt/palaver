@@ -33,7 +33,7 @@ class Discussion::Components::CategoryRow < Phlex::View
         if category.latest_topic
         span do
           text "Last message by "
-          a(href: "/") { "@geronimo" }
+          a(href: "/") { category.latest_topic.last_post.author.nickname }
           whitespace
           text "in"
           whitespace

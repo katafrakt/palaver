@@ -8,6 +8,7 @@ module Persistence
           belongs_to :categories, as: :category
           has_many :posts
           has_one :categories, as: :latest_topic
+          belongs_to :posts, as: :last_post
         end
       end
 
