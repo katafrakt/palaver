@@ -2,9 +2,10 @@
 
 Hanami.app.register_provider :persistence, namespace: true do
   prepare do
-    require "rom-changeset"
     require "rom/core"
+    require "rom-changeset"
     require "rom/sql"
+    require "rom/compat"
 
     rom_config = ROM::Configuration.new(:sql, target["settings"].database_url)
 

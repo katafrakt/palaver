@@ -11,8 +11,11 @@ module Persistence
       end
 
       def with_counts
+        # TODO: figure out why I need to do this dance
+        # ROM 6 bug?
+        _schema = categories
         left_join(topics).left_join(:posts, topic_id: :id).select_append {
-          topics = schema.associations[:topics].target
+          topics = _schema.associations[:topics].target
           [
             integer::count(topics.associations[:posts].target[:topic_id]).as(:post_count),
             integer::count(topics[:category_id]).as(:topic_count)
