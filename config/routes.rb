@@ -5,5 +5,6 @@ require "hanami/routes"
 module Palaver
   class Routes < Hanami::Routes
     slice :discussion, at: "/"
+    slice :account, at: "/account"
   end
 end
