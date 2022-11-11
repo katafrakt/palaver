@@ -2,7 +2,7 @@
 
 class Discussion::Actions::Category::Show < Palaver::Action
   include Discussion::Deps[
-    repo: "repositories.categories", 
+    repo: "repositories.categories",
     topic_repo: "repositories.topics"
   ]
 

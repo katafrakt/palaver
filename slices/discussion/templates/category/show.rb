@@ -12,10 +12,10 @@ class Discussion::Templates::Category::Show < Phlex::View
 
       topics.each do |topic|
         article(class: "mb-5") do
-          h4(class: "is-size-4") do 
+          h4(class: "is-size-4") do
             text topic.title
             small do
-              span(class: 'tag') { "Question" }
+              span(class: "tag") { "Question" }
             end
           end
         end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Palaver::Components::Typography::Heading < Phlex::View
-  def initialize(level: 1, text:)
+  def initialize(text:, level: 1)
     @level = level
     @text = text
   end

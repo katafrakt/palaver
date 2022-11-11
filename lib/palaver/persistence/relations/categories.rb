@@ -17,8 +17,8 @@ module Persistence
         left_join(topics).left_join(:posts, topic_id: :id).select_append {
           topics = _schema.associations[:topics].target
           [
-            integer::count(topics.associations[:posts].target[:topic_id]).as(:post_count),
-            integer::count(topics[:category_id]).as(:topic_count)
+            integer.count(topics.associations[:posts].target[:topic_id]).as(:post_count),
+            integer.count(topics[:category_id]).as(:topic_count)
           ]
         }.group(:id)
       end
