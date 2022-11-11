@@ -1,34 +1,3 @@
-GIT
-  remote: https://github.com/dry-rb/dry-transformer.git
-  revision: caf213b263642c624ff95c2854a8bfa37c69e949
-  specs:
-    dry-transformer (0.1.2)
-
-GIT
-  remote: https://github.com/rom-rb/rom-sql.git
-  revision: 8fd3b3f3f05215e6eabc9ea23fa514b61a897b3b
-  specs:
-    rom-sql (4.0.0.alpha1)
-      dry-core (~> 1.0)
-      dry-types (~> 1.7)
-      rom (~> 6.0.0.alpha)
-      sequel (>= 5)
-
-GIT
-  remote: https://github.com/rom-rb/rom.git
-  revision: c433f03873fad3c0bae9b625a71a92617c24149e
-  specs:
-    rom (6.0.0.alpha1)
-      concurrent-ruby (~> 1.1)
-      dry-core (>= 1.0.0.rc1, < 2)
-      dry-effects (~> 0.4)
-      dry-inflector (>= 1.0.0.rc1, < 2)
-      dry-initializer (~> 3.1)
-      dry-struct (~> 1.4)
-      dry-transformer (~> 0.1, >= 0.1.2)
-      dry-types (~> 1.5)
-      zeitwerk (~> 2.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,12 +18,6 @@ GEM
       zeitwerk (~> 2.6)
     dry-core (1.0.0)
       concurrent-ruby (~> 1.0)
-      zeitwerk (~> 2.6)
-    dry-effects (0.4.0)
-      concurrent-ruby (~> 1.0)
-      dry-core (~> 1.0)
-      dry-inflector (~> 1.0)
-      dry-initializer (~> 3.0)
       zeitwerk (~> 2.6)
     dry-events (1.0.0)
       concurrent-ruby (~> 1.0)
@@ -81,6 +44,7 @@ GEM
       dry-configurable (~> 1.0, < 2)
       dry-core (~> 1.0, < 2)
       dry-inflector (~> 1.0, < 2)
+    dry-transformer (0.1.1)
     dry-types (1.7.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
@@ -165,7 +129,7 @@ GEM
     phlex (0.4.0)
       syntax_tree (~> 3.6)
       zeitwerk (~> 2.6)
-    prettier_print (1.0.2)
+    prettier_print (1.1.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -181,6 +145,32 @@ GEM
       ffi (~> 1.0)
     regexp_parser (2.6.0)
     rexml (3.2.5)
+    rom (5.3.0)
+      rom-changeset (~> 5.3, >= 5.3.0)
+      rom-core (~> 5.3, >= 5.3.0)
+      rom-repository (~> 5.3, >= 5.3.0)
+    rom-changeset (5.3.0)
+      dry-core (~> 1.0)
+      rom-core (~> 5.3)
+      transproc (~> 1.0, >= 1.1.0)
+    rom-core (5.3.0)
+      concurrent-ruby (~> 1.1)
+      dry-configurable (~> 1.0)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0)
+      dry-initializer (~> 3.0, >= 3.0.1)
+      dry-struct (~> 1.0)
+      dry-types (~> 1.6)
+      transproc (~> 1.0, >= 1.1.0)
+    rom-repository (5.3.0)
+      dry-core (~> 1.0)
+      dry-initializer (~> 3.0, >= 3.0.1)
+      rom-core (~> 5.3, >= 5.3.0)
+    rom-sql (3.6.0)
+      dry-core (~> 1.0)
+      dry-types (~> 1.0)
+      rom (~> 5.2, >= 5.2.1)
+      sequel (>= 4.49)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -194,35 +184,36 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.0)
-    rubocop (1.35.1)
+    rubocop (1.38.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.20.1, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
-    rubocop-performance (1.14.3)
+    rubocop-performance (1.15.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     sequel (5.62.0)
     shellany (0.0.1)
-    standard (1.16.1)
-      rubocop (= 1.35.1)
-      rubocop-performance (= 1.14.3)
+    standard (1.17.0)
+      rubocop (= 1.38.0)
+      rubocop-performance (= 1.15.0)
     syntax_tree (3.6.3)
       prettier_print
     thor (1.2.1)
+    transproc (1.1.1)
     unicode-display_width (2.3.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-linux
@@ -230,7 +221,6 @@ PLATFORMS
 DEPENDENCIES
   argon2 (~> 2.1)
   dotenv (~> 2.7)
-  dry-transformer!
   dry-types (~> 1.6)
   guard-puma
   hanami (~> 2.0.0.rc)
@@ -243,8 +233,8 @@ DEPENDENCIES
   puma
   rack-test
   rake
-  rom!
-  rom-sql!
+  rom (~> 5.3.0)
+  rom-sql (~> 3.6.0)
   standard
   warden (~> 1.2)
 

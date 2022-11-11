@@ -6,7 +6,6 @@ require "rom/sql/rake_task"
 namespace :db do
   task setup: :environment do
     require "rom/core"
-    require "rom/compat"
     rom_config = ROM::Configuration.new(:sql, Hanami.app["settings"].database_url)
     ROM::SQL::RakeSupport.env = rom_config
   end
