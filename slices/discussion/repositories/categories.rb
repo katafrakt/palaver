@@ -4,7 +4,10 @@ module Discussion
       commands :create
 
       def homepage
-        categories.with_counts.combine(latest_topic: {last_post: :author}).to_a
+        categories
+          .with_counts
+          .combine(latest_topic: {last_post: :author})
+          .to_a
       end
 
       def get(id)

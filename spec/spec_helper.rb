@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+require "simplecov"
+SimpleCov.start do
+  enable_coverage :branch
+  primary_coverage :branch
+  add_filter "/spec/"
+  add_filter "/config/"
+  add_group "App", "app"
+  add_group "Slices", "slices"
+end
+
 require "pathname"
 SPEC_ROOT = Pathname(__dir__).realpath.freeze
 
@@ -24,3 +34,14 @@ module Phlex
     end
   end
 end
+
+require "dry/system/stubs"
+Discussion::Container.enable_stubs!
+
+require "rom/core"
+require "rom/factory"
+Factory = ROM::Factory.configure do |config|
+  config.rom = Hanami.app["persistence.rom"]
+end
+
+Dir[File.dirname(__FILE__) + '/support/factories/*.rb'].each { |file| require file }

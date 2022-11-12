@@ -33,4 +33,8 @@ end
 
 group :test do
   gem "rack-test"
+  gem "simplecov", require: false
+  gem "faker"
+  gem "rom-factory"
+  gem "oga"
 end

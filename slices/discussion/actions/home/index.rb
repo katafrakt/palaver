@@ -5,7 +5,8 @@ class Discussion::Actions::Home::Index < Palaver::Action
             repo: "repositories.categories"
           ]
 
-  def handle(req, res)
+  def handle(_req, res)
+    categories = repo.homepage
     res.body = render(Discussion::Templates::Home::Index, categories: repo.homepage)
   end
 end

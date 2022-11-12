@@ -2,3 +2,4 @@
 .env
 log
 db/*.sqlite
+coverage
