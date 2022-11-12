@@ -5,7 +5,7 @@ module Persistence
     class Profiles < ROM::Relation[:sql]
       schema(:profiles, infer: true) do
         associations do
-          has_many :posts, as: :author
+          has_many :messages, as: :author
         end
       end
     end

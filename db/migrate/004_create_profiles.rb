@@ -5,7 +5,7 @@ ROM::SQL.migration do
       column :nickname, String
     end
 
-    alter_table(:posts) do
+    alter_table(:messages) do
       add_foreign_key(:author_id, :profiles)
     end
   end

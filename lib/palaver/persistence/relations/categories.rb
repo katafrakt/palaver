@@ -5,8 +5,8 @@ module Persistence
     class Categories < ROM::Relation[:sql]
       schema(:categories, infer: true) do
         associations do
-          has_many :topics
-          belongs_to :topics, as: :latest_topic
+          has_many :threads
+          belongs_to :threads, as: :latest_thread
         end
       end
 
@@ -14,11 +14,11 @@ module Persistence
         # TODO: figure out why I need to do this dance
         # ROM 6 bug?
         _schema = categories
-        left_join(topics).left_join(:posts, topic_id: :id).select_append {
-          topics = _schema.associations[:topics].target
+        left_join(threads).left_join(:messages, thread_id: :id).select_append {
+          threads = _schema.associations[:threads].target
           [
-            integer.count(topics.associations[:posts].target[:topic_id]).as(:post_count),
-            integer.count(topics[:category_id]).as(:topic_count)
+            integer.count(threads.associations[:messages].target[:thread_id]).as(:message_count),
+            integer.count(threads[:category_id]).as(:thread_count)
           ]
         }.group(:id)
       end

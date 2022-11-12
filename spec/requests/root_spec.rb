@@ -4,10 +4,10 @@ RSpec.describe "Root", type: :request do
   let(:container) { Discussion::Container }
   let(:category) {
     category = Factory.structs[:category]
-    def category.topic_count = 0
-    def category.post_count = 0
-    latest_topic = category.latest_topic
-    def latest_topic.last_post = Factory.structs[:last_post]
+    def category.thread_count = 0
+    def category.message_count = 0
+    latest_thread = category.latest_thread
+    def latest_thread.last_message = Factory.structs[:last_message]
     category
   }
 

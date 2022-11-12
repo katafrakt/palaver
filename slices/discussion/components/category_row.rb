@@ -26,18 +26,18 @@ class Discussion::Components::CategoryRow < Phlex::View
       end
 
       div do
-        render Detail.new("Topics", category.topic_count)
+        render Detail.new("Threads", category.thread_count)
         raw " &middot; "
-        render Detail.new("Messages", category.post_count)
-        if category.latest_topic
+        render Detail.new("Messages", category.message_count)
+        if category.latest_thread
           raw " &middot; "
           span do
             text "Last message by "
-            a(href: "/") { most_recent_topic.last_post.author.nickname }
+            a(href: "/") { most_recent_thread.last_message.author.nickname }
             whitespace
             text "in"
             whitespace
-            a(href: "/") { most_recent_topic.title }
+            a(href: "/") { most_recent_thread.title }
           end
         end
       end
@@ -46,7 +46,7 @@ class Discussion::Components::CategoryRow < Phlex::View
 
   private
 
-  def most_recent_topic
-    category.latest_topic
+  def most_recent_thread
+    category.latest_thread
   end
 end

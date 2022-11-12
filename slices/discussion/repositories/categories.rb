@@ -6,7 +6,7 @@ module Discussion
       def homepage
         categories
           .with_counts
-          .combine(latest_topic: {last_post: :author})
+          .combine(latest_thread: {last_message: :author})
           .to_a
       end
 
