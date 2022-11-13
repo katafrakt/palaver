@@ -38,4 +38,5 @@ group :test do
   gem "faker"
   gem "rom-factory"
   gem "oga"
+  gem "database_cleaner-sequel"
 end

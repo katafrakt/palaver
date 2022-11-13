@@ -17,6 +17,14 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("must be filled")
     end
 
+    specify "with incorrect email" do
+      params.merge!(email: "abc@")
+      post url, params
+
+      expect(last_response).not_to be_successful
+      expect(last_response.body).to include("is in invalid format")
+    end
+
     specify "with missing password" do
       params.merge!(password: nil)
       post url, params
@@ -47,6 +55,23 @@ RSpec.describe "POST /account/register", type: :request do
 
       expect(last_response).not_to be_successful
       expect(last_response.body).to include("passwords do not match")
+    end
+
+    specify "with email already taken", db: true do
+      Account::Repositories::Account.new.create(email: "test@test.com")
+      params.merge!(email: "test@test.com")
+      post url, params
+
+      expect(last_response).not_to be_successful
+      expect(last_response.body).to include("must be unique")
+    end
+  end
+
+  context "success", db: true do
+    it "renders a message" do
+      post url, params
+      expect(last_response).to be_successful
+      expect(last_response.body).to include("Thank you for registering")
     end
   end
 end

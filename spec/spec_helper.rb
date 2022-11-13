@@ -37,6 +37,7 @@ end
 
 require "dry/system/stubs"
 Discussion::Container.enable_stubs!
+Account::Container.enable_stubs!
 
 require "rom/core"
 require "rom/factory"
