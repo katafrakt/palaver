@@ -39,5 +39,14 @@ module Palaver
     def render(view, **args)
       Layout.new(view, args).call
     end
+
+    # Hacking around Hanami deficiencies which only allow using schema validation
+    # without rules validation
+    def self.contract(&block)
+      klass = Class.new(Hanami::Action::Params)
+      contract = Dry::Validation::Contract.build { instance_eval(&block) }
+      klass.instance_variable_set(:@_validator, contract)
+      @params_class = klass
+    end
   end
 end

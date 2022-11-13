@@ -11,6 +11,9 @@ class Palaver::Components::Form::HorizontalField < Palaver::Components::Form::Fi
           p(class: "control is-expanded") do
             render_input
           end
+          if @error
+            p(class: "help is-danger") { @error.join(", ") }
+          end
         end
       end
     end

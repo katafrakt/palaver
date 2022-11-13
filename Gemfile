@@ -6,6 +6,7 @@ gem "rake"
 
 gem "hanami-router", "~> 2.0.0.rc"
 gem "hanami-controller", "~> 2.0.0.rc"
+gem "hanami-validations", "~> 2.0.0.rc"
 gem "hanami", "~> 2.0.0.rc"
 
 gem "argon2", "~> 2.1"

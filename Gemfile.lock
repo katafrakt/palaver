@@ -36,6 +36,14 @@ GEM
       dry-configurable (~> 1.0, < 2)
       dry-core (~> 1.0, < 2)
       dry-events (~> 1.0, < 2)
+    dry-schema (1.12.0)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 1.0, < 2)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-logic (>= 1.4, < 2)
+      dry-types (>= 1.7, < 2)
+      zeitwerk (~> 2.6)
     dry-struct (1.6.0)
       dry-core (~> 1.0, < 2)
       dry-types (>= 1.7, < 2)
@@ -52,6 +60,12 @@ GEM
       dry-core (~> 1.0, < 2)
       dry-inflector (~> 1.0, < 2)
       dry-logic (>= 1.4, < 2)
+      zeitwerk (~> 2.6)
+    dry-validation (1.10.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      dry-initializer (~> 3.0)
+      dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
@@ -108,6 +122,8 @@ GEM
     hanami-utils (2.0.0.rc1)
       concurrent-ruby (~> 1.0)
       dry-transformer (~> 0.1)
+    hanami-validations (2.0.0.rc1)
+      dry-validation (>= 1.10, < 2)
     hansi (0.2.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -253,6 +269,7 @@ DEPENDENCIES
   hanami-reloader
   hanami-router (~> 2.0.0.rc)
   hanami-rspec
+  hanami-validations (~> 2.0.0.rc)
   oga
   pg
   phlex

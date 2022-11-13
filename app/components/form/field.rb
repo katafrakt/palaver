@@ -5,12 +5,13 @@ class Palaver::Components::Form::Field < Phlex::View
 
   # NOTE: We are not creating a getter fot label, because it conflicts with label method
   # from Phlex
-  def initialize(label:, name:, type: :text, placeholder: nil, value: nil)
+  def initialize(label:, name:, type: :text, placeholder: nil, value: nil, error: nil)
     @type = type
     @label = label
     @name = name
     @placeholder = placeholder
     @value = value
+    @error = error
   end
 
   def template
@@ -23,6 +24,7 @@ class Palaver::Components::Form::Field < Phlex::View
   private
 
   def render_input
-    input(class: "input", type: type.to_s, placeholder: placeholder, value: value)
+    classes = ["input", @error.nil? ? nil : "is-danger"].compact.join(" ")
+    input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value)
   end
 end
