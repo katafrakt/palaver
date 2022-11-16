@@ -7,5 +7,6 @@ module Palaver
     config.actions.content_security_policy[:default_src] = "*"
     config.actions.content_security_policy[:style_src] = "*"
     config.actions.content_security_policy[:script_src] = "*"
+    config.actions.sessions = :cookie, {secret: ENV["SECRET"]}
   end
 end

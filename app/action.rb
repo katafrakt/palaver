@@ -2,11 +2,16 @@
 # frozen_string_literal: true
 
 require "hanami/action"
+require "hanami/action/session"
 require "phlex"
 
 class Layout < Phlex::View
+  attr_reader :flash
+
   def initialize(view, args)
+    puts args.inspect
     @view = view
+    @flash = args.delete(:flash)
     @args = args
   end
 
@@ -26,6 +31,12 @@ class Layout < Phlex::View
           end
         end
 
+        if flash && flash[:error]
+          article(class: "message is-danger") do
+            div(class: "message-body") { flash[:error] }
+          end
+        end
+
         section(class: "section") do
           render @view.new(**@args)
         end
@@ -34,8 +45,46 @@ class Layout < Phlex::View
   end
 end
 
+module HanamiPhlexView
+  module ResponseExtension
+    def render(view, **args)
+      layout_args = {flash: self.flash}.merge(args)
+      layout = Layout.new(view, layout_args)
+      self.body = layout.call
+    end
+  end
+end
+
+Hanami::Action::Response.prepend(HanamiPhlexView::ResponseExtension)
+
+module HanamiPhlexView
+  def self.included(base)
+    base.extend ClassMethods
+    base.prepend PrependedMethods
+  end
+
+  module ClassMethods
+    def view(view_class = Dry::Core::Undefined)
+      if view_class == Dry::Core::Undefined
+        @view_class
+      else
+        @view_class = view_class
+      end
+    end
+  end
+
+  module PrependedMethods
+    def finish(req, res, halted)
+      super(req, res, halted)
+    end
+  end
+end
+
 module Palaver
   class Action < Hanami::Action
+    include Hanami::Action::Session
+    include HanamiPhlexView
+
     def render(view, **args)
       Layout.new(view, args).call
     end
