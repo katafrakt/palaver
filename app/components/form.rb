@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Palaver::Components::Form < Phlex::View
+class Palaver::Components::Form < Phlex::HTML
   attr_reader :url
 
   def initialize(url:)

@@ -9,7 +9,6 @@ class Account::Actions::Registration::Confirm < Account::Action
   def handle(req, res)
     if !req.params.valid?
       res.flash[:error] = "Incorrect confirmation link"
-      p res.flash
       res.status = 422
       res.redirect_to "/"
     end

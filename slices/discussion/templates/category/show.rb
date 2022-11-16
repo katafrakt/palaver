@@ -1,4 +1,4 @@
-class Discussion::Templates::Category::Show < Phlex::View
+class Discussion::Templates::Category::Show < Phlex::HTML
   attr_reader :category, :topics
 
   def initialize(category:, topics:)

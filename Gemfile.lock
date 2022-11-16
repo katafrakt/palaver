@@ -129,6 +129,7 @@ GEM
     hanami-validations (2.0.0.rc1)
       dry-validation (>= 1.10, < 2)
     hansi (0.2.1)
+    hescape (0.1.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -155,7 +156,8 @@ GEM
     parser (3.1.2.1)
       ast (~> 2.4.1)
     pg (1.4.4)
-    phlex (0.4.0)
+    phlex (0.5.3)
+      hescape
       syntax_tree (~> 3.6)
       zeitwerk (~> 2.6)
     prettier_print (1.1.0)

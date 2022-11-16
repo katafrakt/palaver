@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Account::Templates::Registration::New < Phlex::View
+class Account::Templates::Registration::New < Phlex::HTML
   def initialize(values: {}, errors: {})
     @values = values
     @errors = errors

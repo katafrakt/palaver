@@ -1,4 +1,4 @@
-class Discussion::Templates::Home::Index < Phlex::View
+class Discussion::Templates::Home::Index < Phlex::HTML
   attr_reader :categories
 
   def initialize(categories:)

@@ -1,5 +1,5 @@
-class Discussion::Components::CategoryRow < Phlex::View
-  class Detail < Phlex::View
+class Discussion::Components::CategoryRow < Phlex::HTML
+  class Detail < Phlex::HTML
     def initialize(label, value)
       @label = label
       @value = value
@@ -27,10 +27,10 @@ class Discussion::Components::CategoryRow < Phlex::View
 
       div do
         render Detail.new("Threads", category.thread_count)
-        raw " &middot; "
+        unsafe_raw " &middot; "
         render Detail.new("Messages", category.message_count)
         if category.latest_thread
-          raw " &middot; "
+          unsafe_raw " &middot; "
           span do
             text "Last message by "
             a(href: "/") { most_recent_thread.last_message.author.nickname }

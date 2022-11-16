@@ -5,11 +5,10 @@ require "hanami/action"
 require "hanami/action/session"
 require "phlex"
 
-class Layout < Phlex::View
+class Layout < Phlex::HTML
   attr_reader :flash
 
   def initialize(view, args)
-    puts args.inspect
     @view = view
     @flash = args.delete(:flash)
     @args = args

@@ -1,4 +1,4 @@
-class Account::Templates::Registration::AfterCreate < Phlex::View
+class Account::Templates::Registration::AfterCreate < Phlex::HTML
   def initialize(account:)
     @account = account
   end
