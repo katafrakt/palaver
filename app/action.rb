@@ -6,7 +6,7 @@ require "hanami/action/session"
 require "phlex"
 
 class Layout < Phlex::HTML
-  attr_reader :flash
+  attr_reader :flash, :csrf_token
 
   def initialize(view, args)
     @view = view
@@ -47,7 +47,7 @@ end
 module HanamiPhlexView
   module ResponseExtension
     def render(view, **args)
-      layout_args = {flash: self.flash}.merge(args)
+      layout_args = {flash: self.flash, csrf_token: self.session[:_csrf_token]}.merge(args)
       layout = Layout.new(view, layout_args)
       self.body = layout.call
     end
