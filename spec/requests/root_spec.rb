@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe "Root", type: :request do
+  after do
+    Discussion::Container.unstub("repositories.categories")
+  end
+
   let(:container) { Discussion::Container }
   let(:category) {
     category = Factory.structs[:category]
