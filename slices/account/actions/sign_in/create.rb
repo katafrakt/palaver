@@ -11,11 +11,12 @@ class Account::Actions::SignIn::Create < Account::Action
   def handle(req, res)
     render_on_invalid_params(res, Account::Templates::SignIn::New)
 
-    case re = sign_in_user.call(req.params[:email], req.params[:password])
+    case re = sign_in.call(req.params[:email], req.params[:password])
     in [:ok, account]
-    res.body = account
+      res.body = account
     else
-      res.body = re
+      res.flash[:error] = "Incorrect email or password"
+      res.redirect_to "/account/sign_in"
     end
   end
 end

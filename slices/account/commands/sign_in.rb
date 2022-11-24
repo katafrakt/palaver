@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "argon2"
+
 class Account::Commands::SignIn
   include Account::Deps[repo: "repositories.account"]
 

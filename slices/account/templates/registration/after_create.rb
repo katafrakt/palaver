@@ -1,8 +1,4 @@
-class Account::Templates::Registration::AfterCreate < Phlex::HTML
-  def initialize(account:)
-    @account = account
-  end
-
+class Account::Templates::Registration::AfterCreate < Palaver::View
   def template
     article(class: "message is-warning") do
       div(class: "message-body") do

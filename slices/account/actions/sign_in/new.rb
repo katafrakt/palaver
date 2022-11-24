@@ -2,6 +2,6 @@
 
 class Account::Actions::SignIn::New < Account::Action
   def handle(req, res)
-    res.body = render(Account::Templates::SignIn::New)
+    res.render(Account::Templates::SignIn::New, values: {}, errors: {})
   end
 end

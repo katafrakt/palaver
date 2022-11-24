@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
-class Account::Templates::Registration::New < Phlex::HTML
-  def initialize(values: {}, errors: {})
-    @values = values
-    @errors = errors
-  end
-
+class Account::Templates::Registration::New < Palaver::View
   def template
     div do
       render Palaver::Components::Typography::Heading.new(level: 2, text: "Register new account")

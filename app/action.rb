@@ -5,13 +5,10 @@ require "hanami/action"
 require "hanami/action/session"
 require "phlex"
 
-class Layout < Phlex::HTML
-  attr_reader :flash, :csrf_token
-
-  def initialize(view, args)
+class Layout < Palaver::View
+  def initialize(view, context, args)
+    super(context, args)
     @view = view
-    @flash = args.delete(:flash)
-    @args = args
   end
 
   def template
@@ -37,7 +34,7 @@ class Layout < Phlex::HTML
         end
 
         section(class: "section") do
-          render @view.new(**@args)
+          render @view.new(context, **args)
         end
       end
     end
@@ -47,8 +44,9 @@ end
 module HanamiPhlexView
   module ResponseExtension
     def render(view, **args)
-      layout_args = {flash: self.flash, csrf_token: self.session[:_csrf_token]}.merge(args)
-      layout = Layout.new(view, layout_args)
+      context = Palaver::View::Context.new(self)
+      #layout_args = {flash: self.flash, csrf_token: self.session[:_csrf_token]}.merge(args)
+      layout = Layout.new(view, context, args)
       self.body = layout.call
     end
   end

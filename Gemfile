@@ -4,10 +4,10 @@ source "https://rubygems.org"
 
 gem "rake"
 
-gem "hanami-router", "~> 2.0.0.rc"
-gem "hanami-controller", "~> 2.0.0.rc"
-gem "hanami-validations", "~> 2.0.0.rc"
-gem "hanami", "~> 2.0.0.rc"
+gem "hanami-router", "~> 2.0.0"
+gem "hanami-controller", "~> 2.0.0"
+gem "hanami-validations", "~> 2.0.0"
+gem "hanami", "~> 2.0.0"
 
 gem "argon2", "~> 2.1"
 gem "dry-types", "~> 1.6"
