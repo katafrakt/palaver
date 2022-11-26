@@ -11,6 +11,7 @@ gem "hanami", "~> 2.0.0"
 
 gem "argon2", "~> 2.1"
 gem "dry-types", "~> 1.6"
+gem "dry-monads"
 gem "pg"
 gem "phlex"
 gem "puma"

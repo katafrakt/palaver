@@ -6,27 +6,16 @@ class Account::Commands::SignIn
   include Account::Deps[repo: "repositories.account"]
 
   def call(email, password)
-    crypted_password = hasher.create(password)
-    account = repo.get_by_email_and_password(email, crypted_password)
+    account = repo.get_by_email(email)
 
     if account.nil?
       [:error, :not_found]
     elsif account.confirmed_at.nil?
       [:error, :not_confirmed]
+    elsif !Argon2::Password.verify_password(password, account.crypted_password)
+      [:error, :incorrect_password]
     else
       [:ok, account]
     end
   end
-
-  private
-
-  # :nocov:
-  def hasher
-    if Hanami.env == :test
-      Argon2::Password.new(t_cost: 1, m_cost: 4, p_cost: 1)
-    else
-      Argon2::Password.new
-    end
-  end
-  # :nocov:
 end

@@ -36,6 +36,10 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
       zeitwerk (~> 2.6)
+    dry-monads (1.6.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
     dry-monitor (1.0.1)
       dry-configurable (~> 1.0, < 2)
       dry-core (~> 1.0, < 2)
@@ -274,6 +278,7 @@ DEPENDENCIES
   argon2 (~> 2.1)
   database_cleaner-sequel
   dotenv (~> 2.7)
+  dry-monads
   dry-types (~> 1.6)
   faker
   guard-puma

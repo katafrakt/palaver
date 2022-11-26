@@ -6,10 +6,10 @@ class Account::Repositories::Account < Palaver::Repository[:accounts]
   end
 
   def confirm_user(account)
-    account.changeset(:update, confirmed_at: Time.now.utc).commit
+    accounts.by_pk(account.id).changeset(:update, confirmed_at: Time.now.utc).commit
   end
 
-  def get_by_email_and_password(email, password)
-    accounts.where(email: email, crypted_password: password).one
+  def get_by_email(email)
+    accounts.where(email: email).one
   end
 end

@@ -4,6 +4,7 @@
 require "hanami/action"
 require "hanami/action/session"
 require "phlex"
+require "dry/monads"
 
 class Layout < Palaver::View
   def initialize(view, context, args)
@@ -33,6 +34,12 @@ class Layout < Palaver::View
           end
         end
 
+        if flash && flash[:success]
+          article(class: "message is-success") do
+            div(class: "message-body") { flash[:success] }
+          end
+        end
+
         section(class: "section") do
           render @view.new(context, **args)
         end
@@ -45,7 +52,6 @@ module HanamiPhlexView
   module ResponseExtension
     def render(view, **args)
       context = Palaver::View::Context.new(self)
-      #layout_args = {flash: self.flash, csrf_token: self.session[:_csrf_token]}.merge(args)
       layout = Layout.new(view, context, args)
       self.body = layout.call
     end
@@ -57,7 +63,6 @@ Hanami::Action::Response.prepend(HanamiPhlexView::ResponseExtension)
 module HanamiPhlexView
   def self.included(base)
     base.extend ClassMethods
-    base.prepend PrependedMethods
   end
 
   module ClassMethods
@@ -69,18 +74,13 @@ module HanamiPhlexView
       end
     end
   end
-
-  module PrependedMethods
-    def finish(req, res, halted)
-      super(req, res, halted)
-    end
-  end
 end
 
 module Palaver
   class Action < Hanami::Action
     include Hanami::Action::Session
     include HanamiPhlexView
+    include Dry::Monads[:result]
 
     def render(view, **args)
       Layout.new(view, args).call
@@ -93,6 +93,28 @@ module Palaver
       contract = Dry::Validation::Contract.build { instance_eval(&block) }
       klass.instance_variable_set(:@_validator, contract)
       @params_class = klass
+    end
+
+    private
+
+    def validate_params(req)
+      req.params.valid? ? Success() : Failure(:invalid_params)
+    end
+
+    # NOTE: need to overwrite this internal methot so the  csrf checker uses raw params,
+    # not the params from req.params - which requires to manually allow _csrf_token param
+    # if I'm using .contract method defined above
+    #
+    # Overwrites missing_csrf_token? for the same reason
+    def invalid_csrf_token?(req, res)
+      return false unless verify_csrf_token?(req, res)
+
+      missing_csrf_token?(req, res) ||
+        !::Rack::Utils.secure_compare(req.session[CSRF_TOKEN], req.params.raw[CSRF_TOKEN])
+    end
+
+    def missing_csrf_token?(req, *)
+      Hanami::Utils::Blank.blank?(req.params.raw[CSRF_TOKEN])
     end
   end
 end

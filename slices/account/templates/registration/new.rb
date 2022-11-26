@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 class Account::Templates::Registration::New < Palaver::View
+  include Ui::Typography
+  include Ui::Form
+
   def template
     div do
-      render Palaver::Components::Typography::Heading.new(level: 2, text: "Register new account")
+      heading2("Register new account")
       render Palaver::Components::Form.new(url: "/account/register") do
-        render Palaver::Components::Form::HorizontalField.new(label: "Email", name: "email", placeholder: "your-email@example.com", value: @values[:email], error: @errors[:email])
-        render Palaver::Components::Form::HorizontalField.new(label: "Password", name: "password", type: :password, value: @values[:password], error: @errors[:password])
-        render Palaver::Components::Form::HorizontalField.new(label: "Password confirmation", name: "password_confirmation", type: :password, value: @values[:password_confirmation], error: @errors[:password_confirmation])
+        hidden_field("_csrf_token", csrf_token)
+        horizontal_field(label: "Email", name: "email", placeholder: "your-email@example.com", value: @values[:email], error: @errors[:email])
+        horizontal_field(label: "Password", name: "password", type: :password, value: @values[:password], error: @errors[:password])
+        horizontal_field(label: "Password confirmation", name: "password_confirmation", type: :password, value: @values[:password_confirmation], error: @errors[:password_confirmation])
         render Palaver::Components::Form::HorizontalSubmit.new(label: "Register")
       end
     end

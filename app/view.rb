@@ -1,3 +1,6 @@
+require "ui/typography"
+require "ui/form"
+
 class Palaver::View < Phlex::HTML
   attr_reader :context, :args
 
