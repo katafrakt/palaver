@@ -24,8 +24,7 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
-
 end
 
-require 'database_cleaner/sequel'
+require "database_cleaner/sequel"
 DatabaseCleaner.strategy = :truncation

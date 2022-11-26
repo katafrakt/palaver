@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-p require "ui/typography"
+require "ui/typography"
 
 class Account::Templates::SignIn::New < Palaver::View
   include ::Ui::Typography
@@ -16,7 +16,7 @@ class Account::Templates::SignIn::New < Palaver::View
               hidden_field("_csrf_token", csrf_token)
               horizontal_field(label: "Email", name: "email", placeholder: "your-email@domain.com")
               horizontal_field(label: "Password", name: "password", type: :password,
-                                                                    value: @values[:password], error: @errors[:password])
+                value: @values[:password], error: @errors[:password])
               render Palaver::Components::Form::HorizontalSubmit.new(label: "Sign in")
             end
           end
