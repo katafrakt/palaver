@@ -13,7 +13,10 @@ class Account::Actions::SignIn::Create < Account::Action
 
     case re = sign_in.call(req.params[:email], req.params[:password])
     in [:ok, account]
-      res.body = "Signed in user #{account.id}"
+      res.session[:usi] = account.id
+      res.flash[:success] = "Successfully signed in"
+      # TODO: remember where to redirect back
+      res.redirect_to "/"
     else
       res.flash[:error] = "Incorrect email or password"
       res.redirect_to "/account/sign_in"

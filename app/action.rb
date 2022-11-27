@@ -21,30 +21,54 @@ class Layout < Palaver::View
 
       body do
         nav(class: "navbar", role: "navigation") do
-          div(class: "navbar-brand") do
-            div(class: "navbar-item") do
-              a(href: "/") { "Home" }
+          container do
+            div(class: "navbar-brand") do
+              div(class: "navbar-item") do
+                a(href: "/") { "Home" }
+              end
+            end
+
+            div(class: "navbar-menu") do
+              div(class: "navbar-end") do
+                if current_user
+                  div(class: "navbar-item has-dropdown is-hoverable") do
+                    a(class: "navbar-link") { "User" }
+                    div(class: "navbar-dropdown") do
+                      a(class: "navbar-item", href: "/account/profile") { "My Profile" }
+                      a(class: "navbar-item", href: "/account/sign_out") { "Sign out" }
+                    end
+                  end
+                else
+                  a(href: "/account/sign_in", class: "navbar-item") { "Sign in" }
+                end
+              end
             end
           end
         end
 
-        if flash && flash[:error]
-          article(class: "message is-danger") do
-            div(class: "message-body") { flash[:error] }
+        container do
+          if flash && flash[:error]
+            article(class: "message is-danger") do
+              div(class: "message-body") { flash[:error] }
+            end
           end
-        end
 
-        if flash && flash[:success]
-          article(class: "message is-success") do
-            div(class: "message-body") { flash[:success] }
+          if flash && flash[:success]
+            article(class: "message is-success") do
+              div(class: "message-body") { flash[:success] }
+            end
           end
-        end
 
-        section(class: "section") do
-          render @view.new(context, **args)
+          section(class: "section") do
+            render @view.new(context, **args)
+          end
         end
       end
     end
+  end
+
+  def container(&)
+    div(class: "container", &)
   end
 end
 
@@ -99,6 +123,15 @@ module Palaver
 
     def validate_params(req)
       req.params.valid? ? Success() : Failure(:invalid_params)
+    end
+
+    def current_user(req)
+      return @_current_user if instance_variable_defined?(:@_current_user)
+
+      session_id = req.session[:usi]
+      @_current_user = if session_id
+        Account::Container["repositories.account"].by_session_id(session_id)
+      end
     end
 
     # NOTE: need to overwrite this internal methot so the  csrf checker uses raw params,

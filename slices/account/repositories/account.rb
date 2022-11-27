@@ -12,4 +12,8 @@ class Account::Repositories::Account < Palaver::Repository[:accounts]
   def get_by_email(email)
     accounts.where(email: email).one
   end
+
+  def by_session_id(id)
+    accounts.by_pk(id)
+  end
 end

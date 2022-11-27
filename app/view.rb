@@ -11,6 +11,16 @@ class Palaver::View < Phlex::HTML
 
     def flash = @response.flash
     def csrf_token = @response.session[:_csrf_token]
+
+    def current_user
+      return @_current_user if instance_variable_defined?(:@_current_user)
+
+      session_id = @response.session[:usi]
+      @_current_user = if session_id
+        Account::Container["repositories.account"].by_session_id(session_id)
+      end
+      @_current_user
+    end
   end
 
   def initialize(context, args = {})
@@ -21,6 +31,7 @@ class Palaver::View < Phlex::HTML
 
   def flash = context.flash
   def csrf_token = context.csrf_token
+  def current_user = context.current_user
 
   private
 
