@@ -139,7 +139,6 @@ GEM
       dry-validation (>= 1.10, < 2)
       zeitwerk (~> 2.6.0)
     hansi (0.2.1)
-    hescape (0.1.1)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -166,11 +165,8 @@ GEM
     parser (3.1.2.1)
       ast (~> 2.4.1)
     pg (1.4.5)
-    phlex (0.5.3)
-      hescape
-      syntax_tree (~> 3.6)
+    phlex (1.0.0.rc2)
       zeitwerk (~> 2.6)
-    prettier_print (1.1.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -262,8 +258,6 @@ GEM
     standard (1.18.1)
       rubocop (= 1.39.0)
       rubocop-performance (= 1.15.1)
-    syntax_tree (3.6.3)
-      prettier_print
     thor (1.2.1)
     transproc (1.1.1)
     unicode-display_width (2.3.0)
@@ -288,7 +282,7 @@ DEPENDENCIES
   hanami-validations (~> 2.0.0)
   oga
   pg
-  phlex
+  phlex (~> 1.0.0.rc)
   puma
   rack-test
   rake
