@@ -14,6 +14,6 @@ class Account::Repositories::Account < Palaver::Repository[:accounts]
   end
 
   def by_session_id(id)
-    accounts.by_pk(id)
+    accounts.by_pk(id).one
   end
 end

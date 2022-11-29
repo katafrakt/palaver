@@ -32,7 +32,7 @@ class Layout < Palaver::View
               div(class: "navbar-end") do
                 if current_user
                   div(class: "navbar-item has-dropdown is-hoverable") do
-                    a(class: "navbar-link") { "User" }
+                    a(class: "navbar-link") { current_user.email }
                     div(class: "navbar-dropdown") do
                       a(class: "navbar-item", href: "/account/profile") { "My Profile" }
                       a(class: "navbar-item", href: "/account/sign_out") { "Sign out" }
@@ -72,7 +72,7 @@ class Layout < Palaver::View
   end
 end
 
-module HanamiPhlexView
+module HanamiExt
   module ResponseExtension
     def render(view, **args)
       context = Palaver::View::Context.new(self)
@@ -82,7 +82,7 @@ module HanamiPhlexView
   end
 end
 
-Hanami::Action::Response.prepend(HanamiPhlexView::ResponseExtension)
+Hanami::Action::Response.prepend(HanamiExt::ResponseExtension)
 
 module HanamiPhlexView
   def self.included(base)
@@ -106,8 +106,13 @@ module Palaver
     include HanamiPhlexView
     include Dry::Monads[:result]
 
+    before :fetch_current_user
+
     def render(view, **args)
       Layout.new(view, args).call
+    end
+
+    def handle(res, req)
     end
 
     # Hacking around Hanami deficiencies which only allow using schema validation
@@ -125,13 +130,12 @@ module Palaver
       req.params.valid? ? Success() : Failure(:invalid_params)
     end
 
-    def current_user(req)
-      return @_current_user if instance_variable_defined?(:@_current_user)
-
+    def fetch_current_user(req, res)
+      puts "###### FETCH CURRENT"
       session_id = req.session[:usi]
-      @_current_user = if session_id
-        Account::Container["repositories.account"].by_session_id(session_id)
-      end
+      user = Account::Container["repositories.account"].by_session_id(session_id) if session_id
+      p [session_id, user]
+      res[:current_user] = user
     end
 
     # NOTE: need to overwrite this internal methot so the  csrf checker uses raw params,

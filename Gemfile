@@ -8,6 +8,7 @@ gem "hanami-router", "~> 2.0.0"
 gem "hanami-controller", "~> 2.0.0"
 gem "hanami-validations", "~> 2.0.0"
 gem "hanami", "~> 2.0.0"
+gem "hanami-utils", github: "hanami/utils", branch: "add-equalizer-to-callback-chain"
 
 gem "argon2", "~> 2.1"
 gem "dry-types", "~> 1.6"

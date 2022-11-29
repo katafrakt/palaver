@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Discussion::Actions::Home::Index < Palaver::Action
+class Discussion::Actions::Home::Index < Discussion::Action
   include Discussion::Deps[
             repo: "repositories.categories"
           ]
