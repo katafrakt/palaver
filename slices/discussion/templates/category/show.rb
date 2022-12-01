@@ -6,15 +6,8 @@ class Discussion::Templates::Category::Show < Palaver::View
       if @threads.empty?
         p { "No threads" }
       else
-        @threads.each do |topic|
-          article(class: "mb-5") do
-            h4(class: "is-size-4") do
-              text topic.title
-              small do
-                span(class: "tag") { "Question" }
-              end
-            end
-          end
+        @threads.each do |thread|
+          render Discussion::Components::ThreadRow.new(thread)
         end
       end
     end

@@ -4,6 +4,7 @@ ROM::SQL.migration do
       primary_key :id
       foreign_key :thread_id, :threads
       column :text, String
+      column :posted_at, DateTime, null: false
     end
 
     alter_table(:threads) do

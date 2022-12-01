@@ -27,6 +27,7 @@ group :cli, :development, :test do
   gem "hanami-rspec"
   gem "dotenv", "~> 2.7"
   gem "standard"
+  gem "faker"
 end
 
 group :development do
@@ -36,7 +37,6 @@ end
 group :test do
   gem "rack-test"
   gem "simplecov", require: false
-  gem "faker"
   gem "rom-factory"
   gem "oga"
   gem "database_cleaner-sequel"

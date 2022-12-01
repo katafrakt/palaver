@@ -3,6 +3,7 @@ ROM::SQL.migration do
     create_table(:profiles) do
       primary_key :id
       column :nickname, String
+      column :message_count, Integer
     end
 
     alter_table(:messages) do

@@ -17,6 +17,7 @@ class Layout < Palaver::View
       head do
         title { "Palaver" }
         link rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+        meta(name: "viewport", content: "width=device-width, initial-scale=1")
       end
 
       body do
@@ -131,10 +132,8 @@ module Palaver
     end
 
     def fetch_current_user(req, res)
-      puts "###### FETCH CURRENT"
       session_id = req.session[:usi]
       user = Account::Container["repositories.account"].by_session_id(session_id) if session_id
-      p [session_id, user]
       res[:current_user] = user
     end
 
