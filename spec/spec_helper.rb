@@ -7,7 +7,8 @@ SimpleCov.start do
   add_filter "/spec/"
   add_filter "/config/"
   add_group "App", "app"
-  add_group "Slices", "slices"
+  add_group "Account", "slices/account"
+  add_group "Discussion", "slices/discussion"
 end
 
 require "pathname"

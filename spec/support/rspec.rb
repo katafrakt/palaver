@@ -24,6 +24,10 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.before(:all) do
+    Account::Container.stub("utils.hasher", Argon2::Password.new(t_cost: 1, m_cost: 4, p_cost: 1))
+  end
 end
 
 require "database_cleaner/sequel"
