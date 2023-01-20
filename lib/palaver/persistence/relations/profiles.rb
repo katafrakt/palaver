@@ -6,6 +6,7 @@ module Persistence
       schema(:profiles, infer: true) do
         associations do
           has_many :messages, as: :author
+          belongs_to :account
         end
       end
     end
