@@ -1,6 +1,8 @@
 module Discussion
   module Repositories
     class Threads < Palaver::Repository[:threads]
+      struct_namespace Discussion::Entities
+
       def create(title:, content:, category_id:, author:)
         threads.transaction do
           thread = threads.changeset(:create, title: title, category_id: category_id).commit

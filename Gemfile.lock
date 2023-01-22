@@ -265,6 +265,7 @@ GEM
     thor (1.2.1)
     transproc (1.1.1)
     unicode-display_width (2.4.2)
+    verifica (1.0.0)
     zeitwerk (2.6.6)
 
 PLATFORMS
@@ -296,6 +297,7 @@ DEPENDENCIES
   rom-sql (~> 3.6.0)
   simplecov
   standard
+  verifica
 
 BUNDLED WITH
    2.3.24

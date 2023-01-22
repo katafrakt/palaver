@@ -1,4 +1,6 @@
 class Account::Repositories::Account < Palaver::Repository[:accounts]
+  struct_namespace Account::Entities
+  auto_struct true
   commands :create
 
   def by_id_and_token(id, token)
@@ -14,6 +16,6 @@ class Account::Repositories::Account < Palaver::Repository[:accounts]
   end
 
   def by_session_id(id)
-    accounts.by_pk(id).one
+    accounts.by_pk(id).map_to(Account::Entities::CurrentUser).one || Account::Entities::AnonymousUser.new
   end
 end

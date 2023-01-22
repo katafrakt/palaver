@@ -24,7 +24,7 @@ module Ui
 
               div(class: "navbar-menu") do
                 div(class: "navbar-end") do
-                  if current_user
+                  if current_user&.signed_in?
                     div(class: "navbar-item has-dropdown is-hoverable") do
                       a(class: "navbar-link") { current_user.email }
                       div(class: "navbar-dropdown") do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Discussion
   module Entities
     class User < Dry::Struct

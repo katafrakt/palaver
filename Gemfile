@@ -18,6 +18,7 @@ gem "phlex", "~> 1.1.0"
 gem "puma"
 gem "rom-sql", "~> 3.6.0"
 gem "rom", "~> 5.3.0"
+gem "verifica"
 
 group :cli, :development do
   gem "hanami-reloader"

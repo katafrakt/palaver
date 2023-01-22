@@ -26,6 +26,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.before(:all) do
+    require "argon2"
     Account::Container.stub("utils.hasher", Argon2::Password.new(t_cost: 1, m_cost: 4, p_cost: 1))
   end
 end
