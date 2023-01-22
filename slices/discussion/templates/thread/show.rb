@@ -1,5 +1,7 @@
 class Discussion::Templates::Thread::Show < Palaver::View
   include Ui::Typography
+  include Ui::Form
+  include Discussion::Deps["acl"]
 
   def template
     div do
@@ -7,6 +9,10 @@ class Discussion::Templates::Thread::Show < Palaver::View
 
       @messages.each do |message|
         message_row(message)
+      end
+
+      if acl.authorizer.authorized?(current_user, @thread, :reply)
+        reply_form
       end
     end
   end
@@ -40,5 +46,13 @@ class Discussion::Templates::Thread::Show < Palaver::View
 
   def post_date(message)
     message.posted_at.strftime("%Y-%m-%d %H:%M")
+  end
+
+  def reply_form
+    render Palaver::Components::Form.new(url: "/th/#{@thread.id}/reply") do
+      hidden_field("_csrf_token", csrf_token)
+      horizontal_field(label: "Write your reply", name: :reply, type: :textarea)
+      render Palaver::Components::Form::HorizontalSubmit.new(label: "Reply")
+    end
   end
 end

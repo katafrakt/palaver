@@ -53,7 +53,7 @@ module Palaver
 
     def fetch_current_user(req, res)
       session_id = req.session[:usi]
-      user = Account::Container["repositories.account"].by_session_id(session_id) if session_id
+      user = Account::Container["repositories.account"].by_session_id(session_id)
       res[:current_user] = user
     end
 

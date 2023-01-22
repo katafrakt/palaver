@@ -25,6 +25,12 @@ class Palaver::Components::Form::Field < Phlex::HTML
 
   def render_input
     classes = ["input", @error.nil? ? nil : "is-danger"].compact.join(" ")
-    input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value)
+    case type
+    when :textarea
+      classes = ["textarea", @error.nil? ? nil : "is-danger"].compact.join(" ")
+      textarea(class: "textarea", name: name, rows: 5) { value || placeholder }
+    else
+      input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value)
+    end
   end
 end
