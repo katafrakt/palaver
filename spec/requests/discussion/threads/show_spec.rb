@@ -2,8 +2,8 @@ RSpec.describe "GET /th/:id", type: :request do
   let(:author) { Account::Container["repositories.profile"].create(nickname: "Joshua") }
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
   let(:thread) do
-    category = Discussion::Repositories::Categories.new.create(name: "abcd")
-    Discussion::Repositories::Threads.new.create(title: "A test thread", content: "Testing", category_id: category.id,
+    category = Discussion::Repositories::Category.new.create(name: "abcd")
+    Discussion::Commands::CreateThread.new.call(title: "A test thread", content: "Testing", category_id: category.id,
                                                  author: author)
   end
 

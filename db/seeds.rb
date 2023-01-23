@@ -1,10 +1,10 @@
 require "faker"
 
-categories = Discussion::Container["repositories.categories"]
+categories = Discussion::Container["repositories.category"]
 test = categories.create(name: "Test")
 categories.create(name: "DevLog")
 
-threads = Discussion::Container["repositories.threads"]
+threads = Discussion::Container["repositories.thread"]
 john = threads.create_profile("johnny")
 martha = threads.create_profile("martha")
 th1 = threads.create(title: "Topic 1", category_id: test.id, content: "test", author: john)

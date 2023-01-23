@@ -1,8 +1,10 @@
 RSpec.describe "GET /cat/:id", type: :request do
   let(:author) { Account::Container["repositories.profile"].create(nickname: "Joshua") }
+  let(:repo) { Discussion::Container["repositories.category"] }
+  let(:thread_repo) { Discussion::Container["repositories.thread"] }
 
   specify "with no threads" do
-    category = Discussion::Repositories::Categories.new.create(name: "abcd")
+    category = repo.create(name: "abcd")
     get "/cat/#{category.id}"
 
     expect(last_response).to be_successful
@@ -10,9 +12,9 @@ RSpec.describe "GET /cat/:id", type: :request do
   end
 
   specify "with one thread" do
-    category = Discussion::Repositories::Categories.new.create(name: "abcd")
-    Discussion::Repositories::Threads.new.create(title: "A test thread", content: "Testiiiing",
-                                                 category_id: category.id, author: author)
+    category = repo.create(name: "abcd")
+    thread_repo.create(title: "A test thread", content: "Testiiiing",
+                       category_id: category.id, author: author)
     get "/cat/#{category.id}"
 
     expect(last_response).to be_successful

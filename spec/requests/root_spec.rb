@@ -2,7 +2,7 @@
 
 RSpec.describe "Root", type: :request do
   after do
-    Discussion::Container.unstub("repositories.categories")
+    Discussion::Container.unstub("repositories.category")
   end
 
   let(:container) { Discussion::Container }
@@ -17,7 +17,7 @@ RSpec.describe "Root", type: :request do
 
   it "is succesful" do
     repo = double("fake repo", homepage: [category])
-    container.stub("repositories.categories", repo)
+    container.stub("repositories.category", repo)
 
     get "/"
 

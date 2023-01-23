@@ -1,6 +1,6 @@
 RSpec.describe Discussion::Acl do
   subject(:acl) { Discussion::Container["acl"].authorizer }
-  let(:thread_model) { Discussion::Container["repositories.threads"].threads.mapper.model }
+  let(:thread_model) { Discussion::Container["repositories.thread"].threads.mapper.model }
 
   it "disallows anonymous user to reply" do
     current_user = Account::Entities::AnonymousUser.new

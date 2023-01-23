@@ -2,7 +2,7 @@
 
 class Discussion::Actions::Thread::Show < Discussion::Action
   include Discussion::Deps[
-            repo: "repositories.threads"
+            repo: "repositories.thread"
           ]
 
   def handle(req, res)

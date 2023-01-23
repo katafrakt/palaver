@@ -2,8 +2,8 @@
 
 class Discussion::Actions::Category::Show < Discussion::Action
   include Discussion::Deps[
-    repo: "repositories.categories",
-    threads_repo: "repositories.threads"
+    repo: "repositories.category",
+    threads_repo: "repositories.thread"
   ]
 
   def handle(req, res)

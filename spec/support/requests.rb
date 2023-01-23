@@ -13,6 +13,10 @@ RSpec.configure do |config|
   config.after(type: :request) do
     DatabaseCleaner[:sequel].clean
   end
+
+  config.after(type: :db) do
+    DatabaseCleaner[:sequel].clean
+  end
 end
 
 DatabaseCleaner[:sequel].db = Hanami.app["persistence.db"]

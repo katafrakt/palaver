@@ -2,7 +2,7 @@ RSpec.describe Discussion::Actions::Category::Show do
   subject(:action) { described_class.new }
 
   after do
-    Discussion::Container.unstub("repositories.categories")
+    Discussion::Container.unstub("repositories.category")
   end
 
   describe "with no categories" do
@@ -10,7 +10,7 @@ RSpec.describe Discussion::Actions::Category::Show do
       category = Factory.structs[:category]
       categories_repo = double(:repo)
       expect(categories_repo).to receive(:get) { category }
-      Discussion::Container.stub("repositories.categories", categories_repo)
+      Discussion::Container.stub("repositories.category", categories_repo)
 
       response = action.call({id: category.id})
       expect(response.body.first).to include("No threads")

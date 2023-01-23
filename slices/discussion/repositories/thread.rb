@@ -1,17 +1,15 @@
 module Discussion
   module Repositories
-    class Threads < Palaver::Repository[:threads]
+    class Thread < Palaver::Repository[:threads]
       struct_namespace Discussion::Entities
+      commands :create
 
-      def create(title:, content:, category_id:, author:)
-        threads.transaction do
-          thread = threads.changeset(:create, title: title, category_id: category_id).commit
-          message = create_message(thread: thread, author: author, content: content)
-          sync_message_count(author)
-          threads.by_pk(thread.id).changeset(:update, first_message_id: message.id, last_message_id: message.id).commit
-          categories.by_pk(category_id).changeset(:update, latest_thread_id: thread.id).commit
-          thread
-        end
+      def set_first_message(thread:, message:)
+        threads.by_pk(thread.id).changeset(:update, first_message_id: message.id).commit
+      end
+
+      def set_last_message(thread:, message:)
+        threads.by_pk(thread.id).changeset(:update, last_message_id: message.id).commit
       end
 
       def by_category(category_id)
@@ -30,15 +28,6 @@ module Discussion
       def paged_messages(thread_id, _page)
         messages.where(thread_id: thread_id).combine(:author).order(:posted_at).to_a
       end
-
-      def create_reply(thread:, author:, content:)
-        messages.transaction do
-          create_message(thread: thread, author: author, content: content)
-          sync_message_count(author)
-        end
-      end
-
-      private
 
       def create_message(thread:, author:, content:)
         messages
