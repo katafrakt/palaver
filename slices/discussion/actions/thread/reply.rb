@@ -3,12 +3,9 @@
 class Discussion::Actions::Thread::Reply < Discussion::Action
   include Discussion::Deps[
     reply: "commands.add_message",
-    repo: "repositories.thread"
-  ]
-
-  include Account::Deps[
+    repo: "repositories.thread",
     profile_repo: "repositories.profile"
-  ] 
+  ]
 
   def handle(req, res)
     thread = repo.get(req.params[:id])

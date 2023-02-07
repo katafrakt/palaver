@@ -1,6 +1,6 @@
 RSpec.describe Discussion::Commands::CreateThread, type: :db do
   let(:repo) { Discussion::Container["repositories.thread"] }
-  let(:profile_repo) { Account::Container["repositories.profile"] }
+  let(:profile_repo) { Discussion::Container["repositories.profile"] }
   let(:category) { Discussion::Container["repositories.category"].create(name: "test") }
   subject(:command) { described_class.new }
   let(:author) { profile_repo.create(nickname: "jasiek", message_count: 0) }

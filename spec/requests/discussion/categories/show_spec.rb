@@ -1,5 +1,5 @@
 RSpec.describe "GET /cat/:id", type: :request do
-  let(:author) { Account::Container["repositories.profile"].create(nickname: "Joshua") }
+  let(:author) { Discussion::Container["repositories.profile"].create(nickname: "Joshua") }
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:thread_repo) { Discussion::Container["repositories.thread"] }
 
