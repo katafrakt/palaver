@@ -19,6 +19,8 @@ gem "puma"
 gem "rom-sql", "~> 3.6.0"
 gem "rom", "~> 5.3.0"
 gem "verifica"
+gem "shrine", "~> 3.0"
+gem "shrine-rom"
 
 group :cli, :development do
   gem "hanami-reloader"

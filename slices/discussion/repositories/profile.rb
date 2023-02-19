@@ -1,6 +1,6 @@
 class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
-  struct_namespace Account::Entities
-
+  struct_namespace Discussion::Entities
+  
   def get(id)
     profiles.by_pk(id).one!
   end
@@ -10,9 +10,12 @@ class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
   end
 
   def create(params)
-    nickname = params.delete(:username)
-    params[:nickname] = nickname
     params[:message_count] = 0
     profiles.command(:create).call(params)
+  end
+
+  def update(id, params)
+    command = profiles.by_pk(id).command(:update)
+    command.call(params)
   end
 end

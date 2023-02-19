@@ -29,6 +29,16 @@ class Palaver::Components::Form::Field < Phlex::HTML
     when :textarea
       classes = ["textarea", @error.nil? ? nil : "is-danger"].compact.join(" ")
       textarea(class: "textarea", name: name, rows: 5) { value || placeholder }
+    when :file
+      label(class: "file-label") do
+        input(class: "file-input", type: "file", name: name)
+        span(class: "file-cta") do
+          span(class: "file-icon") do
+            i(class: "fas fa-upload")
+          end
+          span(class: "file-label") { "Choose a file" }
+        end
+      end
     else
       input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value)
     end

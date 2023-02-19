@@ -26,7 +26,11 @@ module Discussion
       end
 
       def paged_messages(thread_id, _page)
-        messages.where(thread_id: thread_id).combine(:author).order(:posted_at).to_a
+        messages
+          .where(thread_id: thread_id)
+          .combine(:author)
+          .order(:posted_at)
+          .to_a
       end
 
       def create_message(thread:, author:, content:)

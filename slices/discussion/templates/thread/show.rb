@@ -26,7 +26,7 @@ class Discussion::Templates::Thread::Show < Palaver::View
           strong { message.author.nickname }
         end
         p(class: "image is-96x96 is-hidden-mobile mb-3 mt-3") do
-          img(src: "https://bulma.io/images/placeholders/128x128.png")
+          img(src: avatar_url(message))
         end
         p(class: "is-hidden-mobile is-size-7") do
           text "Posts: "
@@ -41,6 +41,14 @@ class Discussion::Templates::Thread::Show < Palaver::View
 
         div(class: "content") { message.text }
       end
+    end
+  end
+
+  def avatar_url(message)
+    if message.author.avatar
+      message.author.avatar_url
+    else
+      "https://bulma.io/images/placeholders/128x128.png"
     end
   end
 

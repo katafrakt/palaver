@@ -7,10 +7,6 @@ module Account
         @attributes = attributes.slice(:id, :email, :confirmation_token, :confirmed_at, :registered_at)
       end
 
-      def [](name)
-        attributes[name]
-      end
-
       def id = attributes[:id]
       def email = attributes[:email]
       def signed_in? = true

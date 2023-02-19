@@ -3,11 +3,14 @@
 class Palaver::Components::Form < Phlex::HTML
   attr_reader :url
 
-  def initialize(url:)
+  def initialize(url:, multipart: false)
     @url = url
+    @multipart = multipart
   end
 
   def template(&content)
-    form(method: "POST", action: url, &content)
+    params = {method: "POST", action: url}
+    params[:enctype] = "multipart/form-data" if @multipart
+    form(**params, &content)
   end
 end
