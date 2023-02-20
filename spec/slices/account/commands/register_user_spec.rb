@@ -5,11 +5,7 @@ RSpec.describe Account::Commands::RegisterUser do
     ROM::SQL::UniqueConstraintError.new(StandardError.new)
   end
 
-  around do |example|
-    Account::Container.stub("repositories.account", repo)
-    example.run
-    Account::Container.unstub("repositories.account")
-  end
+  stub(Account::Container, "repositories.account") { repo }
 
   it "calls the repository's create" do
     account = double(:account)

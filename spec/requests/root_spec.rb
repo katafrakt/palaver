@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe "Root", type: :request do
-  after do
-    Discussion::Container.unstub("repositories.category")
-  end
-
-  let(:container) { Discussion::Container }
   let(:category) {
     category = Factory.structs[:category]
     def category.thread_count = 0
@@ -14,10 +9,11 @@ RSpec.describe "Root", type: :request do
     def latest_thread.last_message = Factory.structs[:last_message]
     category
   }
+  let(:repo) { double("fake repo") }
+  stub(Discussion::Container, "repositories.category") { repo }
 
   it "is succesful" do
-    repo = double("fake repo", homepage: [category])
-    container.stub("repositories.category", repo)
+    expect(repo).to receive(:homepage) { [category] }
 
     get "/"
 

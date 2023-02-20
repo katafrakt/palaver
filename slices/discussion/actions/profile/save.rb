@@ -23,6 +23,7 @@ class Discussion::Actions::Profile::Save < Discussion::Action
       create.call(nickname: req.params[:username], avatar: req.params[:avatar], 
         account_id: res[:current_user].id)
     end
-    res.redirect "/profile"
+    res.flash[:success] = "Your profile has been updated"
+    res.redirect "/"
   end
 end
