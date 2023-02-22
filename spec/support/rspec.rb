@@ -2,6 +2,7 @@
 
 require_relative "helpers"
 require_relative "fixtures/account"
+require_relative "fixtures/discussion"
 
 RSpec.configure do |config|
   config.extend RSpecHelpers
