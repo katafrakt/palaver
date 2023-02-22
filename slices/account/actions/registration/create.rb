@@ -22,10 +22,10 @@ class Account::Actions::Registration::Create < Account::Action
       return
     end
 
-    case register_user.call(req.params[:email], req.params[:password])
-    in [:ok, account]
-      res.render(Account::Templates::Registration::AfterCreate, account: account)
-    in [:error, :email_not_unique]
+    result = register_user.call(req.params[:email], req.params[:password])
+    if result.success?
+      res.render(Account::Templates::Registration::AfterCreate, account: result.value!)
+    else
       email_error = "must be unique"
       res.status = 422
       res.render(Account::Templates::Registration::New, values: req.params.to_h, errors: {email: [email_error]})

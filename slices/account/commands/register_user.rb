@@ -1,6 +1,7 @@
 require "argon2"
 
 class Account::Commands::RegisterUser
+  include Dry::Monads[:result]
   include Account::Deps[repo: "repositories.account", hasher: "utils.hasher"]
 
   def call(email, password)
@@ -13,8 +14,8 @@ class Account::Commands::RegisterUser
       confirmation_token: confirmation_token,
       registered_at: Time.now.utc
     )
-    [:ok, account]
+    Success(account)
   rescue ROM::SQL::UniqueConstraintError
-    [:error, :email_not_unique]
+    Failure(:email_not_unique)
   end
 end

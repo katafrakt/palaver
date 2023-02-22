@@ -12,13 +12,14 @@ RSpec.describe Account::Commands::RegisterUser do
     expect(repo).to receive(:create) { account }
 
     result = command.call("test@test.com", "123456")
-    expect(result).to eq([:ok, account])
+    expect(result).to be_success
   end
 
   it "handles non-unique email" do
     allow(repo).to receive(:create).and_raise(non_unique_exception)
 
     result = command.call("test@test.com", "123456")
-    expect(result).to eq([:error, :email_not_unique])
+    expect(result).to be_failure
+    expect(result.failure).to eq(:email_not_unique)
   end
 end

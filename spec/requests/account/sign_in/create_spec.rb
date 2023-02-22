@@ -20,7 +20,7 @@ RSpec.describe "GET #{url}", type: :request do
 
   context "with successful login" do
     before do
-      _, account = register_user.call("test@test.com", "12345678")
+      account = register_user.call("test@test.com", "12345678").value!
       confirm_user.call(account.id, account.confirmation_token)
     end
 
