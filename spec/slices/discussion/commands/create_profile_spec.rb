@@ -1,16 +1,22 @@
 RSpec.describe Discussion::Commands::CreateProfile, type: :db do
   let(:account) { Fixtures::Account.user() }
-  subject(:command) { described_class.new }
+
+  def call_command(opts = {})
+    avatar = if opts[:avatar]
+               file_path = File.join(Hanami.app.root, "spec", "support", "files", opts[:avatar])
+               File.open(file_path)
+             end
+
+    described_class.new.call(nickname: "john", avatar:, account_id: account.id)
+  end
 
   it "creates a profile with zero message count" do
-    profile = command.call(nickname: "john", avatar: nil, account_id: account.id)
+    profile = call_command()
     expect(profile.message_count).to eq(0)
   end
 
   it "saves avatar data" do
-    file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
-    file = File.open(file_path)
-    profile = command.call(nickname: "john", avatar: file, account_id: account.id)
+    profile = call_command(avatar: "cat_small.jpg")
     avatar_data = JSON.parse(profile.avatar_data)
 
     expect(avatar_data["metadata"]["filename"]).to eq("cat_small.jpg")
@@ -18,10 +24,7 @@ RSpec.describe Discussion::Commands::CreateProfile, type: :db do
   end
 
   it "uploads the avatar" do
-    file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
-    file = File.open(file_path)
-    profile = command.call(nickname: "john", avatar: file, account_id: account.id)
-
+    profile = call_command(avatar: "cat_small.jpg")
     file = profile.avatar.to_io
     expect(File.exist?(file.path)).to eq(true)
   end
