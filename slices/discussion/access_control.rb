@@ -3,7 +3,7 @@
 require "verifica"
 
 module Discussion
-  class Acl
+  class AccessControl
     class Thread
       def call(thread, **)
         Verifica::Acl.build do |acl|

@@ -1,5 +1,5 @@
-RSpec.describe Discussion::Acl do
-  subject(:acl) { Discussion::Container["acl"].authorizer }
+RSpec.describe Discussion::AccessControl do
+  subject(:acl) { Discussion::Container["access_control"].authorizer }
   let(:thread_model) { Discussion::Container["repositories.thread"].threads.mapper.model }
 
   it "disallows anonymous user to reply" do

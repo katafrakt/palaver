@@ -1,7 +1,7 @@
 class Discussion::Templates::Thread::Show < Palaver::View
   include Ui::Typography
   include Ui::Form
-  include Discussion::Deps["acl"]
+  include Discussion::Deps["access_control"]
 
   def template
     div do
@@ -11,7 +11,7 @@ class Discussion::Templates::Thread::Show < Palaver::View
         message_row(message)
       end
 
-      if acl.authorizer.authorized?(current_user, @thread, :reply)
+      if access_control.authorizer.authorized?(current_user, @thread, :reply)
         reply_form
       end
     end
