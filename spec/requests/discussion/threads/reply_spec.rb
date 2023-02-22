@@ -5,7 +5,7 @@ RSpec.describe "POST /th/:id/reply", type: :request do
   let(:thread) do
     category = Discussion::Repositories::Category.new.create(name: "abcd")
     Discussion::Commands::CreateThread.new.call(title: "A test thread", content: "Testing", category_id: category.id,
-                                                 author: author)
+                                                 author: author).value!
   end
 
   describe "as a signed in user" do

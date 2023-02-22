@@ -11,12 +11,12 @@ RSpec.describe Discussion::Commands::CreateProfile, type: :db do
   end
 
   it "creates a profile with zero message count" do
-    profile = call_command()
+    profile = call_command().value!
     expect(profile.message_count).to eq(0)
   end
 
   it "saves avatar data" do
-    profile = call_command(avatar: "cat_small.jpg")
+    profile = call_command(avatar: "cat_small.jpg").value!
     avatar_data = JSON.parse(profile.avatar_data)
 
     expect(avatar_data["metadata"]["filename"]).to eq("cat_small.jpg")
@@ -24,7 +24,7 @@ RSpec.describe Discussion::Commands::CreateProfile, type: :db do
   end
 
   it "uploads the avatar" do
-    profile = call_command(avatar: "cat_small.jpg")
+    profile = call_command(avatar: "cat_small.jpg").value!
     file = profile.avatar.to_io
     expect(File.exist?(file.path)).to eq(true)
   end

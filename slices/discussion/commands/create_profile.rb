@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Discussion::Commands::CreateProfile
+  include Dry::Monads[:result]
   include Discussion::Deps[
     repo: "repositories.profile"
   ]
@@ -15,6 +16,7 @@ class Discussion::Commands::CreateProfile
       avatar_data: attacher.column_data
     }
 
-    repo.create(params)
+    profile = repo.create(params)
+    Success(profile)
   end
 end

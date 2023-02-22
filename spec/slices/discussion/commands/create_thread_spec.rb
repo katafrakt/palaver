@@ -6,7 +6,7 @@ RSpec.describe Discussion::Commands::CreateThread, type: :db do
   let(:author) { profile_repo.create(nickname: "jasiek", message_count: 0) }
 
   it "creates a thread" do
-    thread = command.call(title: "weekly update", content: "update", category_id: category.id, author:)
+    thread = command.call(title: "weekly update", content: "update", category_id: category.id, author:).value!
     thread = repo.get(thread.id)
     expect(thread).not_to be_nil
   end
