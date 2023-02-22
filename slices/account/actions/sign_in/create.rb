@@ -3,6 +3,8 @@
 class Account::Actions::SignIn::Create < Account::Action
   include Account::Deps["commands.sign_in"]
 
+  require_signed_out_user!
+
   params do
     required(:email).filled(:str?, format?: URI::MailTo::EMAIL_REGEXP)
     required(:password).filled(:str?)

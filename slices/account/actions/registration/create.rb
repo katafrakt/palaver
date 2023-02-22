@@ -3,6 +3,8 @@
 class Account::Actions::Registration::Create < Account::Action
   include Account::Deps["commands.register_user"]
 
+  require_signed_out_user!
+
   contract do
     schema do
       required(:email).filled(:str?, format?: URI::MailTo::EMAIL_REGEXP)
@@ -16,11 +18,7 @@ class Account::Actions::Registration::Create < Account::Action
   end
 
   def handle(req, res)
-    if !req.params.valid?
-      res.status = 422
-      res.render(Account::Templates::Registration::New, values: req.params.to_h, errors: req.params.errors)
-      return
-    end
+    render_on_invalid_params(res, Account::Templates::Registration::New)
 
     result = register_user.call(req.params[:email], req.params[:password])
     if result.success?

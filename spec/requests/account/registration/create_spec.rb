@@ -67,11 +67,20 @@ RSpec.describe "POST /account/register", type: :request do
     end
   end
 
-  context "success", db: true do
+  context "success" do
     it "renders a message" do
       post url, params
       expect(last_response).to be_successful
       expect(last_response.body).to include("Thank you for registering")
+    end
+  end
+
+  context "with signed in user" do
+    it "redirects" do
+      user = Fixtures::Account.user
+      env "rack.session", { usi: user.id }
+      get url
+      expect(last_response.status).to eq(302)
     end
   end
 end

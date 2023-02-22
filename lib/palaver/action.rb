@@ -32,10 +32,6 @@ module Palaver
 
     before :fetch_current_user
 
-    def render(view, **args)
-      Layout.new(view, args).call
-    end
-
     # Hacking around Hanami deficiencies which only allow using schema validation
     # without rules validation
     def self.contract(&block)
@@ -60,9 +56,8 @@ module Palaver
     def render_on_invalid_params(res, template)
       req = res.request
       if !req.params.valid?
-        res.status = 422
-        res.body = render(template, values: req.params.to_h, errors: req.params.errors)
-        halt
+        body = res.render(template, values: req.params.to_h, errors: req.params.errors)
+        halt(422, body)
       end
     end
 
@@ -80,6 +75,25 @@ module Palaver
 
     def missing_csrf_token?(req, *)
       Hanami::Utils::Blank.blank?(req.params.raw[CSRF_TOKEN])
+    end
+
+    # Redirects to root page if the user is not signed in
+    def self.require_signed_in_user!
+      before do |_, res|
+        unless res[:current_user].signed_in?
+          res.flash[:error] = "You need to be signed in to access this page"
+          res.redirect_to "/"
+        end
+      end
+    end
+
+    def self.require_signed_out_user!
+      before do |_, res|
+        if res[:current_user].signed_in?
+          res.flash[:error] = "You are already signed in"
+          res.redirect_to "/"
+        end
+      end
     end
   end
 end
