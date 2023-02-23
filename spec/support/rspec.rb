@@ -36,6 +36,3 @@ RSpec.configure do |config|
     Account::Container.stub("utils.hasher", Argon2::Password.new(t_cost: 1, m_cost: 4, p_cost: 1))
   end
 end
-
-require "database_cleaner/sequel"
-DatabaseCleaner.strategy = :truncation
