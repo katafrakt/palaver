@@ -20,6 +20,8 @@ require "hanami/prepare"
 require_relative "support/rspec"
 require_relative "support/requests"
 require_relative "support/database_cleaner"
+require_relative "support/uploads"
+
 require "phlex"
 
 # NOTE: for some reason I cannot just require it, so copying from source code
