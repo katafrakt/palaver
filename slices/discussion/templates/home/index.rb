@@ -3,7 +3,7 @@
 class Discussion::Templates::Home::Index < Palaver::View
   def template
     div do
-      render Discussion::Components::NoProfileWarning.new(current_user, current_profile)
+      render Discussion::Components::NoProfileWarning.new(current_user)
       h4(class: "is-size-2") { "Categories" }
       div(class: "section") do
         @categories.each do |category|

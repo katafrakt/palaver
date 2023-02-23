@@ -15,7 +15,7 @@ RSpec.describe Discussion::Action do
 
     it "does not redirect then there is a user" do
       account_repo = double("user repo")
-      expect(account_repo).to receive(:by_session_id).with(101) { Account::Entities::CurrentUser.new(id: 101) }
+      expect(account_repo).to receive(:by_session_id).with(101) { Account::Entities::CurrentUser.new(id: 101, email: "") }
       
       Account::Container.stub("repositories.account", account_repo) do
         res = action.new.call("rack.session" => {"usi" => 101})
