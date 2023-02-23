@@ -8,9 +8,8 @@ module Fixtures
         .value!
     end
 
-    def user_entity(args)
-      model = ::Account::Repositories::Account.new.entities.mapper.model
-      model.new(args)
+    def current_user_entity(args)
+      ::Account::Entities::CurrentUser.new(args)
     end
   end
 end
