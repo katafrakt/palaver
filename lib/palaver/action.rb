@@ -8,26 +8,9 @@ require "dry/monads"
 require "ui/layout"
 require "hanami_extensions"
 
-module HanamiPhlexView
-  def self.included(base)
-    base.extend ClassMethods
-  end
-
-  module ClassMethods
-    def view(view_class = Dry::Core::Undefined)
-      if view_class == Dry::Core::Undefined
-        @view_class
-      else
-        @view_class = view_class
-      end
-    end
-  end
-end
-
 module Palaver
   class Action < Hanami::Action
     include Hanami::Action::Session
-    include HanamiPhlexView
     include Dry::Monads[:result]
 
     before :fetch_current_user

@@ -1,19 +1,17 @@
-module Account
-  module Entities
-    class CurrentUser
-      attr_reader :attributes
+class Account::Entities::CurrentUser < Palaver::Entity
+  def signed_in? = !id.nil?
 
-      def initialize(attributes)
-        @attributes = attributes.slice(:id, :email, :confirmation_token, :confirmed_at, :registered_at)
-      end
+  # access control
+  def subject_id = "user:#{id}"
+  def subject_type = :user
 
-      def id = attributes[:id]
-      def email = attributes[:email]
-      def signed_in? = true
-
-      def subject_id =  "user:#{id}"
-      def subject_type = :user
-      def subject_sids = [:authenticated]
+  def subject_sids
+    [].tap do |sids|
+      sids << :authenticated if signed_in?
     end
   end
+
+  private
+
+  def default_attrs = { id: nil }
 end

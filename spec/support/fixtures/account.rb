@@ -7,5 +7,10 @@ module Fixtures
         .call("#{SecureRandom.hex(16)}@test.com", "123123123")
         .value!
     end
+
+    def user_entity(args)
+      model = ::Account::Repositories::Account.new.entities.mapper.model
+      model.new(args)
+    end
   end
 end

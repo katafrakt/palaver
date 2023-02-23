@@ -1,3 +1,7 @@
+# frozen_string_litral: true
+
+require "dry/monads"
+
 class Account::Commands::ConfirmUser
   include Dry::Monads[:result]
   include Account::Deps[repo: "repositories.account"]
