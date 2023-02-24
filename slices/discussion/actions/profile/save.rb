@@ -3,7 +3,8 @@
 class Discussion::Actions::Profile::Save < Discussion::Action
   include Discussion::Deps[
     repo: "repositories.profile",
-    create: "commands.create_profile"
+    create: "commands.create_profile",
+    update: "commands.update_profile"
   ]
 
   require_signed_in_user!
@@ -17,9 +18,7 @@ class Discussion::Actions::Profile::Save < Discussion::Action
     profile = repo.from_current_user(res[:current_user])
     result =
       if profile
-        params = req.params.to_h
-        params.delete(:username)
-        repo.update(profile.id, params)
+        update.call(avatar: req.params[:avatar], account_id: res[:current_user].id)
       else
         create.call(nickname: req.params[:username], avatar: req.params[:avatar],
                     account_id: res[:current_user].id)
