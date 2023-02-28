@@ -1,7 +1,7 @@
 module Discussion::AntiCorruptionLayer
   def self.transform_current_user(current_user)
     raise RuntimeError unless current_user.is_a?(Account::Entities::CurrentUser) ||
-                              current_user.is_a?(Account::Entities::AnonymousUser)
+      current_user.is_a?(Account::Entities::AnonymousUser)
 
     if current_user.signed_in?
       attrs = {

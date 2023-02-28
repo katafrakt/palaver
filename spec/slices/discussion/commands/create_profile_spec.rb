@@ -1,17 +1,17 @@
 RSpec.describe Discussion::Commands::CreateProfile, type: :db do
-  let(:account) { Fixtures::Account.user() }
+  let(:account) { Fixtures::Account.user }
 
   def call_command(opts = {})
     avatar = if opts[:avatar]
-               file_path = File.join(Hanami.app.root, "spec", "support", "files", opts[:avatar])
-               File.open(file_path)
-             end
+      file_path = File.join(Hanami.app.root, "spec", "support", "files", opts[:avatar])
+      File.open(file_path)
+    end
 
     described_class.new.call(nickname: "john", avatar:, account_id: account.id)
   end
 
   it "creates a profile with zero message count" do
-    profile = call_command().value!
+    profile = call_command.value!
     expect(profile.message_count).to eq(0)
   end
 

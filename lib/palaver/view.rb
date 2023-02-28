@@ -10,7 +10,9 @@ class Palaver::View < Phlex::HTML
     end
 
     def flash = @response.flash
+
     def csrf_token = @response.session[:_csrf_token]
+
     def current_user = @response[:current_user]
   end
 
@@ -21,7 +23,9 @@ class Palaver::View < Phlex::HTML
   end
 
   def flash = context.flash
+
   def csrf_token = context.csrf_token
+
   def current_user = context.current_user
 
   private

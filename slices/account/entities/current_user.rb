@@ -3,6 +3,7 @@ class Account::Entities::CurrentUser < Palaver::Entity
 
   # access control
   def subject_id = "user:#{id}"
+
   def subject_type = :user
 
   def subject_sids
@@ -13,5 +14,5 @@ class Account::Entities::CurrentUser < Palaver::Entity
 
   private
 
-  def default_attrs = { id: nil }
+  def default_attrs = {id: nil}
 end

@@ -4,7 +4,7 @@ RSpec.describe "GET /th/:id", type: :request do
   let(:thread) do
     category = Discussion::Repositories::Category.new.create(name: "abcd")
     Discussion::Commands::CreateThread.new.call(title: "A test thread", content: "Testing", category_id: category.id,
-                                                 author: author).value!
+      author: author).value!
   end
 
   describe "as anonymous user" do
@@ -22,7 +22,7 @@ RSpec.describe "GET /th/:id", type: :request do
 
   describe "as a signed in user" do
     specify "displays reply form" do
-      env "rack.session", { usi: user.id }
+      env "rack.session", {usi: user.id}
       get "/th/#{thread.id}"
 
       expect(last_response.body).to include("A test thread")

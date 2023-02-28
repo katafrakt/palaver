@@ -6,7 +6,7 @@ class Discussion::Actions::Profile::Form < Discussion::Action
   ]
 
   require_signed_in_user!
-  
+
   def handle(req, res)
     profile = repo.from_current_user(res[:current_user])
     res.render(Discussion::Templates::Profile::Form, profile:, values: req.params, errors: {})

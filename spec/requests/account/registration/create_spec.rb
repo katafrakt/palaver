@@ -10,7 +10,7 @@ RSpec.describe "POST /account/register", type: :request do
 
   context "errors" do
     specify "with missing email" do
-      params.merge!(email: nil)
+      params[:email] = nil
       post url, params
 
       expect(last_response).not_to be_successful
@@ -18,7 +18,7 @@ RSpec.describe "POST /account/register", type: :request do
     end
 
     specify "with incorrect email" do
-      params.merge!(email: "abc@")
+      params[:email] = "abc@"
       post url, params
 
       expect(last_response).not_to be_successful
@@ -26,7 +26,7 @@ RSpec.describe "POST /account/register", type: :request do
     end
 
     specify "with missing password" do
-      params.merge!(password: nil)
+      params[:password] = nil
       post url, params
 
       expect(last_response).not_to be_successful
@@ -34,7 +34,7 @@ RSpec.describe "POST /account/register", type: :request do
     end
 
     specify "with missing password confirmation" do
-      params.merge!(password_confirmation: nil)
+      params[:password_confirmation] = nil
       post url, params
 
       expect(last_response).not_to be_successful
@@ -42,7 +42,7 @@ RSpec.describe "POST /account/register", type: :request do
     end
 
     specify "with password too short" do
-      params.merge!(password: "123")
+      params[:password] = "123"
       post url, params
 
       expect(last_response).not_to be_successful
@@ -50,7 +50,7 @@ RSpec.describe "POST /account/register", type: :request do
     end
 
     specify "with password and confirmation not matching" do
-      params.merge!(password: "12344321")
+      params[:password] = "12344321"
       post url, params
 
       expect(last_response).not_to be_successful
@@ -59,7 +59,7 @@ RSpec.describe "POST /account/register", type: :request do
 
     specify "with email already taken", db: true do
       Account::Repositories::Account.new.create(email: "test@test.com")
-      params.merge!(email: "test@test.com")
+      params[:email] = "test@test.com"
       post url, params
 
       expect(last_response).not_to be_successful
@@ -78,7 +78,7 @@ RSpec.describe "POST /account/register", type: :request do
   context "with signed in user" do
     it "redirects" do
       user = Fixtures::Account.user
-      env "rack.session", { usi: user.id }
+      env "rack.session", {usi: user.id}
       get url
       expect(last_response.status).to eq(302)
     end

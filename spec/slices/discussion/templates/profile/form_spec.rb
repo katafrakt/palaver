@@ -26,7 +26,7 @@ RSpec.describe Discussion::Templates::Profile::Form do
 
   context "with existing profile" do
     let(:profile) { Object.new }
-    
+
     it "renders correct button CTA text" do
       expect(output).to match("Update profile")
     end

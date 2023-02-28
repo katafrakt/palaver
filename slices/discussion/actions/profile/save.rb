@@ -21,7 +21,7 @@ class Discussion::Actions::Profile::Save < Discussion::Action
         update.call(avatar: req.params[:avatar], account_id: res[:current_user].id)
       else
         create.call(nickname: req.params[:username], avatar: req.params[:avatar],
-                    account_id: res[:current_user].id)
+          account_id: res[:current_user].id)
       end
 
     if result.success?

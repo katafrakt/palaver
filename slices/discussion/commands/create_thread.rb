@@ -3,9 +3,9 @@
 class Discussion::Commands::CreateThread
   include Dry::Monads[:result]
   include Discussion::Deps[
-            repo: "repositories.thread",
-            add_message: "commands.add_message",
-            category_repo: "repositories.category"
+    repo: "repositories.thread",
+    add_message: "commands.add_message",
+    category_repo: "repositories.category"
           ]
 
   def call(title:, content:, category_id:, author:)

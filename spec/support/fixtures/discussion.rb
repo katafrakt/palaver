@@ -10,7 +10,7 @@ module Fixtures
     def thread(category_id:, author:)
       ::Discussion::Container["commands.create_thread"]
         .call(title: "test thread", content: "this is the thread",
-              category_id:, author:)
+          category_id:, author:)
         .value!
     end
   end

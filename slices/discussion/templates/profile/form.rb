@@ -13,8 +13,8 @@ class Discussion::Templates::Profile::Form < Palaver::View
           field_info { "User name is your unique identifier accross the forum. It has to be unique and cannot be changed later." }
           horizontal_field(label: "User name", name: "username", value: @values[:username], error: @errors[:username])
         end
-      input(type: "hidden", value: nil, name: :avatar)
-      horizontal_field(label: "Avatar", name: :avatar, type: :file)
+        input(type: "hidden", value: nil, name: :avatar)
+        horizontal_field(label: "Avatar", name: :avatar, type: :file)
         label = @profile ? "Update profile" : "Set up your profile"
         render Palaver::Components::Form::HorizontalSubmit.new(label:)
       end

@@ -10,7 +10,7 @@ RSpec.describe "POST /th/:id/reply", type: :request do
   describe "as a signed in user" do
     before do
       profile
-      env "rack.session", { usi: user.id }
+      env "rack.session", {usi: user.id}
     end
 
     specify "redirects to the thread" do

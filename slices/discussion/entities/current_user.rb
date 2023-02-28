@@ -7,10 +7,12 @@ class Discussion::Entities::CurrentUser < Palaver::Entity
   include Palaver::AvatarUploader::Attachment(:avatar)
 
   def profile_set_up? = !attributes[:profile_id].nil?
+
   def signed_in? = !attributes[:id].nil?
 
   # access control
   def subject_id = "user:#{id}"
+
   def subject_type = :user
 
   def subject_sids
@@ -21,5 +23,5 @@ class Discussion::Entities::CurrentUser < Palaver::Entity
 
   private
 
-  def default_attrs = { id: nil }
+  def default_attrs = {id: nil}
 end

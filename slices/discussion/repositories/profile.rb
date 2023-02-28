@@ -1,6 +1,6 @@
 class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
   struct_namespace Discussion::Entities
-  
+
   def get(id)
     profiles.by_pk(id).one!
   end

@@ -14,7 +14,7 @@ RSpec.describe "GET /cat/:id", type: :request do
   specify "with one thread" do
     category = repo.create(name: "abcd")
     thread_repo.create(title: "A test thread", content: "Testiiiing",
-                       category_id: category.id, author: author)
+      category_id: category.id, author: author)
     get "/cat/#{category.id}"
 
     expect(last_response).to be_successful
