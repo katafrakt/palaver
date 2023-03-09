@@ -10,9 +10,9 @@ class Account::Templates::Registration::AfterCreate < Palaver::View
       render Palaver::Components::Typography::Heading.new(level: 2, text: "Thank you for registering on Palaver")
 
       p do
-        text "In order to confirm your account, please click on the following link: "
+        plain "In order to confirm your account, please click on the following link: "
         a(href: "/account/confirm?id=#{@account.id}&token=#{@account.confirmation_token}") { "confirm account" }
-        text "."
+        plain "."
       end
     end
   end

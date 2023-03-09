@@ -8,7 +8,7 @@ class Discussion::Components::CategoryRow < Phlex::HTML
     def template
       span do
         strong { @label }
-        text ": #{@value}"
+        plain ": #{@value}"
       end
     end
   end
@@ -32,10 +32,10 @@ class Discussion::Components::CategoryRow < Phlex::HTML
         if category.latest_thread
           unsafe_raw " &middot; "
           span do
-            text "Last message by "
+            plain "Last message by "
             a(href: "/") { most_recent_thread.last_message.author.nickname }
             whitespace
-            text "in"
+            plain "in"
             whitespace
             a(href: "/") { most_recent_thread.title }
           end

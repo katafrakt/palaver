@@ -24,10 +24,10 @@ class Account::Templates::SignIn::New < Palaver::View
 
         div(class: "column is-one-third") do
           p do
-            text "Don't have an account yet?"
+            plain "Don't have an account yet?"
             whitespace
             a(href: "/account/register") { "Register here" }
-            text "."
+            plain "."
           end
         end
       end

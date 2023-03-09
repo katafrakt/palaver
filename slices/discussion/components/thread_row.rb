@@ -20,7 +20,7 @@ class Discussion::Components::ThreadRow < Phlex::HTML
         nav(class: "level is-mobile") do
           span do
             strong { "Replies: " }
-            text @thread.messages.size - 1
+            plain @thread.messages.size - 1
           end
         end
       end

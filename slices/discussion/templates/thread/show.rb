@@ -29,8 +29,8 @@ class Discussion::Templates::Thread::Show < Palaver::View
           img(src: avatar_url(message))
         end
         p(class: "is-hidden-mobile is-size-7") do
-          text "Posts: "
-          text message.author.message_count
+          plain "Posts: "
+          plain message.author.message_count
         end
       end
 
