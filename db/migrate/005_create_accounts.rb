@@ -3,7 +3,7 @@ ROM::SQL.migration do
     create_table(:accounts) do
       primary_key(:id)
       column :email, String, null: false, unique: true
-      column :crypted_password, String
+      column :password_hash, String
       column :confirmation_token, String
       column :confirmed_at, DateTime
       column :registered_at, DateTime

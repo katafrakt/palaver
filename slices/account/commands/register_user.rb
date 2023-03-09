@@ -7,10 +7,10 @@ class Account::Commands::RegisterUser
   def call(email, password)
     confirmation_token = SecureRandom.uuid
 
-    crypted_password = hasher.create(password)
+    password_hash = hasher.create(password)
     account = repo.create(
       email: email,
-      crypted_password: crypted_password,
+      password_hash: password_hash,
       confirmation_token: confirmation_token,
       registered_at: Time.now.utc
     )

@@ -13,7 +13,7 @@ class Account::Commands::SignIn
       Failure(:not_found)
     elsif account.confirmed_at.nil?
       Failure(:not_confirmed)
-    elsif !Argon2::Password.verify_password(password, account.crypted_password)
+    elsif !Argon2::Password.verify_password(password, account.password_hash)
       Failure(:incorrect_password)
     else
       Success(account)
