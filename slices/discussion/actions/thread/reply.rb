@@ -9,8 +9,8 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
 
   def handle(req, res)
     thread = repo.get(req.params[:id])
-    user = profile_repo.from_current_user(res[:current_user])
-    reply.call(thread:, author: user, content: req.params[:reply])
+    profile = profile_repo.get(res[:current_user].profile_id)
+    reply.call(thread:, author: profile, content: req.params[:reply])
 
     # TODO: redirect always to last page and add anchor
     res.redirect_to "/th/#{thread.id}"

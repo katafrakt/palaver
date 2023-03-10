@@ -7,13 +7,17 @@ class Discussion::Templates::Thread::Show < Palaver::View
     div do
       heading2(@thread.title)
 
-      @messages.each do |message|
+      @pager.entries.each do |message|
         message_row(message)
       end
 
       if access_control.authorizer.authorized?(current_user, @thread, :reply)
         reply_form
+      else
+        render Discussion::Components::NoProfileWarning.new(current_user)
       end
+
+      pagination
     end
   end
 
@@ -61,6 +65,19 @@ class Discussion::Templates::Thread::Show < Palaver::View
       hidden_field("_csrf_token", csrf_token)
       horizontal_field(label: "Write your reply", name: :reply, type: :textarea)
       render Palaver::Components::Form::HorizontalSubmit.new(label: "Reply")
+    end
+  end
+
+  def pagination
+    nav(class: 'pagination is-centered', role: 'pagination', aria_label: 'pagination') do
+      ul(class: 'pagination-list') do
+        @pager.total_pages.times do |pg|
+          page = pg + 1
+          li do
+            a(class: "pagination-link #{page == @pager.current_page ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{@thread.id}?page=#{page}") { plain page }
+          end
+        end
+      end
     end
   end
 end

@@ -18,6 +18,7 @@ class Discussion::Entities::CurrentUser < Palaver::Entity
   def subject_sids
     [].tap do |sids|
       sids << :authenticated if signed_in?
+      sids << :no_profile unless profile_set_up?
     end
   end
 

@@ -1,7 +1,10 @@
 RSpec.describe "POST /th/:id/reply", type: :request do
-  let(:author) { Discussion::Container["repositories.profile"].create(nickname: "Joshua") }
-  let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
-  let(:profile) { Discussion::Container["repositories.profile"].create(nickname: "Wendy", account_id: user.id) }
+  let(:author) { Discussion::Container["repositories.profile"].create(nickname: "Rick") }
+  let(:user) do 
+    Account::Container["repositories.account"].create(email: "test@test.com").tap do |user|
+      Discussion::Container["repositories.profile"].create(nickname: "Joshua", account_id: user.id)
+    end
+  end
   let(:thread) do
     category = Fixtures::Discussion.category
     Fixtures::Discussion.thread(category_id: category.id, author:)
@@ -9,7 +12,6 @@ RSpec.describe "POST /th/:id/reply", type: :request do
 
   describe "as a signed in user" do
     before do
-      profile
       env "rack.session", {usi: user.id}
     end
 

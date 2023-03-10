@@ -8,6 +8,7 @@ module Discussion
       def call(thread, **)
         Verifica::Acl.build do |acl|
           acl.allow :authenticated, [:reply]
+          acl.deny :no_profile, [:reply]
         end
       end
     end
