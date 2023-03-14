@@ -1,10 +1,9 @@
 RSpec.describe Discussion::Components::NoProfileWarning do
   include Phlex::Testing::ViewHelper
-  CurrentUser = Discussion::Entities::CurrentUser
 
-  let(:anonymous_user) { CurrentUser.new }
-  let(:signed_in_user_without_profile) { CurrentUser.new(id: 11) }
-  let(:signed_in_user_with_profile) { CurrentUser.new(id: 11, profile_id: 11) }
+  let(:anonymous_user) { Discussion::Entities::CurrentUser.new }
+  let(:signed_in_user_without_profile) { Discussion::Entities::CurrentUser.new(id: 11) }
+  let(:signed_in_user_with_profile) { Discussion::Entities::CurrentUser.new(id: 11, profile_id: 11) }
 
   it "renders nothing when user is not signed in" do
     warning = described_class.new(anonymous_user)

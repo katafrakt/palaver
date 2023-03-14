@@ -60,6 +60,8 @@ module Palaver
       Hanami::Utils::Blank.blank?(req.params.raw[CSRF_TOKEN])
     end
 
+    public
+
     # Redirects to root page if the user is not signed in
     def self.require_signed_in_user!
       before do |_, res|

@@ -28,7 +28,7 @@ class Palaver::Components::Form::Field < Phlex::HTML
     case type
     when :textarea
       classes = ["textarea", @error.nil? ? nil : "is-danger"].compact.join(" ")
-      textarea(class: "textarea", name: name, rows: 5) { value || placeholder }
+      textarea(class: classes, name: name, rows: 5) { value || placeholder }
     when :file
       label(class: "file-label") do
         input(class: "file-input", type: "file", name: name)
