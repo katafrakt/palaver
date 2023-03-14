@@ -13,9 +13,9 @@ module Persistence
       def with_counts
         # TODO: figure out why I need to do this dance
         # ROM 6 bug?
-        _schema = categories
+        schema_ = categories
         left_join(threads).left_join(:messages, thread_id: :id).select_append {
-          threads = _schema.associations[:threads].target
+          threads = schema_.associations[:threads].target
           [
             integer.count(threads.associations[:messages].target[:thread_id]).as(:message_count),
             integer.count(threads[:category_id]).as(:thread_count)
