@@ -1,0 +1,54 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Hanami
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    env:
+      HANAMI_ENV: test
+      DATABASE_URL: postgres://palaver:password@localhost/palaver_test
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.1']
+    
+    services:
+      postgres:
+        image: postgres:12.7
+        env:
+          POSTGRES_USER: palaver
+          POSTGRES_DB: palaver_test
+          POSTGRES_PASSWORD: password
+        ports: ["5432:5432"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+    # uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@ee2113536afb7f793eed4ce60e8d3b26db912da4 # v1.127.0
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Setup test database
+      run: bundle exec rake db:setup && bundle exec rake db:migrate
+    - name: Run tests
+      run: bundle exec rspec
+    - name: Check style
+      run: bundle exec standardrb
