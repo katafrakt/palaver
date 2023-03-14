@@ -19,6 +19,6 @@ start_thread.call(title: "Topic 2", category_id: test.id, content: "test", autho
 th3 = start_thread.call(title: "A long one", category_id: test.id, content: "Let's discus...", author: john).value!
 40.times do
   author = [john, martha].sample
-  content = Faker::Lorem.sentence(word_count: 5 + rand(10))
+  content = Faker::Lorem.sentence(word_count: rand(5..14))
   reply_in_thread.call(thread: th3, author:, content:)
 end

@@ -69,12 +69,12 @@ class Discussion::Templates::Thread::Show < Palaver::View
   end
 
   def pagination
-    nav(class: 'pagination is-centered', role: 'pagination', aria_label: 'pagination') do
-      ul(class: 'pagination-list') do
+    nav(class: "pagination is-centered", role: "pagination", aria_label: "pagination") do
+      ul(class: "pagination-list") do
         @pager.total_pages.times do |pg|
           page = pg + 1
           li do
-            a(class: "pagination-link #{page == @pager.current_page ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{@thread.id}?page=#{page}") { plain page }
+            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{@thread.id}?page=#{page}") { plain page }
           end
         end
       end

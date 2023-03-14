@@ -38,7 +38,7 @@ module Discussion
             .to_a
 
         all_messages = messages.where(thread_id:).count
-        Page.new(entries, all_messages, (all_messages/15.0).ceil, page)
+        Page.new(entries, all_messages, (all_messages / 15.0).ceil, page)
       end
 
       def create_message(thread:, author:, content:)

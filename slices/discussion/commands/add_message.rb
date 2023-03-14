@@ -9,7 +9,7 @@ class Discussion::Commands::AddMessage
 
   def call(content:, author:, thread:)
     raise RuntimeError unless author.is_a?(Discussion::Entities::Profile)
-    
+
     repo.transaction do
       author = profile_repo.get(author.id)
       message = repo.create_message(thread:, author:, content:)
