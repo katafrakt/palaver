@@ -61,10 +61,10 @@ class Discussion::Templates::Thread::Show < Palaver::View
   end
 
   def reply_form
-    render Palaver::Components::Form.new(url: "/th/#{@thread.id}/reply") do
+    render Ui::Components::Form.new(url: "/th/#{@thread.id}/reply") do
       hidden_field("_csrf_token", csrf_token)
       horizontal_field(label: "Write your reply", name: :reply, type: :textarea)
-      render Palaver::Components::Form::HorizontalSubmit.new(label: "Reply")
+      render Ui::Components::Form::HorizontalSubmit.new(label: "Reply")
     end
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Palaver::Components::Form::HorizontalField < Palaver::Components::Form::Field
+class Ui::Components::Form::HorizontalField < Ui::Components::Form::Field
   def template
     div(class: "field is-horizontal") do
       div(class: "field-label is-normal") do

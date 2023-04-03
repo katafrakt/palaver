@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Palaver::Components::Form::Field < Phlex::HTML
+class Ui::Components::Form::Field < Phlex::HTML
   attr_reader :type, :name, :placeholder, :value
 
   # NOTE: We are not creating a getter fot label, because it conflicts with label method
