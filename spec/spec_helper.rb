@@ -6,9 +6,9 @@ SimpleCov.start do
   primary_coverage :branch
   add_filter "/spec/"
   add_filter "/config/"
-  add_group "App", "app"
   add_group "Account", "slices/account"
   add_group "Discussion", "slices/discussion"
+  add_group "UI", "lib/ui"
 end
 
 require "pathname"
