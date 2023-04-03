@@ -1,4 +1,6 @@
 class Account::Templates::Registration::AfterCreate < Palaver::View
+  include Ui::Typography
+
   def template
     article(class: "message is-warning") do
       div(class: "message-body") do
@@ -7,7 +9,7 @@ class Account::Templates::Registration::AfterCreate < Palaver::View
     end
 
     div do
-      render Palaver::Components::Typography::Heading.new(level: 2, text: "Thank you for registering on Palaver")
+      heading2("Thank you for registering on Palaver")
 
       p do
         plain "In order to confirm your account, please click on the following link: "

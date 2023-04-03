@@ -5,7 +5,7 @@ module Ui
     end
 
     def horizontal_field(label:, name:, placeholder: "", type: "text", value: nil, error: nil)
-      render Palaver::Components::Form::HorizontalField.new(label: label, name: name, placeholder: placeholder, type: type, value: value, error: error)
+      render Ui::Components::Form::HorizontalField.new(label:, name:, placeholder:, type:, value:, error:)
     end
 
     def field_info

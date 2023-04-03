@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Palaver::Components::Form::HorizontalSubmit < Phlex::HTML
+class Ui::Components::Form::HorizontalSubmit < Phlex::HTML
   def initialize(label: "Submit")
     @label = label
   end

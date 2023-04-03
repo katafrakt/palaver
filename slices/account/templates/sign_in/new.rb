@@ -12,12 +12,12 @@ class Account::Templates::SignIn::New < Palaver::View
       div(class: "columns") do
         div(class: "column is-two-thirds") do
           div do
-            render Palaver::Components::Form.new(url: "/account/sign_in") do
+            render Ui::Components::Form.new(url: "/account/sign_in") do
               hidden_field("_csrf_token", csrf_token)
               horizontal_field(label: "Email", name: "email", placeholder: "your-email@domain.com")
               horizontal_field(label: "Password", name: "password", type: :password,
                 value: @values[:password], error: @errors[:password])
-              render Palaver::Components::Form::HorizontalSubmit.new(label: "Sign in")
+              render Ui::Components::Form::HorizontalSubmit.new(label: "Sign in")
             end
           end
         end
