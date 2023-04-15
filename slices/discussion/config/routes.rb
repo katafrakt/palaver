@@ -5,6 +5,9 @@ module Discussion
     post "/th/:id/reply", to: "thread.reply"
     get "/profile", to: "profile.form"
     post "/profile", to: "profile.save"
+
+    get "/recent", to: "home.recent"
+    get "/new_threads", to: "home.index"
     root to: "home.index"
   end
 end

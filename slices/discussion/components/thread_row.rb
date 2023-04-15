@@ -4,7 +4,7 @@ class Discussion::Components::ThreadRow < Phlex::HTML
   end
 
   def template
-    article(class: "mt-5 mb-5 media") do
+    article(class: "mt-5 mb-5 media thread-row") do
       figure(class: "media-left") do
         p(class: "image is-64x64") do
           img(src: "https://bulma.io/images/placeholders/128x128.png")

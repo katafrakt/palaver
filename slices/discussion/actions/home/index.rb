@@ -5,6 +5,6 @@ class Discussion::Actions::Home::Index < Discussion::Action
 
   def handle(_req, res)
     categories = repo.homepage
-    res.render(Discussion::Templates::Home::Index, categories: categories)
+    res.render(Discussion::Templates::Home::Index, categories:)
   end
 end

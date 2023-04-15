@@ -4,7 +4,8 @@ class Discussion::Templates::Home::Index < Palaver::View
   def template
     div do
       render Discussion::Components::NoProfileWarning.new(current_user)
-      h4(class: "is-size-2") { "Categories" }
+      render Discussion::Components::HomeTabs.new(:categories)
+
       div(class: "section") do
         @categories.each do |category|
           render Discussion::Components::CategoryRow.new(category: category)

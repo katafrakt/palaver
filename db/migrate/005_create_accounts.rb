@@ -10,7 +10,7 @@ ROM::SQL.migration do
     end
 
     alter_table(:profiles) do
-      add_foreign_key(:account_id, :accounts)
+      add_column(:account_id, Integer)
     end
   end
 end
