@@ -53,6 +53,14 @@ module Discussion
         count = messages.where(author_id: author.id).count
         profiles.by_pk(author.id).changeset(:update, message_count: count).commit
       end
+
+      def recently_updated
+        threads
+          .combine(:messages)
+          .left_join(:messages, id: :last_message_id)
+          .order(messages[:posted_at].desc)
+          .to_a
+      end
     end
   end
 end
