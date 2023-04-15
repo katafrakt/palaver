@@ -8,7 +8,7 @@ class Discussion::Components::HomeTabs < Phlex::HTML
   end
 
   def template
-    div(class: "tabs") do
+    div(class: "tabs pl-5 pr-5") do
       ul do
         tab("/", "Categories", :categories)
         tab("/recent", "Recently updated", :recent)

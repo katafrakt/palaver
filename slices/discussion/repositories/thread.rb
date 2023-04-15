@@ -61,6 +61,12 @@ module Discussion
           .order(messages[:posted_at].desc)
           .to_a
       end
+
+      def newest_threads
+        threads
+          .left_join(:messages, id: :first_message_id)
+          .combine(:messages).order(messages[:posted_at].desc).to_a
+      end
     end
   end
 end
