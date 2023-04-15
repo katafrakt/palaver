@@ -7,7 +7,7 @@ module Discussion
     post "/profile", to: "profile.save"
 
     get "/recent", to: "home.recent"
-    get "/new_threads", to: "home.index"
+    get "/new_threads", to: "home.new_threads"
     root to: "home.index"
   end
 end
