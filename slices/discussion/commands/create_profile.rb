@@ -6,9 +6,9 @@ class Discussion::Commands::CreateProfile
     repo: "repositories.profile"
   ]
 
-  def call(nickname:, avatar:, account_id:)
+  def call(nickname:, account_id:, avatar: nil)
     attacher = Discussion::Entities::Profile.avatar_attacher
-    attacher.form_assign({avatar: avatar})
+    attacher.form_assign({avatar:})
     attacher.finalize
 
     params = {

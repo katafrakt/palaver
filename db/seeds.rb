@@ -15,6 +15,10 @@ th1 = start_thread.call(title: "Topic 1", category_id: test.id, content: "test",
 reply_in_thread.call(thread: th1, author: martha, content: "this is a longer reply to a previous message")
 reply_in_thread.call(thread: th1, author: john, content: Faker::Lorem.paragraphs(number: 5).join(" "))
 start_thread.call(title: "Topic 2", category_id: test.id, content: "test", author: john)
+start_thread.call(title: "Important announcement", category_id: test.id, content: "This is pinned thread",
+  author: john).fmap do |pinned|
+  Moderation::Container["commands.pin_thread"].call(thread_id: pinned.id, moderator: john)
+end
 
 th3 = start_thread.call(title: "A long one", category_id: test.id, content: "Let's discus...", author: john).value!
 40.times do

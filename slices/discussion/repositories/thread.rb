@@ -15,7 +15,10 @@ module Discussion
       end
 
       def by_category(category_id)
-        threads.where(category_id: category_id).combine(:last_message).combine(:messages).to_a
+        threads.where(category_id:)
+          .combine(:last_message).combine(:messages)
+          .order([Sequel.case({pinned: 0}, 1)])
+          .to_a
       end
 
       # temp

@@ -8,7 +8,7 @@ class Discussion::Commands::AddMessage
   ]
 
   def call(content:, author:, thread:)
-    raise "Must be a profile entity" unless author.is_a?(Discussion::Entities::Profile)
+    raise "Must be a profile entity, is: #{author.class}" unless author.is_a?(Discussion::Entities::Profile)
 
     repo.transaction do
       author = profile_repo.get(author.id)
