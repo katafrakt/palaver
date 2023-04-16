@@ -14,6 +14,7 @@ class Discussion::Components::ThreadRow < Phlex::HTML
         div(class: "content") do
           h4(class: "is-size-4") do
             a(href: "/th/#{@thread.id}") { @thread.title }
+            span(class: "ml-2 tag is-info is-light") { "Pinned " } if @thread.pinned
           end
         end
 
