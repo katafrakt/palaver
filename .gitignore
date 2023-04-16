@@ -3,3 +3,4 @@
 log
 db/*.sqlite
 coverage
+.dir-locals.el
