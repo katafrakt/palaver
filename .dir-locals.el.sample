@@ -1,4 +1,0 @@
-((ruby-mode
-  (format-all-formatters ("Ruby" standardrb))
-  (eval . (format-all-mode 1))
-  (flycheck-disabled-checkers . 'ruby-rubocop)))
