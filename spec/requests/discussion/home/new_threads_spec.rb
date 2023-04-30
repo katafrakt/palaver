@@ -1,7 +1,9 @@
-require "oga"
+require "nokolexbor"
 
 RSpec.describe "GET /new_threads", type: :request do
-  let(:profile) { Discussion::Container["commands.create_profile"].call(nickname: "john", avatar: nil, account_id: 1).value! }
+  let(:profile) do
+    Discussion::Container["commands.create_profile"].call(nickname: "john", avatar: nil, account_id: 1).value!
+  end
   let(:create_thread) { Discussion::Container["commands.create_thread"] }
   let(:add_message) { Discussion::Container["commands.add_message"] }
   let(:repo) { Discussion::Container["repositories.category"] }
@@ -17,7 +19,7 @@ RSpec.describe "GET /new_threads", type: :request do
     get "/new_threads"
 
     expect(last_response).to be_successful
-    doc = Oga.parse_xml(last_response.body)
+    doc = Nokolexbor::HTML(last_response.body)
     titles = doc.css(".thread-row").map do |row|
       row.at_css("h4 a").text
     end
