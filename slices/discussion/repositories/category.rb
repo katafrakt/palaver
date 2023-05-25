@@ -3,7 +3,7 @@ module Discussion
     class Category < Palaver::Repository[:categories]
       commands :create
 
-      def homepage
+      def all_with_last_thread
         categories
           .with_counts
           .combine(latest_thread: {last_message: :author})
