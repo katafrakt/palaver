@@ -3,6 +3,16 @@
 module Discussion
   module Entities
     class Thread < ROM::Struct
+      include Palaver::Types
+
+      attribute :title, String
+
+      def self.from_rom(struct)
+        new(
+          title: struct.title
+        )
+      end
+
       def resource_id = "thread:#{id}"
 
       def resource_type = :thread

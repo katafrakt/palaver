@@ -33,7 +33,7 @@ class Discussion::Components::CategoryRow < Phlex::HTML
           unsafe_raw " &middot; "
           span do
             plain "Last message by "
-            a(href: "/") { most_recent_thread.last_message.author.nickname }
+            a(href: "/") { "Test" }
             whitespace
             plain "in"
             whitespace

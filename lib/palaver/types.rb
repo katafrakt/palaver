@@ -6,5 +6,7 @@ require "dry/types"
 module Palaver
   module Types
     include Dry.Types
+
+    ID = Integer
   end
 end
