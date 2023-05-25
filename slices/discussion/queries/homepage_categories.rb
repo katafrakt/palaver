@@ -7,7 +7,7 @@ class Discussion::Queries::HomepageCategories
           ]
 
   def call
-    repo.homepage.map do |category|
+    repo.all_with_last_thread.map do |category|
       Discussion::Entities::Category.from_rom(category)
     end
   end
