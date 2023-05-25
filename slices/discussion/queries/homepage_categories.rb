@@ -8,12 +8,7 @@ class Discussion::Queries::HomepageCategories
 
   def call
     repo.homepage.map do |category|
-      Discussion::Entities::Category.from_rom(category).tap do |entity|
-        if category.latest_thread
-          thread = Discussion::Entities::Thread.from_rom(category.latest_thread)
-          entity.set_latest_thread(thread)
-        end
-      end
+      Discussion::Entities::Category.from_rom(category)
     end
   end
 end
