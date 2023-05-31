@@ -6,6 +6,7 @@ module Discussion
       include Palaver::Types
 
       attribute :title, String
+      attribute :id, Integer
 
       def self.from_rom(struct)
         new(
