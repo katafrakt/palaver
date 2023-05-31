@@ -57,18 +57,17 @@ module Discussion
         profiles.by_pk(author.id).changeset(:update, message_count: count).commit
       end
 
-      def recently_updated
+      def by_first_message
+        threads
+          .left_join(:messages, id: :first_message_id)
+          .combine(:messages).order(messages[:posted_at].desc)
+      end
+
+      def by_last_message
         threads
           .combine(:messages)
           .left_join(:messages, id: :last_message_id)
           .order(messages[:posted_at].desc)
-          .to_a
-      end
-
-      def newest_threads
-        threads
-          .left_join(:messages, id: :first_message_id)
-          .combine(:messages).order(messages[:posted_at].desc).to_a
       end
     end
   end
