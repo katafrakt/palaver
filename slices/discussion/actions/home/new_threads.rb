@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Discussion::Actions::Home::NewThreads < Discussion::Action
-  include Discussion::Deps[repo: "repositories.thread"]
+  include Discussion::Deps[query: "queries.homepage_new_threads"]
 
   def handle(_req, res)
-    threads = repo.newest_threads
-    res.render(Discussion::Templates::Home::NewThreads, threads:)
+    res.render(Discussion::Templates::Home::NewThreads, threads: query.call)
   end
 end
