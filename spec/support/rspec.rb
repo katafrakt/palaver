@@ -5,7 +5,8 @@ require_relative "fixtures/account"
 require_relative "fixtures/discussion"
 
 RSpec.configure do |config|
-  config.extend RSpecHelpers
+  config.extend RSpecHelpers::ClassMethods
+  config.include RSpecHelpers::InstanceMethods
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

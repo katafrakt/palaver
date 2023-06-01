@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
+require "stringex/unidecoder"
+require "hashids"
+
 class Discussion::Entities::Category < Dry::Struct
   include Palaver::Types
+
+  HASHIDS_NUM = 1
 
   attribute :id, ID
   attribute :name, String

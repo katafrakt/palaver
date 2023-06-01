@@ -5,7 +5,9 @@ RSpec.describe "GET /cat/:id", type: :request do
 
   specify "with no threads" do
     category = repo.create(name: "abcd")
-    get "/cat/#{category.id}"
+    slug = category_slug(category)
+
+    get "/cat/#{slug}"
 
     expect(last_response).to be_successful
     expect(last_response.body).to include("No threads")
@@ -15,7 +17,9 @@ RSpec.describe "GET /cat/:id", type: :request do
     category = repo.create(name: "abcd")
     thread_repo.create(title: "A test thread", content: "Testiiiing",
       category_id: category.id, author: author)
-    get "/cat/#{category.id}"
+    slug = category_slug(category)
+
+    get "/cat/#{slug}"
 
     expect(last_response).to be_successful
     expect(last_response.body).not_to include("No threads")

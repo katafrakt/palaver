@@ -1,9 +1,14 @@
 class Discussion::Components::ThreadRow < Phlex::HTML
-  def initialize(thread)
+  include Discussion::Deps["utils.slugger"]
+
+  def initialize(thread, slugger:)
     @thread = thread
+    @slugger = slugger
   end
 
   def template
+    slug = @slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, @thread.title, @thread.id)
+
     article(class: "mt-5 mb-5 media thread-row") do
       figure(class: "media-left") do
         p(class: "image is-64x64") do
@@ -13,7 +18,7 @@ class Discussion::Components::ThreadRow < Phlex::HTML
       div(class: "media-content") do
         div(class: "content") do
           h4(class: "is-size-4") do
-            a(href: "/th/#{@thread.id}") { @thread.title }
+            a(href: "/th/#{slug}") { @thread.title }
             span(class: "ml-2 tag is-info is-light") { "Pinned" } if @thread.pinned
           end
         end
