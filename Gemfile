@@ -21,6 +21,8 @@ gem "rom-sql", "~> 3.6.0"
 gem "shrine", "~> 3.0"
 gem "shrine-rom"
 gem "verifica"
+gem "hashids"
+gem "stringex"
 
 group :cli, :development do
   gem "hanami-reloader"

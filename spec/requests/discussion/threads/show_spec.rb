@@ -9,13 +9,13 @@ RSpec.describe "GET /th/:id", type: :request do
 
   describe "as anonymous user" do
     specify "shows title and first message" do
-      get "/th/#{thread.id}"
+      get "/th/#{thread_slug(thread)}"
       expect(last_response.body).to include("A test thread")
       expect(last_response.body).to include("Testing")
     end
 
     specify "does not display reply form" do
-      get "/th/#{thread.id}"
+      get "/th/#{thread_slug(thread)}"
       expect(last_response.body).not_to include("Write your reply")
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe "GET /th/:id", type: :request do
   describe "as a signed in user without profile set up" do
     specify "does not display reply form" do
       env "rack.session", {usi: user.id}
-      get "/th/#{thread.id}"
+      get "/th/#{thread_slug(thread)}"
 
       expect(last_response.body).not_to include("Write your reply")
       expect(last_response.body).to include("You need to set up your profile to start posting")
@@ -34,7 +34,7 @@ RSpec.describe "GET /th/:id", type: :request do
     specify "displays reply form" do
       Discussion::Container["repositories.profile"].create(nickname: "Joshua", account_id: user.id)
       env "rack.session", {usi: user.id}
-      get "/th/#{thread.id}"
+      get "/th/#{thread_slug(thread)}"
 
       expect(last_response.body).to include("Write your reply")
     end

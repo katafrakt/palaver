@@ -1,4 +1,6 @@
 class Discussion::Components::CategoryRow < Phlex::HTML
+  include Discussion::Deps["utils.slugger"]
+
   class Detail < Phlex::HTML
     def initialize(label, value)
       @label = label
@@ -15,14 +17,17 @@ class Discussion::Components::CategoryRow < Phlex::HTML
 
   attr_reader :category
 
-  def initialize(category:)
+  def initialize(category:, slugger:)
     @category = category
+    @slugger = slugger
   end
 
   def template
+    slug = @slugger.to_slug(Discussion::Entities::Category::HASHIDS_NUM, category.name, category.id)
+
     article(class: "category mb-5") do
       h4(class: "is-size-4") do
-        a(href: "/cat/#{category.id}") { category.name }
+        a(href: "/cat/#{slug}") { category.name }
       end
 
       div do

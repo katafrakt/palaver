@@ -148,6 +148,7 @@ GEM
       dry-validation (>= 1.10, < 2)
       zeitwerk (~> 2.6.0)
     hansi (0.2.1)
+    hashids (1.0.6)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -281,6 +282,7 @@ GEM
     standard-performance (1.0.1)
       lint_roller (~> 1.0)
       rubocop-performance (~> 1.16.0)
+    stringex (2.8.6)
     thor (1.2.1)
     transproc (1.1.1)
     unicode-display_width (2.4.2)
@@ -305,6 +307,7 @@ DEPENDENCIES
   hanami-rspec
   hanami-utils (~> 2.0.0)
   hanami-validations (~> 2.0.0)
+  hashids
   nokolexbor
   pg
   phlex (~> 1.6)
@@ -318,6 +321,7 @@ DEPENDENCIES
   shrine-rom
   simplecov
   standard
+  stringex
   verifica
 
 BUNDLED WITH

@@ -8,7 +8,7 @@ RSpec.describe Discussion::Actions::Category::Show do
       category = Factory.structs[:category]
       expect(repo).to receive(:get) { category }
 
-      response = action.call({id: category.id})
+      response = action.call({id: category_slug(category)})
       expect(response.body.first).to include("No threads")
     end
   end

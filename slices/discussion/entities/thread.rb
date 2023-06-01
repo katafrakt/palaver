@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
+require "hashids"
+
 module Discussion
   module Entities
     class Thread < ROM::Struct
       include Palaver::Types
+
+      HASHIDS_NUM = 2
 
       attribute :title, String
       attribute :id, Integer
