@@ -35,5 +35,6 @@ RSpec.configure do |config|
   config.before(:all) do
     require "argon2"
     Account::Container.stub("utils.hasher", Argon2::Password.new(t_cost: 1, m_cost: 4, p_cost: 1))
+    Discussion::Container.stub("utils.slug_provider", ->(string) { string.downcase.tr(" ", "-") })
   end
 end
