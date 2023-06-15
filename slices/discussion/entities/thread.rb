@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "hashids"
-
 module Discussion
   module Entities
     class Thread < ROM::Struct
@@ -11,10 +9,15 @@ module Discussion
 
       attribute :title, String
       attribute :id, Integer
+      attribute? :pinned, Bool
+      attribute? :messages, Array
 
       def self.from_rom(struct)
         new(
-          title: struct.title
+          id: struct.id,
+          title: struct.title,
+          pinned: struct.pinned,
+          messages: struct.messages
         )
       end
 

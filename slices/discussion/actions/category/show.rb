@@ -3,14 +3,14 @@
 class Discussion::Actions::Category::Show < Discussion::Action
   include Discussion::Deps[
     repo: "repositories.category",
-    threads_repo: "repositories.thread",
-    slugger: "utils.slugger"
+    slugger: "utils.slugger",
+    query: "queries.threads_in_category"
   ]
 
   def handle(req, res)
     id = slugger.decode_id(req.params[:id])
     category = repo.get(id)
-    threads = threads_repo.by_category(category.id)
+    threads = query.call(category.id)
     res.render(Discussion::Templates::Category::Show, category: category, threads: threads)
   end
 end
