@@ -16,8 +16,17 @@ module Discussion
 
       def by_category(category_id)
         threads.where(category_id:)
-          .combine(:last_message).combine(:messages)
+          .combine(:last_message)
           .order([Sequel.case({pinned: 0}, 1)])
+          .to_a
+      end
+
+      def message_counts(thread_ids)
+        messages
+          .where(thread_id: thread_ids)
+          .group(:thread_id)
+          .select { [thread_id, integer.count(id).as(:count)] }
+          .order(:thread_id)
           .to_a
       end
 

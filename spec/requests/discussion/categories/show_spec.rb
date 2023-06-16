@@ -15,8 +15,10 @@ RSpec.describe "GET /cat/:id", type: :request do
 
   specify "with one thread" do
     category = repo.create(name: "abcd")
-    thread_repo.create(title: "A test thread", content: "Testiiiing",
-      category_id: category.id, author: author)
+    Discussion::Container["commands.create_thread"].call(
+      title: "A test thread", content: "Testiiiing",
+      category_id: category.id, author: author
+    )
     slug = category_slug(category)
 
     get "/cat/#{slug}"
