@@ -1,7 +1,9 @@
 module Discussion
   module Repositories
     class Thread < Palaver::Repository[:threads]
-      Page = Struct.new(:entries, :total_entries, :total_pages, :current_page)
+      PER_PAGE = 15
+
+      Pager = Struct.new(:entries, :total_entries, :total_pages, :current_page, :per_page)
 
       struct_namespace Discussion::Entities
       commands :create
@@ -40,17 +42,17 @@ module Discussion
       end
 
       def paged_messages(thread_id, page = 1)
-        entries =
-          messages
-            .where(thread_id:)
-            .combine(:author)
-            .order(:posted_at)
-            .per_page(15)
-            .page(page)
-            .to_a
+        relation = messages.paged_for_thread(thread_id:, page:, per_page: PER_PAGE)
 
-        all_messages = messages.where(thread_id:).count
-        Page.new(entries, all_messages, (all_messages / 15.0).ceil, page)
+        pager = relation.pager
+
+        Pager.new(
+          relation.to_a,
+          pager.total,
+          pager.total_pages,
+          pager.current_page,
+          pager.per_page
+        )
       end
 
       def create_message(thread:, author:, content:)
@@ -69,13 +71,14 @@ module Discussion
       def by_first_message
         threads
           .left_join(:messages, id: :first_message_id)
-          .combine(:messages).order(messages[:posted_at].desc)
+          .combine(:messages)
+          .order(messages[:posted_at].desc)
       end
 
       def by_last_message
         threads
-          .combine(:messages)
           .left_join(:messages, id: :last_message_id)
+          .combine(:messages)
           .order(messages[:posted_at].desc)
       end
     end
