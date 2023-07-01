@@ -55,6 +55,13 @@ module Discussion
         )
       end
 
+      def last_page(thread_id)
+        count = messages.where(thread_id:).count
+        page = (count.to_f / PER_PAGE).ceil
+
+        paged_messages(thread_id, page)
+      end
+
       def create_message(thread:, author:, content:)
         messages
           .changeset(:create, text: content, posted_at: DateTime.now)

@@ -15,11 +15,11 @@ RSpec.describe "POST /th/:id/reply", type: :request do
       env "rack.session", {usi: user.id}
     end
 
-    specify "redirects to the thread" do
+    specify "redirects to the thread, adding page and anchor" do
       post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply"
 
       expect(last_response.status).to eq(302)
-      expect(last_response.headers["Location"]).to eq("/th/#{thread_slug(thread)}")
+      expect(last_response.headers["Location"]).to eq("/th/#{thread_slug(thread)}?page=1#2")
     end
   end
 end
