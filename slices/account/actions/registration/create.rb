@@ -20,9 +20,9 @@ class Account::Actions::Registration::Create < Account::Action
   def handle(req, res)
     render_on_invalid_params(res, Account::Templates::Registration::New)
 
-    result = register_user.call(req.params[:email], req.params[:password])
-    if result.success?
-      res.render(Account::Templates::Registration::AfterCreate, account: result.value!)
+    case register_user.call(req.params[:email], req.params[:password])
+    in Success(account)
+      res.render(Account::Templates::Registration::AfterCreate, account:)
     else
       email_error = "must be unique"
       res.status = 422
