@@ -11,16 +11,15 @@ module Persistence
       end
 
       def with_counts
-        # TODO: figure out why I need to do this dance
-        # ROM 6 bug?
-        schema_ = categories
-        left_join(threads).left_join(:messages, thread_id: :id).select_append {
-          threads = schema_.associations[:threads].target
+        left_join(:threads)
+          .left_join(:messages, thread_id: :id)
+          .group { `categories.id` }
+          .select_append {
           [
-            integer.count(threads.associations[:messages].target[:thread_id]).as(:message_count),
-            integer.count(threads[:category_id]).as(:thread_count)
+            function(:count, `messages.id`).as(:message_count),
+            function(:count, `threads.title`).distinct.as(:thread_count)
           ]
-        }.group(:id)
+        }
       end
     end
   end
