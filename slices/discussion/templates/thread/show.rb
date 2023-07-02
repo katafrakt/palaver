@@ -3,7 +3,8 @@ class Discussion::Templates::Thread::Show < Palaver::View
   include Ui::Form
   include Discussion::Deps[
     "access_control",
-    slugger: "utils.slugger"
+    slugger: "utils.slugger",
+    indexer: "utils.thread_indexer"
   ]
 
   def template
@@ -27,7 +28,7 @@ class Discussion::Templates::Thread::Show < Palaver::View
   private
 
   def message_row(message)
-    article(class: "mt-5 mb-5 box columns", id: thread_index(message)) do
+    article(class: "mt-5 mb-5 box columns", id: indexer.(@pager, message)) do
       div(class: "column is-one-quarter") do
         p(class: "is-size-4") do
           strong { message.author.nickname }
@@ -65,11 +66,6 @@ class Discussion::Templates::Thread::Show < Palaver::View
 
   def thread_slug
     slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, @thread.title, @thread.id)
-  end
-
-  def thread_index(message)
-    offset = (@pager.current_page - 1) * @pager.per_page
-    offset + (@pager.entries.index(message) + 1)
   end
 
   def reply_form

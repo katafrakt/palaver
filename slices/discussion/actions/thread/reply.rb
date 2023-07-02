@@ -5,7 +5,8 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
     reply: "commands.add_message",
     repo: "repositories.thread",
     profile_repo: "repositories.profile",
-    slugger: "utils.slugger"
+    slugger: "utils.slugger",
+    indexer: "utils.thread_indexer"
   ]
 
   def handle(req, res)
@@ -16,13 +17,6 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
 
     pager = repo.last_page(thread.id)
 
-    res.redirect_to "/th/#{slug}?page=#{pager.current_page}##{thread_index(pager, message)}"
-  end
-
-  private
-
-  def thread_index(pager, message)
-    offset = (pager.current_page - 1) * pager.per_page
-    offset + (pager.entries.index { _1.id == message.id } + 1)
+    res.redirect_to "/th/#{slug}?page=#{pager.current_page}##{indexer.(pager, message)}"
   end
 end
