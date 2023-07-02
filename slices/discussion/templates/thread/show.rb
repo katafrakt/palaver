@@ -1,7 +1,11 @@
 class Discussion::Templates::Thread::Show < Palaver::View
   include Ui::Typography
   include Ui::Form
-  include Discussion::Deps["access_control"]
+  include Discussion::Deps[
+    "access_control",
+    slugger: "utils.slugger",
+    indexer: "utils.thread_indexer"
+  ]
 
   def template
     div do
@@ -24,7 +28,7 @@ class Discussion::Templates::Thread::Show < Palaver::View
   private
 
   def message_row(message)
-    article(class: "mt-5 mb-5 box columns") do
+    article(class: "mt-5 mb-5 box columns", id: indexer.(@pager, message)) do
       div(class: "column is-one-quarter") do
         p(class: "is-size-4") do
           strong { message.author.nickname }
@@ -60,8 +64,12 @@ class Discussion::Templates::Thread::Show < Palaver::View
     message.posted_at.strftime("%Y-%m-%d %H:%M")
   end
 
+  def thread_slug
+    slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, @thread.title, @thread.id)
+  end
+
   def reply_form
-    render Ui::Components::Form.new(url: "/th/#{@thread.id}/reply") do
+    render Ui::Components::Form.new(url: "/th/#{thread_slug}/reply") do
       hidden_field("_csrf_token", csrf_token)
       horizontal_field(label: "Write your reply", name: :reply, type: :textarea)
       render Ui::Components::Form::HorizontalSubmit.new(label: "Reply")
@@ -74,7 +82,7 @@ class Discussion::Templates::Thread::Show < Palaver::View
         @pager.total_pages.times do |pg|
           page = pg + 1
           li do
-            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{@thread.id}?page=#{page}") { plain page }
+            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{thread_slug}?page=#{page}") { plain page }
           end
         end
       end

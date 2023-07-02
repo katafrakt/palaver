@@ -13,9 +13,9 @@ class Account::Actions::SignIn::Create < Account::Action
   def handle(req, res)
     render_on_invalid_params(res, Account::Templates::SignIn::New)
 
-    result = sign_in.call(req.params[:email], req.params[:password])
-    if result.success?
-      res.session[:usi] = result.value!.id
+    case sign_in.call(req.params[:email], req.params[:password])
+    in Success(user)
+      res.session[:usi] = user.id
       res.flash[:success] = "Successfully signed in"
       # TODO: remember where to redirect back
       res.redirect_to "/"

@@ -8,7 +8,7 @@ class Discussion::Commands::CreateThread
     repo: "repositories.thread",
     add_message: "commands.add_message",
     category_repo: "repositories.category"
-          ]
+  ]
 
   def call(title:, content:, category_id:, author:)
     repo.transaction do

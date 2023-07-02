@@ -9,6 +9,14 @@ module Persistence
           belongs_to :profiles, as: :author
         end
       end
+
+      def paged_for_thread(thread_id:, page:, per_page:)
+        where(thread_id:)
+          .combine(:author)
+          .order(:posted_at)
+          .per_page(per_page)
+          .page(page)
+      end
     end
   end
 end
