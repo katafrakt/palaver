@@ -9,8 +9,8 @@ module Discussion
 
       attribute :title, String
       attribute :id, Integer
-      attribute? :pinned, Bool
-      attribute? :message_count, Integer
+      attribute? :pinned, Bool.default(false)
+      attribute? :message_count, Integer.default(0)
 
       def self.from_rom(struct, message_count: 0)
         new(
@@ -24,10 +24,6 @@ module Discussion
       def resource_id = "thread:#{id}"
 
       def resource_type = :thread
-
-      def message_count
-        @message_count || 0
-      end
     end
   end
 end
