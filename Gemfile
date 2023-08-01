@@ -4,11 +4,12 @@ source "https://rubygems.org"
 
 gem "rake"
 
-gem "hanami", "~> 2.0.0"
-gem "hanami-controller", "~> 2.0.0"
-gem "hanami-router", "~> 2.0.0"
-gem "hanami-utils", "~> 2.0.0" # , github: "hanami/utils", branch: "add-equalizer-to-callback-chain"
-gem "hanami-validations", "~> 2.0.0"
+HANAMI_VERSION = "~> 2.1.0.beta"
+gem "hanami", HANAMI_VERSION
+gem "hanami-controller", HANAMI_VERSION
+gem "hanami-router", HANAMI_VERSION
+gem "hanami-utils", HANAMI_VERSION
+gem "hanami-validations", HANAMI_VERSION
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
