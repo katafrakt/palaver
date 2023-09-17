@@ -76,9 +76,12 @@ RSpec.describe "POST /account/register", type: :request do
   end
 
   context "with signed in user" do
-    it "redirects" do
+    before do
       user = Fixtures::Account.user
       env "rack.session", {usi: user.id}
+    end
+
+    it "redirects" do
       get url
       expect(last_response.status).to eq(302)
     end

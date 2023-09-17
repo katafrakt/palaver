@@ -18,4 +18,8 @@ class Account::Repositories::Account < Palaver::Repository[:accounts]
   def by_session_id(id)
     accounts.by_pk(id).map_to(Account::Entities::CurrentUser).one || Account::Entities::AnonymousUser.new
   end
+
+  def settings_for_user(id)
+    accounts.by_pk(id).combine(:profile).one
+  end
 end

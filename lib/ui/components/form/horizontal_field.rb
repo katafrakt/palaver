@@ -9,7 +9,7 @@ class Ui::Components::Form::HorizontalField < Ui::Components::Form::Field
       div(class: "field-body") do
         div(class: "field") do
           p(class: "control is-expanded") do
-            render_input
+            render_input(disabled: @disabled)
           end
           if @error
             p(class: "help is-danger") { @error.join(", ") }
