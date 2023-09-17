@@ -7,5 +7,8 @@ module Account
     get "/sign_in", to: "sign_in.new"
     post "/sign_in", to: "sign_in.create"
     get "/sign_out", to: "sign_in.destroy"
+
+    get "/settings", to: "settings.show"
+    post "/settings", to: "settings.save"
   end
 end

@@ -1,4 +1,5 @@
 require "argon2"
+require "dry/monads"
 
 class Account::Commands::RegisterUser
   include Dry::Monads[:result]

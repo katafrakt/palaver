@@ -5,13 +5,14 @@ class Ui::Components::Form::Field < Phlex::HTML
 
   # NOTE: We are not creating a getter fot label, because it conflicts with label method
   # from Phlex
-  def initialize(label:, name:, type: :text, placeholder: nil, value: nil, error: nil)
+  def initialize(label:, name:, type: :text, placeholder: nil, value: nil, error: nil, disabled: false)
     @type = type
     @label = label
     @name = name
     @placeholder = placeholder
     @value = value
     @error = error
+    @disabled = disabled
   end
 
   def template
@@ -23,7 +24,7 @@ class Ui::Components::Form::Field < Phlex::HTML
 
   private
 
-  def render_input
+  def render_input(disabled: false)
     classes = ["input", @error.nil? ? nil : "is-danger"].compact.join(" ")
     case type
     when :textarea
@@ -40,7 +41,7 @@ class Ui::Components::Form::Field < Phlex::HTML
         end
       end
     else
-      input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value)
+      input(class: classes, name: name, type: type.to_s, placeholder: placeholder, value: value, disabled: disabled)
     end
   end
 end
