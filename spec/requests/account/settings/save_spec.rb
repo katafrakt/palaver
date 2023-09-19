@@ -53,5 +53,14 @@ RSpec.describe "POST /account/settings", type: :request do
       reloaded_user = Account::Repositories::Account.new.by_id(user.id)
       expect(Argon2::Password.verify_password("123123123", reloaded_user.password_hash)).to eq(true)
     end
+
+    it "updates the avatar in the profile" do
+      file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
+      perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg")
+      profile = Account::Repositories::Account.new.settings_for_user(user.id).profile
+      expect(profile.avatar_data).not_to be_nil
+      data = JSON.parse(profile.avatar_data)
+      expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
+    end
   end
 end
