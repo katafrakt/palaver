@@ -7,7 +7,7 @@ class Account::Commands::SetAvatar
   include Account::Deps[repo: "repositories.profile"]
 
   def call(user_id, avatar)
-    attacher = Discussion::Entities::Profile.avatar_attacher
+    attacher = Account::Entities::Settings.avatar_attacher
     attacher.assign(avatar)
     attacher.finalize
 
