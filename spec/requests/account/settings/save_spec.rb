@@ -2,7 +2,7 @@ RSpec.describe "POST /account/settings", type: :request do
   let(:url) { "/account/settings" }
 
   def perform_request(params = {})
-    default_params = { avatar: "", current_password: "", new_password: "", new_password_confirmation: "" }
+    default_params = {avatar: "", current_password: "", new_password: "", new_password_confirmation: ""}
     post url, default_params.merge(params)
   end
 
@@ -19,7 +19,7 @@ RSpec.describe "POST /account/settings", type: :request do
 
     before do
       Fixtures::Account.profile(user.id)
-      env "rack.session", { usi: user.id }
+      env "rack.session", {usi: user.id}
     end
 
     it "shows error when new passwords do not match" do
@@ -45,7 +45,7 @@ RSpec.describe "POST /account/settings", type: :request do
     it "does not update password when current password is incorrect" do
       perform_request current_password: "abcdefgh", new_password: "123123123", new_password_confirmation: "123123123"
       reloaded_user = Account::Repositories::Account.new.by_id(user.id)
-      expect(Argon2::Password.verify_password("123123123", user.password_hash)).to eq(false)
+      expect(Argon2::Password.verify_password("123123123", reloaded_user.password_hash)).to eq(false)
     end
 
     it "updates the password when correct params are passed" do

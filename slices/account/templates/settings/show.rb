@@ -14,15 +14,22 @@ class Account::Templates::Settings::Show < Palaver::View
 
           form.section_title("Password reset", pad_top: true)
           form.horizontal_field(label: "Current password", name: "current_password", type: :password,
-                                error: @errors[:current_password], value: @values[:current_password])
+            error: @errors[:current_password], value: @values[:current_password])
           form.horizontal_field(label: "New password", name: "new_password", type: :password,
-                                error: @errors[:new_password], value: @values[:new_password])
+            error: @errors[:new_password], value: @values[:new_password])
           form.horizontal_field(label: "Confirm new password", name: "new_password_confirmation", type: :password,
-                                error: @errors[:new_password_confirmation], value: @values[:new_password_confirmation])
+            error: @errors[:new_password_confirmation], value: @values[:new_password_confirmation])
         end
 
         columns.column do
           form.section_title("Avatar")
+
+          if @settings.avatar_data
+            p(class: "image is-128x128 mb-3 mt-3") do
+              img(src: @settings.avatar.url)
+            end
+          end
+
           form.input(type: "hidden", value: nil, name: :avatar)
           form.horizontal_field(label: "Pick new", name: :avatar, type: :file)
         end

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'argon2'
+require "argon2"
 require "dry/monads"
 require "dry/monads/do"
-require 'hanami/utils/blank'
+require "hanami/utils/blank"
 
 class Account::Actions::Settings::Save < Account::Action
   include Account::Deps[fetch_settings: "queries.settings", change_password: "commands.change_password",
-                        set_avatar: "commands.set_avatar"]
+    set_avatar: "commands.set_avatar"]
 
   require_signed_in_user!
 
@@ -27,7 +27,7 @@ class Account::Actions::Settings::Save < Account::Action
   def handle(req, res)
     current_user = res[:current_user]
 
-    result = Dry::Monads::Do.() do
+    result = Dry::Monads::Do.call do
       Dry::Monads::Do.bind validate_params(req)
       Dry::Monads::Do.bind verify_current_password(current_user, req) if param_present?(req, :new_password) || param_present?(req, :current_password)
       Dry::Monads::Do.bind change_password.call(current_user.id, req.params[:new_password]) if param_present?(req, :new_password)
