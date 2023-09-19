@@ -1,7 +1,11 @@
 class Account::Repositories::Account < Palaver::Repository[:accounts]
   struct_namespace Account::Entities
   auto_struct true
-  commands :create
+  commands :create, update: :by_pk
+
+  def by_id(id)
+    accounts.where(id:).one!
+  end
 
   def by_id_and_token(id, token)
     accounts.where(id: id, confirmation_token: token).one
