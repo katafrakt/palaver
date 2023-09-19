@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'argon2'
+require "dry/monads"
 require "dry/monads/do"
 
 class Account::Actions::Settings::Save < Account::Action
-  include Account::Deps[fetch_settings: "queries.settings"]
+  include Account::Deps[fetch_settings: "queries.settings", change_password: "commands.change_password"]
 
   require_signed_in_user!
 
@@ -27,6 +28,7 @@ class Account::Actions::Settings::Save < Account::Action
     result = Dry::Monads::Do.() do
       Dry::Monads::Do.bind validate_params(req)
       Dry::Monads::Do.bind verify_current_password(current_user, req)
+      Dry::Monads::Do.bind change_password.call(current_user.id, req.params[:new_password]) if req.params[:new_password]
       Success()
     end
 
