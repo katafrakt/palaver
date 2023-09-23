@@ -8,10 +8,10 @@ module Fixtures
         .value!
     end
 
-    def profile(user_id = nil)
-      ::Discussion::Container["commands.create_profile"]
-        .call(nickname: "Tester", account_id: user_id)
-        .value!
+    def profile(account_id = nil)
+      account_id ||= user.id
+      repo = ::Account::Container["repositories.profile"]
+      repo.create(nickname: "test", account_id:)
     end
 
     def current_user_entity(args)

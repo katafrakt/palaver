@@ -1,5 +1,5 @@
 RSpec.describe "POST /th/:id/reply", type: :request do
-  let(:author) { Discussion::Container["repositories.profile"].create(nickname: "Rick") }
+  let(:author) { Fixtures::Discussion.profile }
   let(:user) do
     Account::Container["repositories.account"].create(email: "test@test.com").tap do |user|
       Discussion::Container["repositories.profile"].create(nickname: "Joshua", account_id: user.id)

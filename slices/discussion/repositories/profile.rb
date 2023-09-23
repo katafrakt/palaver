@@ -1,8 +1,7 @@
 class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
-  struct_namespace Discussion::Entities
-
   def get(id)
-    profiles.by_pk(id).one!
+    record = profiles.by_pk(id).one!
+    ::Discussion::Entities::Profile.new(id: record.id, nickname: record.nickname, account_id: record.account_id, message_count: record.message_count)
   end
 
   def by_account_id(id) = profiles.where(account_id: id).one
