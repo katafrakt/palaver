@@ -48,9 +48,8 @@ module Discussion
 
       def create_message(thread:, author:, content:)
         messages
-          .changeset(:create, text: content, posted_at: DateTime.now)
+          .changeset(:create, text: content, posted_at: DateTime.now, author_id: author.id)
           .associate(thread)
-          .associate(author)
           .commit
       end
 

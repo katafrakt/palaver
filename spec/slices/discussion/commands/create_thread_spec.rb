@@ -3,7 +3,7 @@ RSpec.describe Discussion::Commands::CreateThread, type: :db do
   let(:profile_repo) { Discussion::Container["repositories.profile"] }
   let(:category) { Discussion::Container["repositories.category"].create(name: "test") }
   subject(:command) { described_class.new }
-  let(:author) { profile_repo.create(nickname: "jasiek", message_count: 0) }
+  let(:author) { Fixtures::Discussion.profile }
 
   it "creates a thread" do
     thread = command.call(title: "weekly update", content: "update", category_id: category.id, author:).value!
@@ -12,7 +12,6 @@ RSpec.describe Discussion::Commands::CreateThread, type: :db do
   end
 
   it "update author's message count" do
-    expect(author.message_count).to eq(0)
     command.call(title: "weekly update", content: "update", category_id: category.id, author:)
     reloaded = profile_repo.get(author.id)
     expect(reloaded.message_count).to eq(1)

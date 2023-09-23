@@ -1,9 +1,7 @@
 require "nokolexbor"
 
 RSpec.describe "GET /new_threads", type: :request do
-  let(:profile) do
-    Discussion::Container["commands.create_profile"].call(nickname: "john", avatar: nil, account_id: 1).value!
-  end
+  let(:profile) { Fixtures::Discussion.profile }
   let(:create_thread) { Discussion::Container["commands.create_thread"] }
   let(:add_message) { Discussion::Container["commands.add_message"] }
   let(:repo) { Discussion::Container["repositories.category"] }

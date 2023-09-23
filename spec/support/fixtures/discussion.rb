@@ -15,9 +15,12 @@ module Fixtures
     end
 
     def profile
-      ::Discussion::Container["commands.create_profile"].call(
-        nickname: "test", account_id: 1
-      ).value!
+      # there's a cross-slice dependency here, but I guess it is okay in test code
+      # Discussion slice does not have the rights to write profiles, but they are
+      # needed to read.
+      repo = ::Account::Container["repositories.profile"]
+      record = repo.create(nickname: "test", account_id: 1)
+      ::Discussion::Entities::Profile.new(record.to_h.merge(message_count: 1))
     end
   end
 end
