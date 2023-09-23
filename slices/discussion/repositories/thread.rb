@@ -1,9 +1,6 @@
 module Discussion
   module Repositories
     class Thread < Palaver::Repository[:threads]
-      Page = Struct.new(:entries, :total_entries, :total_pages, :current_page)
-
-      struct_namespace Discussion::Entities
       commands :create
 
       def set_first_message(thread:, message:)
@@ -40,17 +37,13 @@ module Discussion
       end
 
       def paged_messages(thread_id, page = 1)
-        entries =
-          messages
-            .where(thread_id:)
-            .combine(:author)
-            .order(:posted_at)
-            .per_page(15)
-            .page(page)
-            .to_a
-
-        all_messages = messages.where(thread_id:).count
-        Page.new(entries, all_messages, (all_messages / 15.0).ceil, page)
+        messages
+          .where(thread_id:)
+          .combine(:author)
+          .order(:posted_at)
+          .per_page(15)
+          .page(page)
+          .to_a
       end
 
       def create_message(thread:, author:, content:)

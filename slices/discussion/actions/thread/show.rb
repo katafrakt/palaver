@@ -3,14 +3,15 @@
 class Discussion::Actions::Thread::Show < Discussion::Action
   include Discussion::Deps[
     repo: "repositories.thread",
-    slugger: "utils.slugger"
+    slugger: "utils.slugger",
+    query: "queries.thread_messages_page"
           ]
 
   def handle(req, res)
     id = slugger.decode_id(req.params[:id])
     page = req.params[:page] || 1
-    thread = repo.get(id)
-    pager = repo.paged_messages(thread.id, page.to_i)
-    res.render(Discussion::Templates::Thread::Show, thread:, pager:)
+    result = query.call(id, page)
+
+    res.render(Discussion::Templates::Thread::Show, thread: result[:thread], pager: result[:pager])
   end
 end
