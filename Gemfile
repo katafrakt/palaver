@@ -10,6 +10,7 @@ gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
 gem "hanami-utils", HANAMI_VERSION
 gem "hanami-validations", HANAMI_VERSION
+gem "hanami-assets", HANAMI_VERSION
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"

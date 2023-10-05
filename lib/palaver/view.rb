@@ -13,6 +13,8 @@ class Palaver::View < Phlex::HTML
     def csrf_token = @response.session[:_csrf_token]
 
     def current_user = @response[:current_user]
+
+    def asset_url(asset) = Hanami.app["assets"][asset].url
   end
 
   def initialize(context, args = {})
@@ -26,6 +28,9 @@ class Palaver::View < Phlex::HTML
   def csrf_token = context.csrf_token
 
   def current_user = context.current_user
+
+  # Standard check must be disabled, because we still support Ruby 3.1
+  def asset_url(*args) = context.asset_url(*args) # standard:disable Style/ArgumentsForwarding
 
   private
 

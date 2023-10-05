@@ -48,6 +48,8 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Setup test database
       run: bundle exec rake db:setup && bundle exec rake db:migrate
+    - name: Compile assets
+      run: bundle exec hanami assets compile
     - name: Run tests
       run: bundle exec rspec
     - name: Check style
