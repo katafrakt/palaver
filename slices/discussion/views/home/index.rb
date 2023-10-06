@@ -3,12 +3,12 @@
 class Discussion::Views::Home::Index < Palaver::View
   def template
     div do
-      render Discussion::Components::NoProfileWarning.new(current_user)
-      render Discussion::Components::HomeTabs.new(:categories)
+      render Discussion::Views::Shared::Components::NoProfileWarning.new(current_user)
+      render Discussion::Views::Home::Components::Tabs.new(:categories)
 
       div(class: "section") do
         @categories.each do |category|
-          render Discussion::Components::CategoryRow.new(category: category)
+          render Discussion::Views::Home::Partials::Category.new(category: category)
         end
       end
     end

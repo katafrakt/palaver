@@ -1,4 +1,6 @@
-class Discussion::Components::ThreadRow < Phlex::HTML
+# frozen_string_literal: true
+
+class Discussion::Views::Shared::Partials::ThreadRow < Phlex::HTML
   include Discussion::Deps["utils.slugger"]
 
   def initialize(thread, slugger:)

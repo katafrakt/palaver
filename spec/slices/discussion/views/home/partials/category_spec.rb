@@ -1,6 +1,6 @@
 require "nokolexbor"
 
-RSpec.describe Discussion::Components::CategoryRow do
+RSpec.describe Discussion::Views::Home::Partials::Category do
   include Phlex::Testing::ViewHelper
 
   let(:category) { Discussion::Entities::Category.new(name: "Announcements", id: 24, thread_count: 25, message_count: 67) }

@@ -1,4 +1,6 @@
-class Discussion::Components::NoProfileWarning < Phlex::HTML
+# frozen_string_literal: true
+
+class Discussion::Views::Shared::Components::NoProfileWarning < Phlex::HTML
   def initialize(current_user)
     @current_user = current_user
   end

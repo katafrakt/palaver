@@ -1,6 +1,6 @@
 require "nokolexbor"
 
-RSpec.describe Discussion::Components::ThreadRow do
+RSpec.describe Discussion::Views::Shared::Partials::ThreadRow do
   include Phlex::Testing::ViewHelper
 
   let(:thread) { Discussion::Entities::Thread.new(title: "Registrations are now closed", id: 22, message_count: 1, pinned: false, messages: []) }

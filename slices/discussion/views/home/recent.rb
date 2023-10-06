@@ -3,12 +3,12 @@
 class Discussion::Views::Home::Recent < Palaver::View
   def template
     div do
-      render Discussion::Components::NoProfileWarning.new(current_user)
-      render Discussion::Components::HomeTabs.new(:recent)
+      render Discussion::Views::Shared::Components::NoProfileWarning.new(current_user)
+      render Discussion::Views::Home::Components::Tabs.new(:recent)
 
       div(class: "section") do
         @threads.each do |thread|
-          render Discussion::Components::ThreadRow.new(thread)
+          render Discussion::Views::Shared::Partials::ThreadRow.new(thread)
         end
       end
     end
