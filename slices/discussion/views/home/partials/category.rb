@@ -1,4 +1,4 @@
-class Discussion::Components::CategoryRow < Phlex::HTML
+class Discussion::Views::Home::Partials::Category < Phlex::HTML
   include Discussion::Deps["utils.slugger"]
 
   class Detail < Phlex::HTML

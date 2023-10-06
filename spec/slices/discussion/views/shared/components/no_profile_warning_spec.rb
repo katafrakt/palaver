@@ -1,4 +1,4 @@
-RSpec.describe Discussion::Components::NoProfileWarning do
+RSpec.describe Discussion::Views::Shared::Components::NoProfileWarning do
   include Phlex::Testing::ViewHelper
 
   let(:anonymous_user) { Discussion::Entities::CurrentUser.new }

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Discussion::Components::HomeTabs < Phlex::HTML
+class Discussion::Views::Home::Components::Tabs < Phlex::HTML
   attr_reader :selected
 
   def initialize(selected)

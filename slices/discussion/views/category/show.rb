@@ -7,7 +7,7 @@ class Discussion::Views::Category::Show < Palaver::View
         p { "No threads" }
       else
         @threads.each do |thread|
-          render Discussion::Components::ThreadRow.new(thread)
+          render Discussion::Views::Shared::Partials::ThreadRow.new(thread)
         end
       end
     end

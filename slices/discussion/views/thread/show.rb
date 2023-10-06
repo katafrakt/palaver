@@ -17,7 +17,7 @@ class Discussion::Views::Thread::Show < Palaver::View
       if access_control.authorizer.authorized?(current_user, @thread, :reply)
         reply_form
       else
-        render Discussion::Components::NoProfileWarning.new(current_user)
+        render Discussion::Views::Shared::Components::NoProfileWarning.new(current_user)
       end
 
       pagination

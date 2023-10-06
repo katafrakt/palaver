@@ -5,7 +5,7 @@ class Discussion::Actions::Thread::Show < Discussion::Action
     repo: "repositories.thread",
     slugger: "utils.slugger",
     query: "queries.thread_messages_page"
-          ]
+  ]
 
   def handle(req, res)
     id = slugger.decode_id(req.params[:id])
