@@ -1,4 +1,4 @@
-class Discussion::Templates::Category::Show < Palaver::View
+class Discussion::Views::Category::Show < Palaver::View
   def template
     div do
       h2(class: "is-size-2") { @category.name }

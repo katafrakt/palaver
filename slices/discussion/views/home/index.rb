@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Discussion::Templates::Home::Index < Palaver::View
+class Discussion::Views::Home::Index < Palaver::View
   def template
     div do
       render Discussion::Components::NoProfileWarning.new(current_user)

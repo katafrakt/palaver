@@ -52,7 +52,7 @@ class Account::Actions::Settings::Save < Account::Action
   def render_show(req, res)
     current_user = res[:current_user]
     settings = fetch_settings.call(current_user.id)
-    res.render(Account::Templates::Settings::Show, settings:, errors: req.params.errors, values: req.params.to_h)
+    res.render(Account::Views::Settings::Show, settings:, errors: req.params.errors, values: req.params.to_h)
   end
 
   def verify_current_password(account, req)

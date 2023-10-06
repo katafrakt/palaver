@@ -4,6 +4,6 @@ class Discussion::Actions::Home::Recent < Discussion::Action
   include Discussion::Deps[query: "queries.homepage_recent"]
 
   def handle(_req, res)
-    res.render(Discussion::Templates::Home::Recent, threads: query.call)
+    res.render(Discussion::Views::Home::Recent, threads: query.call)
   end
 end

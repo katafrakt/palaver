@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Account::Templates::Settings::Show < Palaver::View
+class Account::Views::Settings::Show < Palaver::View
   include Ui::Typography
 
   def template
