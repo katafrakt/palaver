@@ -7,6 +7,6 @@ class Account::Actions::Settings::Show < Account::Action
 
   def handle(req, res)
     settings = fetch_settings.call(res[:current_user].id)
-    res.render(Account::Templates::Settings::Show, settings:, errors: {}, values: {})
+    res.render(Account::Views::Settings::Show, settings:, errors: {}, values: {})
   end
 end

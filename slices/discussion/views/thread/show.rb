@@ -1,4 +1,4 @@
-class Discussion::Templates::Thread::Show < Palaver::View
+class Discussion::Views::Thread::Show < Palaver::View
   include Ui::Typography
   include Ui::Form
   include Discussion::Deps[

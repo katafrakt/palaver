@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class Discussion::Templates::Home::Recent < Palaver::View
+class Discussion::Views::Home::NewThreads < Palaver::View
   def template
     div do
       render Discussion::Components::NoProfileWarning.new(current_user)
-      render Discussion::Components::HomeTabs.new(:recent)
+      render Discussion::Components::HomeTabs.new(:new)
 
       div(class: "section") do
         @threads.each do |thread|

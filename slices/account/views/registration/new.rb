@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Account::Templates::Registration::New < Palaver::View
+class Account::Views::Registration::New < Palaver::View
   include Ui::Typography
   include Ui::Form
 

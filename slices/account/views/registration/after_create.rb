@@ -1,4 +1,4 @@
-class Account::Templates::Registration::AfterCreate < Palaver::View
+class Account::Views::Registration::AfterCreate < Palaver::View
   include Ui::Typography
 
   def template

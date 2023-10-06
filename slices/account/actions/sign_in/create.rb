@@ -11,7 +11,7 @@ class Account::Actions::SignIn::Create < Account::Action
   end
 
   def handle(req, res)
-    render_on_invalid_params(res, Account::Templates::SignIn::New)
+    render_on_invalid_params(res, Account::Views::SignIn::New)
 
     case sign_in.call(req.params[:email], req.params[:password])
     in Success(user)

@@ -12,6 +12,6 @@ class Discussion::Actions::Thread::Show < Discussion::Action
     page = req.params[:page] || 1
     result = query.call(id, page)
 
-    res.render(Discussion::Templates::Thread::Show, thread: result[:thread], pager: result[:pager])
+    res.render(Discussion::Views::Thread::Show, thread: result[:thread], pager: result[:pager])
   end
 end

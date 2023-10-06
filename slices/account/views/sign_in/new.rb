@@ -2,7 +2,7 @@
 
 require "ui/typography"
 
-class Account::Templates::SignIn::New < Palaver::View
+class Account::Views::SignIn::New < Palaver::View
   include ::Ui::Typography
   include ::Ui::Form
 
