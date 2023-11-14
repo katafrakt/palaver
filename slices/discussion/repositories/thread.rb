@@ -82,6 +82,30 @@ module Discussion
               author_id: event.author.id,
               thread_id: event.thread_id
             ).commit
+        when Discussion::Events::ThreadCreated
+          transaction do
+            thread = threads.changeset(
+              :create,
+              title: event.title,
+              category_id: event.category_id
+            ).commit
+
+            message = messages.changeset(
+              :create,
+              text: event.content,
+              posted_at: DateTime.now,
+              author_id: event.creator.id,
+              thread_id: thread.id
+            ).commit
+
+            threads.by_pk(thread.id).changeset(
+              :update,
+              first_message_id: message.id,
+              last_message_id: message.id
+            ).commit
+          end
+        else
+          raise NotImplementedError
         end
       end
 

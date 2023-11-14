@@ -8,10 +8,14 @@ module Fixtures
     end
 
     def thread(category_id:, author:)
-      ::Discussion::Container["commands.create_thread"]
-        .call(title: "test thread", content: "this is the thread",
-          category_id:, author:)
-        .value!
+      event = ::Discussion::Events::ThreadCreated.new(
+        title: "test thread",
+        content: "this is the thread",
+        category_id:,
+        creator: author
+      )
+
+      ::Discussion::Container["repositories.thread"].handle_event(event)
     end
 
     def profile
