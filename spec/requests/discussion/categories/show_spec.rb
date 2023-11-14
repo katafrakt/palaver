@@ -15,7 +15,7 @@ RSpec.describe "GET /cat/:id", type: :request do
 
   specify "with one thread" do
     category = repo.create(name: "abcd")
-    Discussion::Container["commands.create_thread"].call(
+    Fixtures::Discussion.thread(
       title: "A test thread", content: "Testiiiing",
       category_id: category.id, author: author
     )

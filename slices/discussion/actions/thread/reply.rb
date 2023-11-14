@@ -2,7 +2,6 @@
 
 class Discussion::Actions::Thread::Reply < Discussion::Action
   include Discussion::Deps[
-    reply: "commands.add_message",
     repo: "repositories.thread",
     profile_repo: "repositories.profile",
     slugger: "utils.slugger"

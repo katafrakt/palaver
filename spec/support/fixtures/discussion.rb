@@ -7,12 +7,20 @@ module Fixtures
         .create(name: "test category")
     end
 
-    def thread(category_id:, author:)
+    def thread(category_id:, author:, title: "test thread", content: "this is the thread")
       event = ::Discussion::Events::ThreadCreated.new(
-        title: "test thread",
-        content: "this is the thread",
+        title:,
+        content:,
         category_id:,
         creator: author
+      )
+
+      ::Discussion::Container["repositories.thread"].handle_event(event)
+    end
+
+    def message(thread_id:, author:, content:)
+      event = ::Discussion::Events::ReplyAddedToThread.new(
+        content:, thread_id:, author:
       )
 
       ::Discussion::Container["repositories.thread"].handle_event(event)

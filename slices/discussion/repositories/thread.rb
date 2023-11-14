@@ -46,13 +46,6 @@ module Discussion
           .to_a
       end
 
-      def create_message(thread:, author:, content:)
-        messages
-          .changeset(:create, text: content, posted_at: DateTime.now, author_id: author.id)
-          .associate(thread)
-          .commit
-      end
-
       def sync_message_count(author)
         count = messages.where(author_id: author.id).count
         profiles.by_pk(author.id).changeset(:update, message_count: count).commit
@@ -74,7 +67,7 @@ module Discussion
       def handle_event(event)
         case event
         when Discussion::Events::ReplyAddedToThread
-          messages
+          message = messages
             .changeset(
               :create,
               text: event.content,
@@ -82,6 +75,13 @@ module Discussion
               author_id: event.author.id,
               thread_id: event.thread_id
             ).commit
+
+          threads.by_pk(message.thread_id).changeset(
+            :update,
+            last_message_id: message.id
+          ).commit
+
+          message
         when Discussion::Events::ThreadCreated
           transaction do
             thread = threads.changeset(
