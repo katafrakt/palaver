@@ -11,6 +11,7 @@ module Discussion
       attribute :id, Integer
       attribute? :pinned, Bool.default(false)
       attribute? :message_count, Integer.default(0)
+      attribute? :creator, Discussion::Entities::Author
 
       def self.from_rom(struct, message_count: 0)
         new(
@@ -24,6 +25,10 @@ module Discussion
       def resource_id = "thread:#{id}"
 
       def resource_type = :thread
+
+      def add_reply(author:, content:)
+        Discussion::Events::ReplyAddedToThread.new(thread_id: id, author:, content:)
+      end
     end
   end
 end

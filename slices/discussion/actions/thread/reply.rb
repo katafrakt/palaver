@@ -9,9 +9,11 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
   ]
 
   def handle(req, res)
-    thread = repo.get(slugger.decode_id(req.params[:id]))
+    thread_id = slugger.decode_id(req.params[:id])
+    thread = repo.get(thread_id)
     profile = profile_repo.get(res[:current_user].profile_id)
-    reply.call(thread:, author: profile, content: req.params[:reply])
+    event = thread.add_reply(author: profile, content: req.params[:reply])
+    repo.handle_event(event)
     slug = slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, thread.title, thread.id)
 
     # TODO: redirect always to last page and add anchor
