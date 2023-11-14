@@ -33,7 +33,7 @@ module Discussion
       end
 
       def get(id)
-        threads.by_pk(id).one!
+        threads.by_pk(id).one!.then { |struct| to_entity(struct) }
       end
 
       def paged_messages(thread_id, page = 1)
@@ -69,6 +69,30 @@ module Discussion
           .combine(:messages)
           .left_join(:messages, id: :last_message_id)
           .order(messages[:posted_at].desc)
+      end
+
+      def handle_event(event)
+        case event
+        when Discussion::Events::ReplyAddedToThread
+          messages
+            .changeset(
+              :create,
+              text: event.content,
+              posted_at: DateTime.now,
+              author_id: event.author.id,
+              thread_id: event.thread_id
+            ).commit
+        end
+      end
+
+      private
+
+      def to_entity(struct)
+        Discussion::Entities::Thread.new(
+          id: struct.id,
+          title: struct.title,
+          pinned: struct.pinned
+        )
       end
     end
   end
