@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "assets": "node config/assets.mjs"
+  },
+  "dependencies": {
+    "hanami-assets": "^2.1.0-rc.2"
+  }
+}
