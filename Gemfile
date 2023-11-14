@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "rake"
 
-HANAMI_VERSION = "~> 2.1.0.rc2"
+HANAMI_VERSION = "~> 2.1.0.beta"
 gem "hanami", HANAMI_VERSION
 gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
