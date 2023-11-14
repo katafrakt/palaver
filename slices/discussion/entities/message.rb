@@ -7,7 +7,7 @@ class Discussion::Entities::Message < Dry::Struct
 
     attribute :nickname, String
     attribute :id, Integer
-    attribute :message_count, Integer
+    attribute :message_count, Integer.optional
     attribute :avatar_data, String.optional
   end
 

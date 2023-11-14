@@ -3,16 +3,15 @@ require "nokolexbor"
 RSpec.describe "GET /new_threads", type: :request do
   let(:profile) { Fixtures::Discussion.profile }
   let(:create_thread) { Discussion::Container["commands.create_thread"] }
-  let(:add_message) { Discussion::Container["commands.add_message"] }
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:category_id) { repo.create(name: "abcd").id }
 
   specify "return threads descending by last message date" do
-    th1 = create_thread.call(title: "test 1", content: "test", category_id:, author: profile).value!
-    th2 = create_thread.call(title: "test 2", content: "test", category_id:, author: profile).value!
-    th3 = create_thread.call(title: "test 3", content: "test", category_id:, author: profile).value!
-    add_message.call(content: "test", author: profile, thread: th3)
-    add_message.call(content: "test", author: profile, thread: th2)
+    th1 = Fixtures::Discussion.thread(title: "test 1", category_id:, author: profile)
+    th2 = Fixtures::Discussion.thread(title: "test 2", category_id:, author: profile)
+    th3 = Fixtures::Discussion.thread(title: "test 3", category_id:, author: profile)
+    Fixtures::Discussion.message(content: "test", author: profile, thread_id: th3.id)
+    Fixtures::Discussion.message(content: "test", author: profile, thread_id: th2.id)
 
     get "/new_threads"
 
