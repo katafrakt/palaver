@@ -9,6 +9,11 @@ class Discussion::Actions::Profile::Show < Discussion::Action
 
   def handle(req, res)
     profile = repo.from_current_user(res[:current_user])
-    res.render(Discussion::Views::Profile::Show, profile:)
+
+    if profile
+      res.render(Discussion::Views::Profile::Show, profile:)
+    else
+      res.redirect "/account/settings"
+    end
   end
 end
