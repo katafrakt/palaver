@@ -50,8 +50,9 @@ class Seeds
   def reply_in_thread(thread, args)
     repo = Discussion::Container["repositories.thread"]
     threads = Discussion::Container["threads"]
-    event = threads.add_reply(thread, **args)
-    repo.handle(event)
+    threads.add_reply(thread, **args).bind do |event|
+      repo.handle(event)
+    end
   end
 
   def pin_thread(thread)
