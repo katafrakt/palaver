@@ -6,7 +6,9 @@ RSpec.describe Discussion::Threads do
 
   context "add_reply" do
     it "returns the event" do
-      event = threads.add_reply(thread, author: creator, content: "Let's do this!")
+      result = threads.add_reply(thread, author: creator, content: "Let's do this!")
+      expect(result).to be_success
+      event = result.value!
 
       expect(event).to be_kind_of(Discussion::Events::ReplyAddedToThread)
       expect(event.thread_id).to eq(thread.id)
