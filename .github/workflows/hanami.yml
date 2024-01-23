@@ -56,3 +56,5 @@ jobs:
       run: bundle exec rspec
     - name: Check style
       run: bundle exec standardrb
+    - name: Run seeds
+      run: bundle exec rake db:seeds
