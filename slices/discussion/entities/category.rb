@@ -18,16 +18,18 @@ class Discussion::Entities::Category < Dry::Struct
     attrs = {
       id: struct.id,
       name: struct.name,
-      thread_count: struct.thread_count,
-      message_count: struct.message_count
+      thread_count: struct.attributes.fetch(:thread_count, 0),
+      message_count: struct.attributes.fetch(:message_count, 0)
     }
 
-    attrs[:latest_thread] = Discussion::Entities::Thread.from_rom(struct.latest_thread) if struct.latest_thread
+    if struct.attributes[:latest_thread]
+      attrs[:latest_thread] = Discussion::Entities::Thread.from_rom(struct.latest_thread) if struct.latest_thread
+    end
 
     new(attrs)
   end
 
-  def create_thread(title:, content:, creator:)
+  def start_thread(title:, content:, creator:)
     Discussion::Events::ThreadCreated.new(title:, content:, creator:, category_id: id)
   end
 end

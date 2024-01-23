@@ -8,7 +8,7 @@ module Discussion
 
       attribute :id, ID
       attribute :nickname, String
-      attribute :account_id, Integer
+      attribute :account_id, Integer.optional
       attribute? :message_count, Integer.optional
     end
   end
