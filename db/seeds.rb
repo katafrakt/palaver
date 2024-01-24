@@ -43,7 +43,7 @@ class Seeds
     repo = Discussion::Container["repositories.thread"]
     threads = Discussion::Container["threads"]
     event = threads.start_thread(**args.merge(category:))
-    record = repo.handle_event(event)
+    record = repo.handle(event)
     repo.get(record.id)
   end
 
@@ -51,7 +51,7 @@ class Seeds
     repo = Discussion::Container["repositories.thread"]
     threads = Discussion::Container["threads"]
     event = threads.add_reply(thread, **args)
-    repo.handle_event(event)
+    repo.handle(event)
   end
 
   def pin_thread(thread)

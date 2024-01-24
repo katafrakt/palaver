@@ -1,15 +1,9 @@
+# frozen_string_literal: true
+
 module Discussion
   module Repositories
     class Thread < Palaver::Repository[:threads]
       commands :create
-
-      def set_first_message(thread:, message:)
-        threads.by_pk(thread.id).changeset(:update, first_message_id: message.id).commit
-      end
-
-      def set_last_message(thread:, message:)
-        threads.by_pk(thread.id).changeset(:update, last_message_id: message.id).commit
-      end
 
       def by_category(category_id)
         threads.where(category_id:)
@@ -64,7 +58,7 @@ module Discussion
           .order(messages[:posted_at].desc)
       end
 
-      def handle_event(event)
+      def handle(event)
         case event
         when Discussion::Events::ReplyAddedToThread
           message = messages
