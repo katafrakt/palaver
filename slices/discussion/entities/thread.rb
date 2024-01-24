@@ -25,10 +25,6 @@ module Discussion
       def resource_id = "thread:#{id}"
 
       def resource_type = :thread
-
-      def add_reply(author:, content:)
-        Discussion::Events::ReplyAddedToThread.new(thread_id: id, author:, content:)
-      end
     end
   end
 end
