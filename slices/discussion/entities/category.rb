@@ -28,8 +28,4 @@ class Discussion::Entities::Category < Dry::Struct
 
     new(attrs)
   end
-
-  def start_thread(title:, content:, creator:)
-    Discussion::Events::ThreadCreated.new(title:, content:, creator:, category_id: id)
-  end
 end
