@@ -16,7 +16,7 @@ class Seeds
 
     pinned = create_thread(test_cat, title: "Important announcement", content: "This is a pinned thread",
       creator: john)
-    Moderation::Container["commands.pin_thread"].call(thread_id: pinned.id, moderator: john)
+    pin_thread(pinned)
 
     th3 = create_thread(test_cat, title: "A long one", content: "Let's discus...", creator: martha)
     40.times do
@@ -52,6 +52,13 @@ class Seeds
     threads = Discussion::Container["threads"]
     event = threads.add_reply(thread, **args)
     repo.handle_event(event)
+  end
+
+  def pin_thread(thread)
+    repo = Moderation::Container["repositories.thread"]
+    thread = repo.get(thread.id)
+    threads = Moderation::Container["threads"]
+    threads.pin(thread).bind { |event| repo.handle(event) }
   end
 end
 
