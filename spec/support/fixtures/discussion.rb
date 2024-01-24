@@ -15,7 +15,7 @@ module Fixtures
         creator: author
       )
 
-      ::Discussion::Container["repositories.thread"].handle_event(event)
+      ::Discussion::Container["repositories.thread"].handle(event)
     end
 
     def message(thread_id:, author:, content:)
@@ -23,7 +23,7 @@ module Fixtures
         content:, thread_id:, author:
       )
 
-      ::Discussion::Container["repositories.thread"].handle_event(event)
+      ::Discussion::Container["repositories.thread"].handle(event)
     end
 
     def profile(account_id: 1)
