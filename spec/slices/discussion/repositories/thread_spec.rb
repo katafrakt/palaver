@@ -7,7 +7,7 @@ RSpec.describe Discussion::Repositories::Thread do
   end
 
   let(:profile) do
-    id = repo.profiles.insert(nickname: "hans")
+    id = repo.profiles.insert(nickname: "hans", message_count: 17)
     repo.profiles.by_pk(id).one!
   end
 
@@ -30,6 +30,13 @@ RSpec.describe Discussion::Repositories::Thread do
 
         expect(record.last_message_id).to eq(message.id)
       end
+
+      it "recalculates message counter" do
+        event = Discussion::Events::ReplyAddedToThread.new(thread_id: thread.id, author: profile, content: "test")
+        repo.handle(event)
+        reloaded_profile = repo.profiles.by_pk(profile.id).one!
+        expect(reloaded_profile.message_count).to eq(1)
+      end
     end
 
     context "ThreadCreated" do
@@ -44,6 +51,13 @@ RSpec.describe Discussion::Repositories::Thread do
         thread = repo.handle(event)
         message = repo.messages.where(thread_id: thread.id).one!
         expect(message.text).to eq("content")
+      end
+
+      it "recalculates message counter" do
+        event = Discussion::Events::ThreadCreated.new(title: "test", category_id:, content: "content", creator: profile)
+        repo.handle(event)
+        reloaded_profile = repo.profiles.by_pk(profile.id).one!
+        expect(reloaded_profile.message_count).to eq(1)
       end
     end
 

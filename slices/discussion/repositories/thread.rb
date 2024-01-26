@@ -75,6 +75,7 @@ module Discussion
             last_message_id: message.id
           ).commit
 
+          sync_message_count(event.author)
           message
         when Discussion::Events::ThreadCreated
           transaction do
@@ -92,6 +93,7 @@ module Discussion
               thread_id: thread.id
             ).commit
 
+            sync_message_count(event.creator)
             threads.by_pk(thread.id).changeset(
               :update,
               first_message_id: message.id,
