@@ -11,6 +11,11 @@ SimpleCov.start do
   add_group "UI", "lib/ui"
 end
 
+if ENV["GITHUB_ACTIONS"]
+  require "simplecov-cobertura"
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+end
+
 require "pathname"
 SPEC_ROOT = Pathname(__dir__).realpath.freeze
 
