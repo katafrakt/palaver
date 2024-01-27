@@ -47,4 +47,5 @@ group :test do
   gem "rack-test"
   gem "rom-factory"
   gem "simplecov", require: false
+  gem "simplecov-cobertura"
 end
