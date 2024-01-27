@@ -19,6 +19,10 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
 
       # TODO: redirect always to last page and add anchor
       res.redirect_to "/th/#{slug}"
+    in Failure(:thread_locked)
+      res.flash[:error] = "This thread is locked. You cannot reply to it."
+      slug = slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, thread.title, thread.id)
+      res.redirect_to "/th/#{slug}"
     else
       # TODO: figure out
     end

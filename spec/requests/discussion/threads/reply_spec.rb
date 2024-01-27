@@ -18,5 +18,19 @@ RSpec.describe "POST /th/:id/reply", type: :request do
       expect(last_response.status).to eq(302)
       expect(last_response.headers["Location"]).to eq("/th/#{thread_slug(thread)}")
     end
+
+    context "for locked thread" do
+      before do
+        Fixtures::Moderation.lock_thread(thread.id)
+      end
+
+      specify "renders flash message" do
+        post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply"
+        follow_redirect!
+
+        expect(last_response.body).not_to include("This is a reply")
+        expect(last_response.body).to include("This thread is locked")
+      end
+    end
   end
 end

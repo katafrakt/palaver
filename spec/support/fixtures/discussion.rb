@@ -7,7 +7,7 @@ module Fixtures
         .create(name: "test category")
     end
 
-    def thread(category_id:, author:, title: "test thread", content: "this is the thread")
+    def thread(category_id:, author:, title: "test thread", content: "this is the thread", locked: false)
       event = ::Discussion::Events::ThreadCreated.new(
         title:,
         content:,
