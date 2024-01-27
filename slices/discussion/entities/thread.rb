@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "dry/monads"
+
 module Discussion
   module Entities
     class Thread < ROM::Struct

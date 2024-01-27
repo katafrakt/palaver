@@ -111,7 +111,8 @@ module Discussion
         Discussion::Entities::Thread.new(
           id: struct.id,
           title: struct.title,
-          pinned: struct.pinned
+          pinned: struct.pinned,
+          locked: struct.locked
         )
       end
     end
