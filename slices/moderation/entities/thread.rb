@@ -7,8 +7,11 @@ module Moderation
 
       attribute :id, Integer
       attribute :pinned, Bool
+      attribute :locked, Bool
 
       def pinned? = pinned
+
+      def locked? = locked
     end
   end
 end

@@ -19,4 +19,16 @@ class Moderation::Threads
     event = ThreadUnpinned.new(thread_id: thread.id)
     Success(event)
   end
+
+  def lock(thread)
+    return Failure(:thread_already_locked) if thread.locked?
+    event = ThreadLocked.new(thread_id: thread.id)
+    Success(event)
+  end
+
+  def unlock(thread)
+    return Failure(:thread_not_locked) unless thread.locked?
+    event = ThreadUnlocked.new(thread_id: thread.id)
+    Success(event)
+  end
 end
