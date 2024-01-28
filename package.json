@@ -3,6 +3,11 @@
     "assets": "node config/assets.mjs"
   },
   "dependencies": {
+    "esbuild-sass-plugin": "^2.16.1",
     "hanami-assets": "^2.1.0-rc.2"
+  },
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "node-sass": "^9.0.0"
   }
 }
