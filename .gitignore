@@ -5,3 +5,4 @@ db/*.sqlite
 coverage
 .dir-locals.el
 public
+/node_modules
