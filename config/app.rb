@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "hanami"
-require "hanami/middleware/body_parser"
 
 module Palaver
   # By default Hanami tries to find a matching class for current action,
@@ -18,7 +17,7 @@ module Palaver
     config.actions.content_security_policy[:style_src] = "*"
     config.actions.content_security_policy[:script_src] = "*"
     config.actions.sessions = :cookie, {secret: ENV["SECRET"]}
-    config.middleware.use Hanami::Middleware::BodyParser, :form
+    config.middleware.use :body_parser, :form
 
     # disable default view inferrer
     config.actions.view_name_inferrer = FakeViewNameInferrer
