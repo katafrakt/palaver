@@ -4,13 +4,12 @@ source "https://rubygems.org"
 
 gem "rake"
 
-HANAMI_VERSION = "~> 2.1.0.rc2"
-gem "hanami", HANAMI_VERSION
-gem "hanami-controller", HANAMI_VERSION
-gem "hanami-router", HANAMI_VERSION
-gem "hanami-utils", HANAMI_VERSION
-gem "hanami-validations", HANAMI_VERSION
-gem "hanami-assets", HANAMI_VERSION
+gem "hanami", "~> 2.1.1"
+gem "hanami-controller", "~> 2.1.0"
+gem "hanami-router", "~> 2.1.0"
+gem "hanami-utils", "~> 2.1.0"
+gem "hanami-validations", "~> 2.1.0"
+gem "hanami-assets", "~> 2.1.0"
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
