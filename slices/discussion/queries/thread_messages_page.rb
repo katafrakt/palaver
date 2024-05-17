@@ -11,7 +11,7 @@ class Discussion::Queries::ThreadMessagesPage
     all_thread_messages_count = repo.message_counts([thread_id]).first.count
     entries = repo.paged_messages(thread_id, page_no.to_i)
     entries.map! { |e| Discussion::Entities::Message.from_rom(e) }
-    pager = Pager.new(entries, all_thread_messages_count, (all_thread_messages_count / 15.0).ceil, page_no)
+    pager = Pager.new(entries, all_thread_messages_count, (all_thread_messages_count / 15.0).ceil, page_no.to_i)
 
     {thread:, pager:}
   end
