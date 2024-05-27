@@ -5,7 +5,7 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
     repo: "repositories.thread",
     profile_repo: "repositories.profile",
     slugger: "utils.slugger",
-    threads: "threads"
+    threads: "domain.threads"
   ]
 
   def handle(req, res)

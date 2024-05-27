@@ -1,8 +1,8 @@
-RSpec.describe Discussion::Threads do
+RSpec.describe Discussion::Domain::Threads do
   # TODO: acocunt_id should not be required
   let(:creator) { Discussion::Entities::Author.new(nickname: "leah", id: rand(100), account_id: 1) }
   let(:thread) { Discussion::Entities::Thread.new(id: rand(100), creator:, title: "My test thread") }
-  let(:threads) { Discussion::Threads.new }
+  let(:threads) { Discussion::Container["domain.threads"] }
 
   context "add_reply" do
     it "returns the event" do
