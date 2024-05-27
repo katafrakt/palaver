@@ -8,9 +8,9 @@ class Discussion::Actions::Profile::Show < Discussion::Action
   require_signed_in_user!
 
   def handle(req, res)
-    profile = repo.from_current_user(res[:current_user])
+    profile = res[:current_user]
 
-    if profile
+    if profile.profile_set_up?
       res.render(Discussion::Views::Profile::Show, profile:)
     else
       res.redirect "/account/settings"

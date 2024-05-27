@@ -12,8 +12,9 @@ module Palaver
   class Action < Hanami::Action
     include Hanami::Action::Session
     include Dry::Monads[:result]
+    include Account::Deps[account_repo: "repositories.account"]
 
-    before :fetch_current_user
+    before :fetch_current_user_id
 
     # Hacking around Hanami deficiencies which only allow using schema validation
     # without rules validation
@@ -30,10 +31,10 @@ module Palaver
       req.params.valid? ? Success() : Failure(:invalid_params)
     end
 
-    def fetch_current_user(req, res)
+    def fetch_current_user_id(req, res)
       session_id = req.session[:usi]
-      user = Account::Container["repositories.account"].by_session_id(session_id)
-      res[:current_user] = user
+      user = account_repo.by_session_id(session_id)
+      res[:_current_user_id] = user.signed_in? ? user.id : nil
     end
 
     def render_on_invalid_params(res, template)
@@ -65,7 +66,7 @@ module Palaver
     # Redirects to root page if the user is not signed in
     def self.require_signed_in_user!
       before do |_, res|
-        unless res[:current_user].signed_in?
+        unless res[:_current_user_id]
           res.flash[:error] = "You need to be signed in to access this page"
           res.redirect_to "/"
         end
@@ -74,7 +75,7 @@ module Palaver
 
     def self.require_signed_out_user!
       before do |_, res|
-        if res[:current_user].signed_in?
+        if res[:_current_user_id]
           res.flash[:error] = "You are already signed in"
           res.redirect_to "/"
         end
