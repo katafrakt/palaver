@@ -1,5 +1,5 @@
-RSpec.describe Moderation::Threads do
-  let(:threads) { Moderation::Container["threads"] }
+RSpec.describe Moderation::Domain::Threads do
+  let(:threads) { Moderation::Container["domain.threads"] }
 
   def build_thread(args = {})
     params = {id: rand(100), title: "My test thread", pinned: false, locked: false}.merge(args)
