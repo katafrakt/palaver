@@ -1,13 +1,18 @@
 class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
-  def get(id)
-    record = profiles.by_pk(id).one!
-    ::Discussion::Entities::Profile.new(id: record.id, nickname: record.nickname, account_id: record.account_id, message_count: record.message_count)
-  end
+  def current_user(id)
+    account = accounts.where(id: id).one
+    return Discussion::Entities::CurrentUser.build_anonymous unless account
 
-  def by_account_id(id) = profiles.where(account_id: id).one
+    profile = profiles.where(account_id: id).one
+    return Discussion::Entities::CurrentUser.build_profileless(id) unless profile
 
-  def from_current_user(user)
-    profiles.where(account_id: user.id).one
+    Discussion::Entities::CurrentUser.new(
+      account_id: id,
+      profile_id: profile.id,
+      email: account.email,
+      nickname: profile.nickname,
+      message_count: profile.message_count || 0
+    )
   end
 
   def create(params)

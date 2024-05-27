@@ -11,8 +11,8 @@ class Discussion::Actions::Thread::Reply < Discussion::Action
   def handle(req, res)
     thread_id = slugger.decode_id(req.params[:id])
     thread = repo.get(thread_id)
-    profile = profile_repo.get(res[:current_user].profile_id)
-    case threads.add_reply(thread, author: profile, content: req.params[:reply])
+    author = res[:current_user].to_author
+    case threads.add_reply(thread, author:, content: req.params[:reply])
     in Success(event)
       repo.handle(event)
       slug = slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, thread.title, thread.id)
