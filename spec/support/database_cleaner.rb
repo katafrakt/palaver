@@ -1,6 +1,5 @@
 require "database_cleaner/sequel"
 
-DatabaseCleaner[:sequel].db = Hanami.app["persistence.db"]
 DatabaseCleaner[:sequel].strategy = :transaction
 
 RSpec.configure do |config|

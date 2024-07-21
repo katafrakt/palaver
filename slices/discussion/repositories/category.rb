@@ -1,6 +1,6 @@
 module Discussion
   module Repositories
-    class Category < Palaver::Repository[:categories]
+    class Category < Palaver::DB::Repo[:categories]
       commands :create
 
       def all_with_last_thread

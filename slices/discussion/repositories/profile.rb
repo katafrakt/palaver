@@ -1,4 +1,4 @@
-class Discussion::Repositories::Profile < Palaver::Repository[:profiles]
+class Discussion::Repositories::Profile < Palaver::DB::Repo[:profiles]
   def current_user(id)
     account = accounts.where(id: id).one
     return Discussion::Entities::CurrentUser.build_anonymous unless account

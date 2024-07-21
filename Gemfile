@@ -4,12 +4,14 @@ source "https://rubygems.org"
 
 gem "rake"
 
-gem "hanami", "~> 2.1.1"
-gem "hanami-controller", "~> 2.1.0"
-gem "hanami-router", "~> 2.1.0"
-gem "hanami-utils", "~> 2.1.0"
-gem "hanami-validations", "~> 2.1.0"
-gem "hanami-assets", "~> 2.1.0"
+HANAMI_VERSION = "2.2.0.beta1"
+gem "hanami", HANAMI_VERSION
+gem "hanami-controller", HANAMI_VERSION
+gem "hanami-router", HANAMI_VERSION
+gem "hanami-utils", HANAMI_VERSION
+gem "hanami-validations", HANAMI_VERSION
+gem "hanami-assets", HANAMI_VERSION
+gem "hanami-db", HANAMI_VERSION
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
@@ -17,8 +19,6 @@ gem "dry-types", "~> 1.6"
 gem "pg"
 gem "phlex", "~> 1.6"
 gem "puma"
-gem "rom", "~> 5.3.0"
-gem "rom-sql", "~> 3.6.0"
 gem "shrine", "~> 3.6"
 gem "shrine-rom"
 gem "verifica"

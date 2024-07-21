@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Moderation::Repositories::Thread < Palaver::Repository[:threads]
+class Moderation::Repositories::Thread < Palaver::DB::Repo[:threads]
   def get(id)
     threads.by_pk(id).one!.then do |record|
       Moderation::Entities::Thread.new(

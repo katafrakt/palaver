@@ -6,3 +6,4 @@ coverage
 .dir-locals.el
 public
 /node_modules
+config/db/structure.sql

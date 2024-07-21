@@ -47,7 +47,7 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Setup test database
-      run: bundle exec rake db:setup && bundle exec rake db:migrate
+      run: bundle exec hanami db migrate --no-dump
     - name: npm install
       run: npm install
     - name: Compile assets

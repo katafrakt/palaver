@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Persistence
-  module Relations
-    class Threads < ROM::Relation[:sql]
+module Palaver
+  module DB
+    class Threads < Palaver::DB::Relation
       schema(:threads, infer: true) do
         associations do
           belongs_to :categories, as: :category
