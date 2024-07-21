@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Persistence
-  module Relations
-    class Profiles < ROM::Relation[:sql]
+module Palaver
+  module DB
+    class Profiles < Palaver::DB::Relation
       schema(:profiles, infer: true) do
         associations do
           has_many :messages, as: :author

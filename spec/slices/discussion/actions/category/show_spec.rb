@@ -1,18 +1,13 @@
 RSpec.describe Discussion::Actions::Category::Show do
   subject(:action) { described_class.new }
-  let(:repo) { double(:repo) }
-  let(:query) { double(:query) }
-  stub(Discussion::Container, "repositories.category") { repo }
-  stub(Discussion::Container, "queries.threads_in_category") { query }
+  let(:repo) { Discussion::Container["repositories.category"] }
+
+  let(:category) do
+    id = repo.categories.insert(name: "test")
+    repo.categories.by_pk(id).one!
+  end
 
   describe "with no threads" do
-    let(:category) { Factory.structs[:category] }
-
-    before do
-      expect(repo).to receive(:get) { category }
-      expect(query).to receive(:call).with(category.id) { [] }
-    end
-
     it "renders message about no threads" do
       response = action.call({id: category_slug(category)})
       expect(response.body.first).to include("No threads")
@@ -20,17 +15,13 @@ RSpec.describe Discussion::Actions::Category::Show do
   end
 
   describe "with threads" do
-    let(:category) { Factory[:category] }
-    let(:threads) { [Discussion::Entities::Thread.from_rom(category.latest_thread)] }
-
     before do
-      expect(repo).to receive(:get) { category }
-      expect(query).to receive(:call).with(category.id) { threads }
+      repo.threads.insert(category_id: category.id, title: "test thread")
     end
 
     it "renders message about no threads" do
       response = action.call({id: category_slug(category)})
-      threads.each { |th| expect(response.body.first).to include(th.title) }
+      expect(response.body.first).to include("test thread")
     end
   end
 end

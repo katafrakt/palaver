@@ -9,7 +9,7 @@ module Discussion
         threads = repo.by_category(category_id)
         counts = repo.message_counts(threads.map(&:id))
         threads.map do |thread|
-          message_count = counts.detect { |c| c.thread_id == thread.id }&.count
+          message_count = counts.detect { |c| c.thread_id == thread.id }&.count || 0
           Discussion::Entities::Thread.from_rom(thread, message_count:)
         end
       end

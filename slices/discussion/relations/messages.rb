@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-module Persistence
+module Discussion
   module Relations
-    class Messages < ROM::Relation[:sql]
+    class Messages < Palaver::DB::Relation
       schema(:messages, infer: true) do
         associations do
           belongs_to :threads, as: :thread
           belongs_to :profiles, as: :author
         end
       end
+
+      use :pagination
     end
   end
 end

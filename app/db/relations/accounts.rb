@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Persistence
-  module Relations
-    class Accounts < ROM::Relation[:sql]
+module Palaver
+  module DB
+    class Accounts < Palaver::DB::Relation
       schema(:accounts, infer: true) do
         associations do
           has_one :profiles, as: :profile

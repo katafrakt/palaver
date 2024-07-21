@@ -2,7 +2,7 @@
 
 module Discussion
   module Repositories
-    class Thread < Palaver::Repository[:threads]
+    class Thread < Palaver::DB::Repo[:threads]
       commands :create
 
       def by_category(category_id)

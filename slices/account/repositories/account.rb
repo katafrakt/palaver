@@ -1,4 +1,4 @@
-class Account::Repositories::Account < Palaver::Repository[:accounts]
+class Account::Repositories::Account < Palaver::DB::Repo[:accounts]
   struct_namespace Account::Entities
   auto_struct true
   commands :create, update: :by_pk

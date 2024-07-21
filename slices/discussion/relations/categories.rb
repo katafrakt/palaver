@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Persistence
+module Discussion
   module Relations
-    class Categories < ROM::Relation[:sql]
+    class Categories < Palaver::DB::Relation
       schema(:categories, infer: true) do
         associations do
           has_many :threads
