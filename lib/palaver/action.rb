@@ -16,15 +16,6 @@ module Palaver
 
     before :fetch_current_user_id
 
-    # Hacking around Hanami deficiencies which only allow using schema validation
-    # without rules validation
-    def self.contract(&block)
-      klass = Class.new(Hanami::Action::Params)
-      contract = Dry::Validation::Contract.build { instance_eval(&block) }
-      klass.instance_variable_set(:@_validator, contract)
-      @params_class = klass
-    end
-
     private
 
     def validate_params(req)
@@ -43,22 +34,6 @@ module Palaver
         body = res.render(template, values: req.params.to_h, errors: req.params.errors)
         halt(422, body)
       end
-    end
-
-    # NOTE: need to overwrite this internal method so the  csrf checker uses raw params,
-    # not the params from req.params - which requires to manually allow _csrf_token param
-    # if I'm using .contract method defined above
-    #
-    # Overwrites missing_csrf_token? for the same reason
-    def invalid_csrf_token?(req, res)
-      return false unless verify_csrf_token?(req, res)
-
-      missing_csrf_token?(req, res) ||
-        !::Rack::Utils.secure_compare(req.session[CSRF_TOKEN], req.params.raw[CSRF_TOKEN])
-    end
-
-    def missing_csrf_token?(req, *)
-      Hanami::Utils::Blank.blank?(req.params.raw[CSRF_TOKEN])
     end
 
     public

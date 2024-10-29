@@ -5,8 +5,8 @@ class Account::Actions::Registration::Create < Account::Action
 
   require_signed_out_user!
 
-  contract do
-    schema do
+  class Schema < Dry::Validation::Contract
+    params do
       required(:email).filled(:str?, format?: URI::MailTo::EMAIL_REGEXP)
       required(:password).filled(:str?, min_size?: 8)
       required(:password_confirmation).filled(:str?, min_size?: 8)
@@ -16,6 +16,7 @@ class Account::Actions::Registration::Create < Account::Action
       key.failure("passwords do not match") if values[:password] != values[:password_confirmation]
     end
   end
+  contract Schema
 
   def handle(req, res)
     render_on_invalid_params(res, Account::Views::Registration::New)
