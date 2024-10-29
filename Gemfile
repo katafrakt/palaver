@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "rake"
 
-HANAMI_VERSION = "2.2.0.beta1"
+HANAMI_VERSION = "2.2.0"
 gem "hanami", HANAMI_VERSION
 gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
@@ -32,7 +32,7 @@ end
 group :cli, :development, :test do
   gem "dotenv", "~> 2.7"
   gem "faker"
-  gem "hanami-rspec"
+  gem "hanami-rspec", HANAMI_VERSION
   gem "standard"
 end
 
