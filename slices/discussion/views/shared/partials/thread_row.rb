@@ -8,7 +8,7 @@ class Discussion::Views::Shared::Partials::ThreadRow < Phlex::HTML
     @slugger = slugger
   end
 
-  def template
+  def view_template
     slug = @slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, @thread.title, @thread.id)
 
     article(class: "mt-5 mb-5 media thread-row") do

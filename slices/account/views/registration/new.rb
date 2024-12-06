@@ -4,7 +4,7 @@ class Account::Views::Registration::New < Palaver::View
   include Ui::Typography
   include Ui::Form
 
-  def template
+  def view_template
     div do
       heading2("Register new account")
       render Ui::Components::Form.new(url: "/account/register") do

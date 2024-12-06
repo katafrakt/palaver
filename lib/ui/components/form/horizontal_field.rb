@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Ui::Components::Form::HorizontalField < Ui::Components::Form::Field
-  def template
+  def view_template
     div(class: "field is-horizontal") do
       div(class: "field-label is-normal") do
         label(class: "label") { @label }

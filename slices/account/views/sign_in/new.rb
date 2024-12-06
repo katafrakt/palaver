@@ -6,7 +6,7 @@ class Account::Views::SignIn::New < Palaver::View
   include ::Ui::Typography
   include ::Ui::Form
 
-  def template
+  def view_template
     div do
       heading2("Sign in")
       div(class: "columns") do
