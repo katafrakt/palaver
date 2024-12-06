@@ -1,7 +1,7 @@
 class Account::Views::Registration::AfterCreate < Palaver::View
   include Ui::Typography
 
-  def template
+  def view_template
     article(class: "message is-warning") do
       div(class: "message-body") do
         "This should be an email, but we are just testing, so let's pretend it is."

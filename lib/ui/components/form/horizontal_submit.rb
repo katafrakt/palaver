@@ -5,7 +5,7 @@ class Ui::Components::Form::HorizontalSubmit < Phlex::HTML
     @label = label
   end
 
-  def template
+  def view_template
     div(class: "field is-horizontal") do
       div(class: "field-label") do
       end

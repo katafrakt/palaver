@@ -6,7 +6,7 @@ class Discussion::Views::Thread::Show < Palaver::View
     slugger: "utils.slugger"
   ]
 
-  def template
+  def view_template
     div do
       heading2(@thread.title)
 
