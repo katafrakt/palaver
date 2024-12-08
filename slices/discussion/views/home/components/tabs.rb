@@ -7,7 +7,7 @@ class Discussion::Views::Home::Components::Tabs < Phlex::HTML
     @selected = selected
   end
 
-  def template
+  def view_template
     div(class: "tabs pl-5 pr-5") do
       ul do
         tab("/", "Categories", :categories)

@@ -3,7 +3,7 @@
 module Ui
   module Components
     class Columns < Phlex::HTML
-      def template(&)
+      def view_template(&)
         div(class: "columns", &)
       end
 

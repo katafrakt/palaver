@@ -7,7 +7,7 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
       @value = value
     end
 
-    def template
+    def view_template
       span do
         strong { @label }
         plain ": #{@value}"
@@ -22,7 +22,7 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
     @slugger = slugger
   end
 
-  def template
+  def view_template
     slug = @slugger.to_slug(Discussion::Entities::Category::HASHIDS_NUM, category.name, category.id)
 
     article(class: "category mb-5") do
@@ -32,10 +32,10 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
 
       div do
         render Detail.new("Threads", category.thread_count)
-        unsafe_raw " &middot; "
+        raw safe(" &middot; ")
         render Detail.new("Messages", category.message_count)
         if category.latest_thread
-          unsafe_raw " &middot; "
+          raw safe(" &middot; ")
           span do
             plain "Last message by "
             a(href: "/") { "Test" }

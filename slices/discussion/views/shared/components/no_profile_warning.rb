@@ -5,7 +5,7 @@ class Discussion::Views::Shared::Components::NoProfileWarning < Phlex::HTML
     @current_user = current_user
   end
 
-  def template
+  def view_template
     if @current_user.signed_in? && !@current_user.profile_set_up?
       article(class: "message is-warning") do
         div(class: "message-body") do

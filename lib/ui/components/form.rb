@@ -11,7 +11,7 @@ module Ui
         @multipart = multipart
       end
 
-      def template(&content)
+      def view_template(&content)
         params = {method: "POST", action: url}
         params[:enctype] = "multipart/form-data" if @multipart
         form(**params, &content)

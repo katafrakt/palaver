@@ -5,7 +5,7 @@ module Ui
       @view = view
     end
 
-    def template
+    def view_template
       html do
         head do
           title { "Palaver" }

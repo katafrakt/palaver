@@ -15,7 +15,7 @@ class Ui::Components::Form::Field < Phlex::HTML
     @disabled = disabled
   end
 
-  def template
+  def view_template
     div(class: "field") do
       label(class: "label") { @label }
       render_input

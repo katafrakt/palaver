@@ -3,7 +3,7 @@
 class Account::Views::Settings::Show < Palaver::View
   include Ui::Typography
 
-  def template
+  def view_template
     heading2("Account settings")
     render Ui::Components::Form.new(url: "/account/settings", multipart: true) do |form|
       form.csrf(csrf_token)
