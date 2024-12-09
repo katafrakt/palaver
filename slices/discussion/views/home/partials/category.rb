@@ -34,7 +34,7 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
         render Detail.new("Threads", category.thread_count)
         raw safe(" &middot; ")
         render Detail.new("Messages", category.message_count)
-        if category.latest_thread
+        if most_recent_thread
           raw safe(" &middot; ")
           span do
             plain "Last message by "
@@ -42,7 +42,7 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
             whitespace
             plain "in"
             whitespace
-            a(href: "/") { most_recent_thread.title }
+            a(href: "/th/") { most_recent_thread.title }
           end
         end
       end
