@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Account::Actions::Registration::Create < Account::Action
-  include Account::Deps["operations.register"]
+  include Account::Deps["operations.register", mailer: "mailers.registration"]
 
   require_signed_out_user!
 
@@ -23,6 +23,7 @@ class Account::Actions::Registration::Create < Account::Action
 
     case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
+      mailer.deliver(account:)
       res.render(Account::Views::Registration::AfterCreate, account:)
     else
       email_error = "must be unique"
