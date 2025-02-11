@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+    }
+    h3 {
+      color: #2c3e50;
+      margin: 0 0 20px 0;
+      font-size: 1.5em;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .header {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #e1e8ed;
+    }
+    .header p {
+      margin: 8px 0;
+      color: #5a6c7d;
+      font-size: 0.95em;
+    }
+    .header strong {
+      color: #4a5568;
+      font-weight: 500;
+      display: inline-block;
+      min-width: 50px;
+    }
+    .header a {
+      color: #5a6c7d;
+      text-decoration: none;
+      border-bottom: 1px dotted #cbd5e0;
+      transition: all 0.2s ease;
+    }
+    .header a:hover {
+      color: #4a5568;
+      border-bottom-color: #4a5568;
+    }
+    .email-body {
+      margin-top: 25px;
+      background-color: #fafbfc;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #e1e8ed;
+    }
+    .part {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+    .part:not(:last-child) {
+      border-bottom: 1px solid #e1e8ed;
+    }
+    .part h5 {
+      color: #718096;
+      font-size: 0.85em;
+      margin: 0 0 12px 0;
+      background-color: #f7fafc;
+      padding: 8px 12px;
+      border-left: 3px solid #cbd5e0;
+      border-radius: 0 4px 4px 0;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .part > div {
+      color: #2d3748;
+      line-height: 1.7;
+    }
+    section {
+      background-color: #ffffff;
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .metadata {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .metadata p {
+      margin: 0;
+    }
+    @media (max-width: 640px) {
+      body {
+        padding: 10px;
+      }
+      section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="header">
+      <h3><%= mail.subject %></h3>
+      <div class="metadata">
+        <p><strong>From:</strong> <%= mail.from.join(", ") %></p>
+        <p><strong>To:</strong> <%= mail.to.map{ |it| "<a href=\"mailto:#{it}\">#{it}</a>"}.join(", ").html_safe %></p>
+      </div>
+    </div>
+
+    <div class="email-body">
+      <% if mail.body.parts.empty? %>
+        <!-- Single part email -->
+        <div class="part">
+          <%= mail.body %>
+        </div>
+      <% elsif mail.body.parts.length == 1 %>
+        <!-- Single part email but in parts array -->
+        <div class="part">
+          <%= mail.body.parts.first.body %>
+        </div>
+      <% else %>
+        <!-- Multipart email -->
+        <% mail.body.parts.each do |part| %>
+          <div class="part">
+            <h5><%= part.content_type %></h5>
+            <div><%= part.body %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</body>
+</html>

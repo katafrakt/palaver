@@ -1,3 +1,5 @@
+require_relative "storage"
+
 module Hanami
   module DevMail
     class DeliveryMethod
@@ -7,6 +9,9 @@ module Hanami
 
       def deliver!(mail)
         p mail
+        p mail.body
+        storage = Storage.new(file: "/tmp/palaver-mails", items_limit: 20)
+        storage.add(mail)
       end
     end
   end

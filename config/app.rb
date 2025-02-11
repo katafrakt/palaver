@@ -13,6 +13,8 @@ module Palaver
   end
 
   class App < Hanami::App
+    require "hanami/dev_mail"
+    
     config.actions.content_security_policy[:default_src] = "*"
     config.actions.content_security_policy[:style_src] = "*"
     config.actions.content_security_policy[:script_src] = "*"
@@ -21,5 +23,7 @@ module Palaver
 
     # disable default view inferrer
     config.actions.view_name_inferrer = FakeViewNameInferrer
+
+    config.shared_app_component_keys += ["mailer.configuration"]
   end
 end

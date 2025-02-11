@@ -14,9 +14,10 @@ Hanami.app.register_provider :mailer, namespace: true do
 
   start do
     configuration = target["mailer.configuration"]
+    p configuration
 
     # we need to manually load every mailer here, before finalizing
-    [Account::Mailers::Registration]
+    Account::Mailers::Registration
 
     Hanami::Mailer.finalize(configuration)
   end
