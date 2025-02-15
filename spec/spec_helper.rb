@@ -26,23 +26,9 @@ require_relative "support/rspec"
 require_relative "support/requests"
 require_relative "support/database_cleaner"
 require_relative "support/uploads"
+require_relative "support/component_testing"
 
 require "phlex"
-
-# NOTE: for some reason I cannot just require it, so copying from source code
-module Phlex
-  module Testing
-    module ViewHelper
-      def render(view, &block)
-        view.call(view_context: view_context, &block)
-      end
-
-      def view_context
-        nil
-      end
-    end
-  end
-end
 
 require "dry/system/stubs"
 Discussion::Container.enable_stubs!

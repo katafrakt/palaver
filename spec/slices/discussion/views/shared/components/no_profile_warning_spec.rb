@@ -1,5 +1,5 @@
 RSpec.describe Discussion::Views::Shared::Components::NoProfileWarning do
-  include Phlex::Testing::ViewHelper
+  include ComponentTestingHelper
 
   let(:anonymous) { Discussion::Entities::CurrentUser.build_anonymous }
   let(:without_profile) { Discussion::Entities::CurrentUser.build_profileless(1) }
