@@ -55,7 +55,7 @@ class Discussion::Views::Thread::Show < Palaver::View
     if message.author.avatar
       message.author.avatar_url
     else
-      "https://bulma.io/images/placeholders/128x128.png"
+      "https://bulma.io/assets/images/placeholders/128x128.png"
     end
   end
 

@@ -14,7 +14,7 @@ class Discussion::Views::Shared::Partials::ThreadRow < Phlex::HTML
     article(class: "mt-5 mb-5 media thread-row") do
       figure(class: "media-left") do
         p(class: "image is-64x64") do
-          img(src: "https://bulma.io/images/placeholders/128x128.png")
+          img(src: "https://bulma.io/assets/images/placeholders/128x128.png")
         end
       end
       div(class: "media-content") do
