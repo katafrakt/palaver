@@ -33,7 +33,7 @@ RSpec.describe "POST /account/settings", type: :request do
     end
 
     it "shows error when current password does not match" do
-      perform_request current_password: SecureRandom.hex
+      perform_request current_password: SecureRandom.hex, new_password: "123123123", new_password_confirmation: "123123123"
       expect(last_response.body).to include("incorrect password")
     end
 
@@ -61,6 +61,25 @@ RSpec.describe "POST /account/settings", type: :request do
       expect(profile.avatar_data).not_to be_nil
       data = JSON.parse(profile.avatar_data)
       expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
+    end
+  end
+
+  context "as a signed in user without a profile yet" do
+    let(:password) { "12345678" }
+    let(:user) { Fixtures::Account.user(password:) }
+
+    before do
+      env "rack.session", {usi: user.id}
+    end
+
+    it "updates name and avatar in the profile" do
+      file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
+      perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg"), nickname: "John"
+      profile = Account::Repositories::Account.new.settings_for_user(user.id).profile
+      expect(profile.avatar_data).not_to be_nil
+      data = JSON.parse(profile.avatar_data)
+      expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
+      expect(profile.nickname).to eq("John")
     end
   end
 end

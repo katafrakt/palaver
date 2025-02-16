@@ -13,7 +13,7 @@ RSpec.describe "GET /account/settings", type: :request do
   describe "as a user without profile set up" do
     let(:user_id) { user.id }
     specify "I can input my nickname" do
-      nickname_input = @doc.xpath("//input[@name='name']").first
+      nickname_input = @doc.xpath("//input[@name='nickname']").first
       expect(nickname_input.attributes["disabled"]).to be_nil
     end
 
@@ -32,7 +32,7 @@ RSpec.describe "GET /account/settings", type: :request do
     end
 
     specify "I cannot input my nickname" do
-      nickname_input = @doc.xpath("//input[@name='name']").first
+      nickname_input = @doc.xpath("//input[@name='nickname']").first
       expect(nickname_input.attributes["disabled"]).not_to be_nil
     end
 

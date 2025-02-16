@@ -25,6 +25,7 @@ gem "verifica"
 gem "hashids"
 gem "base64"
 gem "stringex"
+gem "dry-operation", "~> 1.0"
 
 group :cli, :development do
   gem "hanami-reloader"
