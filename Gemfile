@@ -23,6 +23,7 @@ gem "shrine", "~> 3.6"
 gem "shrine-rom"
 gem "verifica"
 gem "hashids"
+gem "base64"
 gem "stringex"
 
 group :cli, :development do
