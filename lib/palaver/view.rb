@@ -37,7 +37,7 @@ class Palaver::View < Phlex::HTML
   def define_args_vars
     # TODO: forbid some names
     @args.each do |name, value|
-      instance_variable_set("@#{name}".to_sym, value)
+      instance_variable_set(:"@#{name}", value)
     end
   end
 end

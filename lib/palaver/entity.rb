@@ -6,7 +6,7 @@ class Palaver::Entity
   end
 
   def method_missing(name)
-    attributes.key?(name) ? attributes[name] : super(name)
+    attributes.key?(name) ? attributes[name] : super
   end
 
   def respond_to_missing?(name, _)
