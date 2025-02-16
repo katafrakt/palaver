@@ -10,7 +10,7 @@ class Account::Views::Settings::Show < Palaver::View
       render Ui::Components::Columns.new do |columns|
         columns.column do
           form.horizontal_field(label: "Email", name: "email", value: @settings.email, disabled: true)
-          form.horizontal_field(label: "Name", name: "name", value: @settings.nickname, disabled: !@settings.nickname.nil?)
+          form.horizontal_field(label: "Name", name: "nickname", value: @settings.nickname, disabled: !@settings.nickname.nil?)
 
           form.section_title("Password reset", pad_top: true)
           form.horizontal_field(label: "Current password", name: "current_password", type: :password,
