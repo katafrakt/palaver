@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Account::Actions::Registration::Create < Account::Action
-  include Account::Deps["commands.register_user"]
+  include Account::Deps["operations.register"]
 
   require_signed_out_user!
 
@@ -21,7 +21,7 @@ class Account::Actions::Registration::Create < Account::Action
   def handle(req, res)
     render_on_invalid_params(res, Account::Views::Registration::New)
 
-    case register_user.call(req.params[:email], req.params[:password])
+    case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
       res.render(Account::Views::Registration::AfterCreate, account:)
     else
