@@ -3,8 +3,8 @@ module Fixtures
     extend self
 
     def user(password: SecureRandom.hex(10))
-      ::Account::Container["commands.register_user"]
-        .call("#{SecureRandom.hex(16)}@test.com", password)
+      ::Account::Container["operations.register"]
+        .call(email: "#{SecureRandom.hex(16)}@test.com", password:)
         .value!
     end
 
