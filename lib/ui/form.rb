@@ -15,18 +15,5 @@ module Ui
     def csrf(token)
       hidden_field("_csrf_token", token)
     end
-
-    def field_info
-      div(class: "field is-horizontal") do
-        div(class: "field-label is-normal")
-        div(class: "field-body") do
-          div(class: "field") do
-            p(class: "control is-expanded") do
-              yield
-            end
-          end
-        end
-      end
-    end
   end
 end
