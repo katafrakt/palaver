@@ -61,7 +61,7 @@ module Account
       end
 
       def reload_user(id)
-        user = repo.settings_for_user(id)
+        user = repo.settings_by_user_id(id)
         Success(user)
       end
     end

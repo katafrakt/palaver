@@ -6,7 +6,7 @@ require "dry/monads/do"
 require "hanami/utils/blank"
 
 class Account::Actions::Settings::Save < Account::Action
-  include Account::Deps[fetch_settings: "queries.settings"]
+  include Account::Deps["operations.update_account", repo: "repositories.account"]
 
   require_signed_in_user!
 
@@ -28,7 +28,7 @@ class Account::Actions::Settings::Save < Account::Action
     current_user = res[:current_user]
     return render_show(req, res) unless validate_params(req).success?
 
-    case Account::Operations::UpdateAccount.new.call(current_user, req.params.to_h)
+    case update_account.call(current_user, req.params.to_h)
     in Failure(:current_password_invalid)
       req.params.errors[:current_password] = ["incorrect password"]
       render_show(req, res)
@@ -42,7 +42,7 @@ class Account::Actions::Settings::Save < Account::Action
 
   def render_show(req, res)
     current_user = res[:current_user]
-    settings = fetch_settings.call(current_user.id)
+    settings = repo.settings_by_user_id(current_user.id)
     res.render(Account::Views::Settings::Show, settings:, errors: req.params.errors, values: req.params.to_h)
   end
 end

@@ -57,7 +57,7 @@ RSpec.describe "POST /account/settings", type: :request do
     it "updates the avatar in the profile" do
       file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
       perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg")
-      profile = Account::Repositories::Account.new.settings_for_user(user.id).profile
+      profile = Account::Repositories::Profile.new.by_account_id(user.id)
       expect(profile.avatar_data).not_to be_nil
       data = JSON.parse(profile.avatar_data)
       expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
@@ -75,7 +75,7 @@ RSpec.describe "POST /account/settings", type: :request do
     it "updates name and avatar in the profile" do
       file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
       perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg"), nickname: "John"
-      profile = Account::Repositories::Account.new.settings_for_user(user.id).profile
+      profile = Account::Repositories::Profile.new.by_account_id(user.id)
       expect(profile.avatar_data).not_to be_nil
       data = JSON.parse(profile.avatar_data)
       expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
