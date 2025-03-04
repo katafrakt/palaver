@@ -1,5 +1,5 @@
 class Account::Actions::Registration::Confirm < Account::Action
-  include Account::Deps["commands.confirm_user"]
+  include Account::Deps["operations.confirm_user"]
 
   params do
     required(:id).filled(:integer)
@@ -8,7 +8,7 @@ class Account::Actions::Registration::Confirm < Account::Action
 
   def handle(req, res)
     result = validate_params(req).bind do
-      confirm_user.call(req.params[:id], req.params[:token])
+      confirm_user.call(id: req.params[:id], token: req.params[:token])
     end
 
     case result
