@@ -3,7 +3,7 @@
 url = "/account/sign_in"
 RSpec.describe "GET #{url}", type: :request do
   let(:register) { Account::Container["operations.register"] }
-  let(:confirm_user) { Account::Container["commands.confirm_user"] }
+  let(:confirm_user) { Account::Container["operations.confirm_user"] }
 
   it "redirects when user not found" do
     post url, {email: "test@test.com", password: "12345678"}
@@ -21,7 +21,7 @@ RSpec.describe "GET #{url}", type: :request do
   context "with successful login" do
     before do
       account = register.call(email: "test@test.com", password: "12345678").value!
-      confirm_user.call(account.id, account.confirmation_token)
+      confirm_user.call(id: account.id, token: account.confirmation_token)
     end
 
     it "redirects when user is correct" do
