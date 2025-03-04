@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Account::Actions::SignIn::Create < Account::Action
-  include Account::Deps["commands.sign_in"]
+  include Account::Deps["operations.sign_in"]
 
   require_signed_out_user!
 
@@ -13,7 +13,7 @@ class Account::Actions::SignIn::Create < Account::Action
   def handle(req, res)
     render_on_invalid_params(res, Account::Views::SignIn::New)
 
-    case sign_in.call(req.params[:email], req.params[:password])
+    case sign_in.call(email: req.params[:email], password: req.params[:password])
     in Success(user)
       res.session[:usi] = user.id
       res.flash[:success] = "Successfully signed in"
