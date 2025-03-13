@@ -8,14 +8,8 @@ module Fixtures
     end
 
     def thread(category_id:, author:, title: "test thread", content: "this is the thread", locked: false)
-      event = ::Discussion::Events::ThreadCreated.new(
-        title:,
-        content:,
-        category_id:,
-        creator: author
-      )
-
-      ::Discussion::Container["repositories.thread"].handle(event)
+      operation = ::Discussion::Container["operations.start_thread"]
+      operation.call(title:, content:, category_id:, creator: author).value!
     end
 
     def message(thread_id:, author:, content:)

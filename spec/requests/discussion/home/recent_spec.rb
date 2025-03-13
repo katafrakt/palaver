@@ -2,7 +2,6 @@ require "nokolexbor"
 
 RSpec.describe "GET /recent", type: :request do
   let(:profile) { Fixtures::Discussion.profile }
-  let(:create_thread) { Discussion::Container["commands.create_thread"] }
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:category_id) { repo.create(name: "abcd").id }
 

@@ -3,7 +3,7 @@
 
 require "dry/operation"
 
-module Account
+module Discussion
   class Operation < Dry::Operation
   end
 end

@@ -4,6 +4,7 @@ module Account
   module Operations
     class ConfirmUser < Account::Operation
       include Account::Deps[repo: "repositories.account"]
+
       def call(id:, token:)
         account = step fetch_account(id, token)
         step confirm_account(account)
