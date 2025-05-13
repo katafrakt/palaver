@@ -171,7 +171,12 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     lumberjack (1.2.9)
+    marcel (0.3.3)
+      mimemagic (~> 0.3.2)
     method_source (1.0.0)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (3.0.3)
@@ -179,6 +184,8 @@ GEM
       mustermann (= 3.0.3)
     nenv (0.3.0)
     nio4r (2.5.9)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
     nokolexbor (0.6.0-x86_64-linux)
     notiffany (0.1.3)
       nenv (~> 0.1)
@@ -188,7 +195,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
-    phlex (2.0.1)
+    phlex (2.3.0)
+      zeitwerk (~> 2.7)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -330,9 +338,10 @@ DEPENDENCIES
   hanami-utils (= 2.2.0)
   hanami-validations (= 2.2.0)
   hashids
+  marcel (~> 0.3)
   nokolexbor
   pg
-  phlex (~> 2.0.0)
+  phlex (~> 2.3.0)
   puma
   rack-test
   rake

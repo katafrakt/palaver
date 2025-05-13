@@ -19,6 +19,7 @@ Hanami.app.register_provider :uploader do
     Shrine.plugin :restore_cached_data
     Shrine.plugin :form_assign
     Shrine.plugin :validation_helpers
+    Shrine.plugin :determine_mime_type, analyzer: :marcel
 
     register :uploader, Shrine
   end
