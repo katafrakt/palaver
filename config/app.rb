@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "hanami"
+require "strict_ivars"
 
 module Palaver
   # By default Hanami tries to find a matching class for current action,
