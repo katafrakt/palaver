@@ -6,7 +6,7 @@ module Ui
     end
 
     def view_template
-      html do
+      html(data: {theme: "light"}) do
         head do
           title { "Palaver" }
           link rel: "stylesheet", href: asset_url("app.css")
