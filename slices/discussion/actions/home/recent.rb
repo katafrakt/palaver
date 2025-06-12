@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Discussion::Actions::Home::Recent < Discussion::Action
-  include Discussion::Deps[query: "queries.homepage_recent"]
+  include Discussion::Deps[queries: "queries.homepage"]
 
   def handle(_req, res)
-    res.render(Discussion::Views::Home::Recent, threads: query.call)
+    res.render(Discussion::Views::Home::Recent, threads: queries.recent_threads)
   end
 end

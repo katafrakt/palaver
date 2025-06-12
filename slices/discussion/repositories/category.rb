@@ -3,13 +3,6 @@ module Discussion
     class Category < Palaver::DB::Repo[:categories]
       commands :create
 
-      def all_with_last_thread
-        categories
-          .with_counts
-          .combine(latest_thread: {last_message: :author})
-          .to_a
-      end
-
       def get(id)
         categories.by_pk(id).one!
       end

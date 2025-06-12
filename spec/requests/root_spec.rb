@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe "Root", type: :request do
-  let(:category) { Discussion::Entities::Category.new(id: 123, name: "Test", thread_count: 0, message_count: 0) }
+  let(:repo) { Discussion::Container["repositories.category"] }
 
-  let(:repo) { double("fake repo") }
-  stub(Discussion::Container, "repositories.category") { repo }
-
-  it "is succesful" do
-    expect(repo).to receive(:all_with_last_thread) { [category] }
-
+  it "shows categories" do
+    category = repo.create(name: "Test")
     get "/"
 
     expect(last_response).to be_successful
