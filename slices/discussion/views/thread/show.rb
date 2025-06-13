@@ -14,13 +14,21 @@ class Discussion::Views::Thread::Show < Palaver::View
         message_row(message)
       end
 
-      if access_control.authorizer.authorized?(current_user, @thread, :reply)
+      if @pager.current_page < @pager.total_pages
+        article(class: "message is-warning") do
+          div(class: "message-body") do
+            plain "This is not the end of the thread. Go to the "
+            a(href: "?page=#{@pager.total_pages}") { "last page" }
+            plain " to reply."
+          end
+        end
+      elsif access_control.authorizer.authorized?(current_user, @thread, :reply)
         reply_form
       else
         render Discussion::Views::Shared::Components::NoProfileWarning.new(current_user)
       end
 
-      pagination
+      pagination if @pager.total_pages > 1
     end
   end
 
