@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Discussion
   module Operations
     class StartThread < Discussion::Operation
