@@ -15,17 +15,4 @@ RSpec.describe Discussion::Domain::Threads do
       expect(event.content).to eq("Let's do this!")
     end
   end
-
-  context "start_thread" do
-    let(:category) { Discussion::Entities::Category.new(id: rand(100), name: "Test category", thread_count: 1, message_count: 1) }
-
-    it "returns the event" do
-      event = threads.start_thread(category:, creator:, title: "Good thread", content: "This is good")
-
-      expect(event).to be_kind_of(Discussion::Events::ThreadCreated)
-      expect(event.category_id).to eq(category.id)
-      expect(event.title).to eq("Good thread")
-      expect(event.content).to eq("This is good")
-    end
-  end
 end

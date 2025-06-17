@@ -40,16 +40,12 @@ class Seeds
   end
 
   def create_thread(category, args)
-    repo = Discussion::Container["repositories.thread"]
-    threads = Discussion::Container["domain.threads"]
-    event = threads.start_thread(**args.merge(category:))
-    record = repo.handle(event)
-    repo.get(record.id)
+    start = Discussion::Container["operations.start_thread"]
+    start.call(**args.merge(category:))
   end
 
   def reply_in_thread(thread, args)
     repo = Discussion::Container["repositories.thread"]
-    threads = Discussion::Container["domain.threads"]
     threads.add_reply(thread, **args).bind do |event|
       repo.handle(event)
     end
