@@ -63,7 +63,10 @@ module Discussion
           ).commit
 
           sync_message_count(event.author)
-          message
+
+          Discussion::Entities::Message.from_rom(
+            messages.by_pk(message.id).combine(:author).one
+          )
         when Discussion::Events::ThreadCreated
           transaction do
             thread = threads.changeset(
@@ -81,11 +84,12 @@ module Discussion
             ).commit
 
             sync_message_count(event.creator)
-            threads.by_pk(thread.id).changeset(
+            thread = threads.by_pk(thread.id).changeset(
               :update,
               first_message_id: message.id,
               last_message_id: message.id
             ).commit
+            Discussion::Entities::Thread.from_rom(thread)
           end
         else
           raise NotImplementedError
