@@ -6,8 +6,7 @@ module Discussion
       include Discussion::Deps[repo: "repositories.thread"]
 
       def call(category:, title:, content:, creator:)
-        event = Discussion::Events::ThreadCreated.new(title:, content:, creator:, category_id: category.id)
-        repo.handle(event)
+        repo.create(category:, title:, content:, author:)
       end
     end
   end

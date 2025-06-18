@@ -45,6 +45,33 @@ module Discussion
         profiles.by_pk(author.id).changeset(:update, message_count: count).commit
       end
 
+      def create(title:, content:, creator:, category:)
+        transaction do
+          thread = threads.changeset(
+            :create,
+            title: title,
+            category_id: category.id
+          ).commit
+
+          message = messages.changeset(
+            :create,
+            text: content,
+            posted_at: DateTime.now,
+            author_id: creator.id,
+            thread_id: thread.id
+          ).commit
+
+          sync_message_count(creator)
+          threads.by_pk(thread.id).changeset(
+            :update,
+            first_message_id: message.id,
+            last_message_id: message.id
+          ).commit
+
+          Discussion::Entities::Thread.from_rom(thread)
+        end
+      end
+
       def handle(event)
         case event
         when Discussion::Events::ReplyAddedToThread
@@ -67,30 +94,6 @@ module Discussion
           Discussion::Entities::Message.from_rom(
             messages.by_pk(message.id).combine(:author).one
           )
-        when Discussion::Events::ThreadCreated
-          transaction do
-            thread = threads.changeset(
-              :create,
-              title: event.title,
-              category_id: event.category_id
-            ).commit
-
-            message = messages.changeset(
-              :create,
-              text: event.content,
-              posted_at: DateTime.now,
-              author_id: event.creator.id,
-              thread_id: thread.id
-            ).commit
-
-            sync_message_count(event.creator)
-            thread = threads.by_pk(thread.id).changeset(
-              :update,
-              first_message_id: message.id,
-              last_message_id: message.id
-            ).commit
-            Discussion::Entities::Thread.from_rom(thread)
-          end
         else
           raise NotImplementedError
         end

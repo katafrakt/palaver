@@ -1,8 +1,11 @@
 RSpec.describe Discussion::Repositories::Thread do
   let(:repo) { described_class.new }
-  let(:category_id) { repo.categories.insert(name: "test") }
+  let(:category) do
+    id = repo.categories.insert(name: "test")
+    repo.categories.by_pk(id).one
+  end
   let(:thread) do
-    id = repo.threads.insert(category_id:)
+    id = repo.threads.insert(category_id: category.id)
     repo.threads.by_pk(id).one!
   end
 
@@ -39,30 +42,27 @@ RSpec.describe Discussion::Repositories::Thread do
       end
     end
 
-    context "ThreadCreated" do
-      it "creates a new thread" do
-        event = Discussion::Events::ThreadCreated.new(title: "test", category_id:, content: "content", creator: profile)
-        thread = repo.handle(event)
-        expect(thread.title).to eq("test")
-      end
-
-      it "adds the first message" do
-        event = Discussion::Events::ThreadCreated.new(title: "test", category_id:, content: "content", creator: profile)
-        thread = repo.handle(event)
-        message = repo.messages.where(thread_id: thread.id).one!
-        expect(message.text).to eq("content")
-      end
-
-      it "recalculates message counter" do
-        event = Discussion::Events::ThreadCreated.new(title: "test", category_id:, content: "content", creator: profile)
-        repo.handle(event)
-        reloaded_profile = repo.profiles.by_pk(profile.id).one!
-        expect(reloaded_profile.message_count).to eq(1)
-      end
-    end
-
     it "raises on unknown event" do
       expect { repo.handle(Class.new) }.to raise_error(NotImplementedError)
+    end
+  end
+
+  context "create" do
+    it "creates a new thread" do
+      thread = repo.create(title: "test", category:, content: "content", creator: profile)
+      expect(thread.title).to eq("test")
+    end
+
+    it "adds the first message" do
+      thread = repo.create(title: "test", category:, content: "content", creator: profile)
+      message = repo.messages.where(thread_id: thread.id).one!
+      expect(message.text).to eq("content")
+    end
+
+    it "recalculates message counter" do
+      repo.create(title: "test", category:, content: "content", creator: profile)
+      reloaded_profile = repo.profiles.by_pk(profile.id).one!
+      expect(reloaded_profile.message_count).to eq(1)
     end
   end
 end
