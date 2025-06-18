@@ -3,7 +3,7 @@ RSpec.describe "GET /th/:id", type: :request do
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
   let(:thread) do
     category = Discussion::Repositories::Category.new.create(name: "abcd")
-    Fixtures::Discussion.thread(category_id: category.id, author:, title: "A test thread", content: "Testing")
+    Fixtures::Discussion.thread(category:, author:, title: "A test thread", content: "Testing")
   end
 
   describe "as anonymous user" do
@@ -24,8 +24,8 @@ RSpec.describe "GET /th/:id", type: :request do
       env "rack.session", {usi: user.id}
       get "/th/#{thread_slug(thread)}"
 
-      expect(last_response.body).not_to include("Write your reply")
       expect(last_response.body).to include("You need to set up your profile to start posting")
+      expect(last_response.body).not_to include("Write your reply")
     end
   end
 

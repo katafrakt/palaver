@@ -4,7 +4,7 @@ RSpec.describe "POST /th/:id/reply", type: :request do
 
   let(:thread) do
     category = Fixtures::Discussion.category
-    Fixtures::Discussion.thread(category_id: category.id, author:)
+    Fixtures::Discussion.thread(category:, author:)
   end
 
   describe "as a signed in user" do

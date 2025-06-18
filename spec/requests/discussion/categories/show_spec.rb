@@ -17,7 +17,7 @@ RSpec.describe "GET /cat/:id", type: :request do
     category = repo.create(name: "abcd")
     Fixtures::Discussion.thread(
       title: "A test thread", content: "Testiiiing",
-      category_id: category.id, author: author
+      category:, author:
     )
     slug = category_slug(category)
 
