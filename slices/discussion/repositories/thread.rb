@@ -72,16 +72,15 @@ module Discussion
         end
       end
 
-      def handle(event)
-        case event
-        when Discussion::Events::ReplyAddedToThread
+      def add_reply(content:, author:, thread:)
+        transaction do
           message = messages
             .changeset(
               :create,
-              text: event.content,
+              text: content,
               posted_at: DateTime.now,
-              author_id: event.author.id,
-              thread_id: event.thread_id
+              author_id: author.id,
+              thread_id: thread.id
             ).commit
 
           threads.by_pk(message.thread_id).changeset(
@@ -89,13 +88,11 @@ module Discussion
             last_message_id: message.id
           ).commit
 
-          sync_message_count(event.author)
+          sync_message_count(author)
 
           Discussion::Entities::Message.from_rom(
             messages.by_pk(message.id).combine(:author).one
           )
-        else
-          raise NotImplementedError
         end
       end
 

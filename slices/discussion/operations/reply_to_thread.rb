@@ -7,8 +7,7 @@ module Discussion
 
       def call(thread:, author:, content:)
         step check_if_locked(thread)
-        event = Discussion::Events::ReplyAddedToThread.new(thread_id: thread.id, author:, content:)
-        repo.handle(event)
+        repo.add_reply(thread:, author:, content:)
       end
 
       private

@@ -16,12 +16,8 @@ module Fixtures
       )
     end
 
-    def message(thread_id:, author:, content:)
-      event = ::Discussion::Events::ReplyAddedToThread.new(
-        content:, thread_id:, author:
-      )
-
-      ::Discussion::Container["repositories.thread"].handle(event)
+    def message(thread:, author:, content:)
+      ::Discussion::Container["repositories.thread"].add_reply(thread:, author:, content:)
     end
 
     def profile(account_id: 1)
