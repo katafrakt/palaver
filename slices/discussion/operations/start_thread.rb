@@ -6,7 +6,7 @@ module Discussion
       include Discussion::Deps[repo: "repositories.thread"]
 
       def call(category:, title:, content:, creator:)
-        repo.create(category:, title:, content:, author:)
+        repo.create(category:, title:, content:, creator:)
       end
     end
   end

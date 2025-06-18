@@ -10,8 +10,8 @@ RSpec.describe "GET /recent", type: :request do
     th1 = Fixtures::Discussion.thread(title: "test 1", category:, author: profile)
     th2 = Fixtures::Discussion.thread(title: "test 2", category:, author: profile)
     th3 = Fixtures::Discussion.thread(title: "test 3", category:, author: profile)
-    Fixtures::Discussion.message(content: "test", author: profile, thread_id: th3.id)
-    Fixtures::Discussion.message(content: "test", author: profile, thread_id: th2.id)
+    Fixtures::Discussion.message(content: "test", author: profile, thread: th3)
+    Fixtures::Discussion.message(content: "test", author: profile, thread: th2)
 
     get "/recent"
 
