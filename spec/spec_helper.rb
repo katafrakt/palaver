@@ -28,6 +28,14 @@ require_relative "support/database_cleaner"
 require_relative "support/uploads"
 require_relative "support/component_testing"
 
+# Phlex for some reason floods my output with warning about methods being redefined
+Warning.extend(Module.new do
+  def warn(message, category: nil, **kwargs)
+    return if message.match?(/gems\/phlex/)
+    super
+  end
+end)
+
 require "phlex"
 
 require "dry/system/stubs"
