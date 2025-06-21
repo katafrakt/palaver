@@ -3,8 +3,6 @@
 module Discussion
   module Repositories
     class Thread < Palaver::DB::Repo[:threads]
-      commands :create
-
       def by_category(category_id)
         threads.where(category_id:)
           .combine(:last_message)
