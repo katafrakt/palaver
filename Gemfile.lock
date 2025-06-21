@@ -197,7 +197,6 @@ GEM
     pg (1.5.4)
     phlex (2.3.0)
       zeitwerk (~> 2.7)
-    prism (1.4.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -214,7 +213,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.10.0)
-    require-hooks (0.2.2)
     rexml (3.4.1)
     rom (5.4.2)
       rom-changeset (~> 5.4)
@@ -308,9 +306,6 @@ GEM
     standard-performance (1.6.0)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.23.0)
-    strict_ivars (0.6.0)
-      prism
-      require-hooks (~> 0.2)
     stringex (2.8.6)
     thor (1.2.2)
     transproc (1.1.1)
@@ -356,7 +351,6 @@ DEPENDENCIES
   simplecov
   simplecov-cobertura
   standard
-  strict_ivars
   stringex
   verifica
 

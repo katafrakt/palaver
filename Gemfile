@@ -27,7 +27,6 @@ gem "hashids"
 gem "base64"
 gem "stringex"
 gem "dry-operation", "~> 1.0"
-gem "strict_ivars", require: false
 
 group :cli, :development do
   gem "hanami-reloader"
