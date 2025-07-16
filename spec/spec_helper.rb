@@ -4,8 +4,11 @@ require "simplecov"
 SimpleCov.start do
   enable_coverage :branch
   primary_coverage :branch
+  
   add_filter "/spec/"
   add_filter "/config/"
+  add_filter "/gems/"
+
   add_group "Account", "slices/account"
   add_group "Discussion", "slices/discussion"
   add_group "UI", "lib/ui"
