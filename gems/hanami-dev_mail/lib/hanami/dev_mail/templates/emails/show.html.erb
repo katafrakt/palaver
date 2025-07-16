@@ -73,6 +73,14 @@
       color: #2d3748;
       line-height: 1.7;
     }
+    .part pre {
+      font-family: inherit;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 0;
+      color: #2d3748;
+      line-height: 1.7;
+    }
     section {
       background-color: #ffffff;
       padding: 35px;
@@ -115,19 +123,34 @@
       <% if mail.body.parts.empty? %>
         <!-- Single part email -->
         <div class="part">
-          <%= mail.body %>
+          <% if mail.content_type && mail.content_type.include?("text/plain") %>
+            <pre><%= mail.body %></pre>
+          <% else %>
+            <%= mail.body %>
+          <% end %>
         </div>
       <% elsif mail.body.parts.length == 1 %>
         <!-- Single part email but in parts array -->
         <div class="part">
-          <%= mail.body.parts.first.body %>
+          <% part = mail.body.parts.first %>
+          <% if part.content_type.include?("text/plain") %>
+            <pre><%= part.body %></pre>
+          <% else %>
+            <%= part.body %>
+          <% end %>
         </div>
       <% else %>
         <!-- Multipart email -->
         <% mail.body.parts.each do |part| %>
           <div class="part">
             <h5><%= part.content_type %></h5>
-            <div><%= part.body %></div>
+            <div>
+              <% if part.content_type.include?("text/plain") %>
+                <pre><%= part.body %></pre>
+              <% else %>
+                <%= part.body %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>

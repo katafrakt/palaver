@@ -23,7 +23,8 @@ class Account::Actions::Registration::Create < Account::Action
 
     case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
-      mailer.deliver(account:)
+      url = "/account/confirm?id=#{account.id}&token=#{account.confirmation_token}"
+      mailer.deliver(url:, account:)
       res.render(Account::Views::Registration::AfterCreate, account:)
     else
       email_error = "must be unique"

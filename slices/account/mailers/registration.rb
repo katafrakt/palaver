@@ -1,3 +1,5 @@
+require "hanami/mailer"
+
 module Account
   module Mailers
     class Registration < Hanami::Mailer
