@@ -41,6 +41,18 @@ module Hanami
           @store[envelope.id] = mail
         end
       end
+
+      def clear
+        @store.transaction do
+          envelopes = @store[ENVELOPES_KEY] || []
+
+          envelopes.each do |envelope|
+            @store.delete(envelope.id)
+          end
+
+          @store[ENVELOPES_KEY] = []
+        end
+      end
     end
   end
 end

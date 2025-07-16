@@ -18,6 +18,8 @@
             background-color: #f0f0f0;
             padding: 20px;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
 
         .sidebar-item {
@@ -31,6 +33,56 @@
 
         .sidebar-item:hover {
             background-color: #e0e0e0;
+        }
+
+        .sidebar-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #718096;
+            padding: 40px 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .empty-message p {
+            margin: 0 0 10px 0;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            opacity: 0.3;
+            margin-bottom: 15px;
+        }
+
+        .clear-button {
+            padding: 10px 16px;
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .clear-button:hover {
+            background-color: #c53030;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        .clear-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .main-content {
@@ -47,11 +99,28 @@
 </head>
 <body>
     <div class="sidebar">
-      <% envelopes.each do |envelope| %>
-        <div class="sidebar-item" onclick="loadPage('<%= envelope.url %>')">
-          <%= envelope.subject %><br />
-          <%= envelope.to.join(", ") %>
-        </div>
+      <div class="sidebar-items">
+        <% if envelopes.empty? %>
+          <div class="empty-message">
+            <div class="empty-icon">📭</div>
+            <p>No emails yet</p>
+            <p style="font-size: 12px; opacity: 0.7;">Emails will appear here when sent</p>
+          </div>
+        <% else %>
+          <% envelopes.each do |envelope| %>
+            <div class="sidebar-item" onclick="loadPage('<%= envelope.url %>')">
+              <%= envelope.subject %><br />
+              <%= envelope.to.join(", ") %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <% unless envelopes.empty? %>
+        <form method="post" action="<%= File.join(Hanami::DevMail.url_prefix, "clear") %>" style="margin: 0; margin-top: auto;">
+          <button type="submit" class="clear-button" onclick="return confirm('Are you sure you want to clear all emails?')">
+            🗑️ Clear All Emails
+          </button>
+        </form>
       <% end %>
     </div>
     <div class="main-content">
