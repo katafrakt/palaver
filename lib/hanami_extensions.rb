@@ -1,9 +1,11 @@
 module HanamiExtensions
   module ResponseExtension
     def render(view, **args)
-      context = Palaver::View::Context.new(self)
-      layout = Ui::Layout.new(view, context, args)
-      self.body = layout.call
+      unless args.key?(:layout)
+        context = Palaver::View::Context.new(self)
+        layout = Ui::Layout.new(view, context, args)
+        self.body = layout.call
+      end
     end
   end
 end

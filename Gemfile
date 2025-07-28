@@ -12,6 +12,7 @@ gem "hanami-utils", HANAMI_VERSION
 gem "hanami-validations", HANAMI_VERSION
 gem "hanami-assets", HANAMI_VERSION
 gem "hanami-db", "2.2.1"
+gem "hanami-mailer", github: "hanami/mailer", branch: "main"
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
@@ -27,6 +28,8 @@ gem "hashids"
 gem "base64"
 gem "stringex"
 gem "dry-operation", "~> 1.0"
+
+gem "hanami-dev_mail", path: "gems/hanami-dev_mail"
 
 group :cli, :development do
   gem "hanami-reloader"
