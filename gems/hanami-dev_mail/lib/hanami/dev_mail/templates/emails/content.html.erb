@@ -1,0 +1,24 @@
+<% if mail.body.parts.empty? %>
+  <% if mail.content_type && mail.content_type.include?("text/plain") %>
+    <pre><%= mail.body %></pre>
+  <% else %>
+    <%= mail.body.to_s.html_safe %>
+  <% end %>
+<% else %>
+  <% html_part = mail.body.parts.find { |p| p.content_type.include?("text/html") } %>
+  <% text_part = mail.body.parts.find { |p| p.content_type.include?("text/plain") } %>
+
+  <% if html_part %>
+    <%= html_part.body.to_s.html_safe %>
+  <% elsif text_part %>
+    <pre><%= text_part.body %></pre>
+  <% else %>
+    <% mail.body.parts.each do |part| %>
+      <% if part.content_type.include?("text/plain") %>
+        <pre><%= part.body %></pre>
+      <% else %>
+        <%= part.body.to_s.html_safe %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

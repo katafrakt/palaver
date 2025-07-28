@@ -4,7 +4,7 @@ require "simplecov"
 SimpleCov.start do
   enable_coverage :branch
   primary_coverage :branch
-  
+
   add_filter "/spec/"
   add_filter "/config/"
   add_filter "/gems/"

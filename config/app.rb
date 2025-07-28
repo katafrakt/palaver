@@ -14,7 +14,7 @@ module Palaver
 
   class App < Hanami::App
     require "hanami/dev_mail"
-    
+
     config.actions.content_security_policy[:default_src] = "*"
     config.actions.content_security_policy[:style_src] = "*"
     config.actions.content_security_policy[:script_src] = "*"

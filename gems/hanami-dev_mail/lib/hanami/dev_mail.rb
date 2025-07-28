@@ -11,7 +11,7 @@ module Hanami
 
     setting :url_prefix
 
-    def self.url_prefix = self.config.url_prefix
+    def self.url_prefix = config.url_prefix
   end
 end
 

@@ -21,4 +21,4 @@ end
 # Apply the extension immediately when this file is loaded
 # if defined?(Hanami::Routes)
 #  Hanami::Routes.include(Hanami::DevMail::RouterExtension)
-#end
+# end
