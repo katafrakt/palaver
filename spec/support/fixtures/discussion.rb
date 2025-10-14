@@ -1,3 +1,5 @@
+require "securerandom"
+
 module Fixtures
   module Discussion
     extend self
@@ -20,7 +22,8 @@ module Fixtures
       ::Discussion::Container["repositories.thread"].add_reply(thread:, author:, content:)
     end
 
-    def profile(account_id: 1)
+    def profile(account_id: nil)
+      account_id ||= ::Account::Container["repositories.account"].create(email: "#{SecureRandom.hex(8)}@test.com").id
       # there's a cross-slice dependency here, but I guess it is okay in test code
       # Discussion slice does not have the rights to write profiles, but they are
       # needed to read.
