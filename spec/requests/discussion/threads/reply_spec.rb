@@ -7,12 +7,12 @@ RSpec.describe "POST /th/:id/reply", type: :request do
     Fixtures::Discussion.thread(category:, author:)
   end
 
-  describe "as a signed in user" do
+  context "as a signed in user" do
     before do
       sign_in(user: user)
     end
 
-    specify "redirects to the thread" do
+    specify "I am redirected to the thread" do
       post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply"
 
       expect(last_response.status).to eq(302)
@@ -24,7 +24,7 @@ RSpec.describe "POST /th/:id/reply", type: :request do
         Fixtures::Moderation.lock_thread(thread.id)
       end
 
-      specify "renders flash message" do
+      specify "I see a flash message that the thread is locked" do
         post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply"
         follow_redirect!
 

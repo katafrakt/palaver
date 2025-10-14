@@ -5,7 +5,7 @@ RSpec.describe "POST /account/settings/profile", type: :request do
   end
 
   context "as anonymous user" do
-    specify "redirect to home" do
+    specify "I am redirected to home" do
       perform_request
       expect(last_response.status).to eq(302)
     end
@@ -20,7 +20,7 @@ RSpec.describe "POST /account/settings/profile", type: :request do
       sign_in(user: user)
     end
 
-    it "updates the avatar in the profile" do
+    specify "I can update my avatar" do
       file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
       perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg")
       profile = Account::Repositories::Profile.new.by_account_id(user.id)

@@ -6,7 +6,7 @@ RSpec.describe "GET /new_threads", type: :request do
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:category) { repo.create(name: "abcd") }
 
-  specify "return threads descending by last message date" do
+  specify "I see threads ordered by last message date" do
     th1 = Fixtures::Discussion.thread(title: "test 1", category:, author: profile)
     th2 = Fixtures::Discussion.thread(title: "test 2", category:, author: profile)
     th3 = Fixtures::Discussion.thread(title: "test 3", category:, author: profile)

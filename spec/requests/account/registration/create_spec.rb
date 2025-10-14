@@ -9,7 +9,7 @@ RSpec.describe "POST /account/register", type: :request do
   let(:url) { "/account/register" }
 
   context "errors" do
-    specify "with missing email" do
+    specify "I see an error when email is missing" do
       params[:email] = nil
       post url, params
 
@@ -17,7 +17,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("must be filled")
     end
 
-    specify "with incorrect email" do
+    specify "I see an error when email is incorrect" do
       params[:email] = "abc@"
       post url, params
 
@@ -25,7 +25,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("is in invalid format")
     end
 
-    specify "with missing password" do
+    specify "I see an error when password is missing" do
       params[:password] = nil
       post url, params
 
@@ -33,7 +33,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("must be filled")
     end
 
-    specify "with missing password confirmation" do
+    specify "I see an error when password confirmation is missing" do
       params[:password_confirmation] = nil
       post url, params
 
@@ -41,7 +41,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("must be filled")
     end
 
-    specify "with password too short" do
+    specify "I see an error when password is too short" do
       params[:password] = "123"
       post url, params
 
@@ -49,7 +49,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("size cannot be less than 8")
     end
 
-    specify "with password and confirmation not matching" do
+    specify "I see an error when passwords do not match" do
       params[:password] = "12344321"
       post url, params
 
@@ -57,7 +57,7 @@ RSpec.describe "POST /account/register", type: :request do
       expect(last_response.body).to include("passwords do not match")
     end
 
-    specify "with email already taken", db: true do
+    specify "I see an error when email is already taken", db: true do
       Account::Repositories::Account.new.create(email: "test@test.com")
       params[:email] = "test@test.com"
       post url, params
@@ -68,7 +68,7 @@ RSpec.describe "POST /account/register", type: :request do
   end
 
   context "success" do
-    it "renders a message" do
+    specify "I see a success message" do
       post url, params
       expect(last_response).to be_successful
       expect(last_response.body).to include("Thank you for registering")
@@ -81,7 +81,7 @@ RSpec.describe "POST /account/register", type: :request do
       sign_in(user: user)
     end
 
-    it "redirects" do
+    specify "I am redirected away from registration" do
       get url
       expect(last_response.status).to eq(302)
     end

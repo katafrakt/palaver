@@ -5,13 +5,13 @@ RSpec.describe "GET #{url}", type: :request do
   let(:register) { Account::Container["operations.register"] }
   let(:confirm_user) { Account::Container["operations.confirm_user"] }
 
-  it "redirects when user not found" do
+  specify "I am redirected when user is not found" do
     post url, {email: "test@test.com", password: "12345678"}
     expect(last_response.status).to eq(302)
     expect(last_response.headers["Location"]).to eq("/account/sign_in")
   end
 
-  it "renders error message and login form" do
+  specify "I see an error message when credentials are incorrect" do
     post url, {email: "test@test.com", password: "12345678"}
     follow_redirect!
     expect(last_response).to be_successful
@@ -24,13 +24,13 @@ RSpec.describe "GET #{url}", type: :request do
       confirm_user.call(id: account.id, token: account.confirmation_token)
     end
 
-    it "redirects when user is correct" do
+    specify "I am redirected to home when credentials are correct" do
       post url, {email: "test@test.com", password: "12345678"}
       expect(last_response.status).to eq(302)
       expect(last_response.headers["Location"]).to eq("/")
     end
 
-    it "renders success message on successful sign in" do
+    specify "I see a success message when I sign in successfully" do
       post url, {email: "test@test.com", password: "12345678"}
       follow_redirect!
       expect(last_response).to be_successful
