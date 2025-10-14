@@ -5,7 +5,7 @@ RSpec.describe "GET /account/settings/profile", type: :request do
     user = Account::Container["repositories.account"].create(email: "test@test.com")
     Fixtures::Discussion.profile(account_id: user.id)
 
-    env "rack.session", {usi: user.id}
+    sign_in(user: user)
     get "/account/settings/profile"
     expect(last_response.status).to eq(200)
 

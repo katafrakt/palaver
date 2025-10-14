@@ -3,7 +3,7 @@ RSpec.describe "GET /profile", type: :request do
   let(:profile) { Fixtures::Discussion.profile(account_id: user.id) }
 
   describe "as a user without profile set up" do
-    before { env "rack.session", {usi: user.id} }
+    before { sign_in(user: user) }
 
     specify "I'm redirected to account settings page" do
       get "/profile"
@@ -13,7 +13,7 @@ RSpec.describe "GET /profile", type: :request do
   end
 
   describe "as a user with a profile set up" do
-    before { env "rack.session", {usi: profile.account_id} }
+    before { sign_in(id: profile.account_id) }
 
     specify "I see a page with my nickname included" do
       get "/profile"

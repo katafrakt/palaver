@@ -78,7 +78,7 @@ RSpec.describe "POST /account/register", type: :request do
   context "with signed in user" do
     before do
       user = Fixtures::Account.user
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
     end
 
     it "redirects" do

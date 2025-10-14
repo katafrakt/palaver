@@ -9,7 +9,7 @@ RSpec.describe "GET #{url}", type: :request do
 
   specify "redirect when user already signed in" do
     user = Fixtures::Account.user
-    env "rack.session", {usi: user.id}
+    sign_in(user: user)
     get url
     expect(last_response.status).to eq(302)
   end
