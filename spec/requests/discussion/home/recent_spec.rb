@@ -1,17 +1,17 @@
 require "nokolexbor"
 
 RSpec.describe "GET /recent", type: :request do
-  let(:profile) { Fixtures::Discussion.profile(email: "profile@test.com") }
+  let(:profile) { Factories::Discussion.profile(email: "profile@test.com") }
   let(:create_thread) { Discussion::Container["commands.create_thread"] }
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:category) { repo.create(name: "abcd") }
 
   specify "I see threads ordered by last message date" do
-    th1 = Fixtures::Discussion.thread(title: "test 1", category:, author: profile)
-    th2 = Fixtures::Discussion.thread(title: "test 2", category:, author: profile)
-    th3 = Fixtures::Discussion.thread(title: "test 3", category:, author: profile)
-    Fixtures::Discussion.message(content: "test", author: profile, thread: th3)
-    Fixtures::Discussion.message(content: "test", author: profile, thread: th2)
+    th1 = Factories::Discussion.thread(title: "test 1", category:, author: profile)
+    th2 = Factories::Discussion.thread(title: "test 2", category:, author: profile)
+    th3 = Factories::Discussion.thread(title: "test 3", category:, author: profile)
+    Factories::Discussion.message(content: "test", author: profile, thread: th3)
+    Factories::Discussion.message(content: "test", author: profile, thread: th2)
 
     get "/recent"
 

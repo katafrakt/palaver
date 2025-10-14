@@ -1,6 +1,6 @@
 require "securerandom"
 
-module Fixtures
+module Factories
   module Discussion
     extend self
 

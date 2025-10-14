@@ -77,7 +77,7 @@ RSpec.describe "POST /account/register", type: :request do
 
   context "with signed in user" do
     before do
-      user = Fixtures::Account.user
+      user = Factories::Account.user
       sign_in(user: user)
     end
 

@@ -1,9 +1,9 @@
 RSpec.describe "GET /th/:id", type: :request do
-  let(:author) { Fixtures::Discussion.profile(email: "author@test.com") }
+  let(:author) { Factories::Discussion.profile(email: "author@test.com") }
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
   let(:thread) do
     category = Discussion::Repositories::Category.new.create(name: "abcd")
-    Fixtures::Discussion.thread(category:, author:, title: "A test thread", content: "Testing")
+    Factories::Discussion.thread(category:, author:, title: "A test thread", content: "Testing")
   end
 
   context "as anonymous user" do

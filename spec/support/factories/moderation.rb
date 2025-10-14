@@ -1,4 +1,4 @@
-module Fixtures
+module Factories
   module Moderation
     extend self
 
