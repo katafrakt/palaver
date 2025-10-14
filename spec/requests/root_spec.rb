@@ -3,7 +3,7 @@
 RSpec.describe "Root", type: :request do
   let(:repo) { Discussion::Container["repositories.category"] }
 
-  it "shows categories" do
+  specify "I can see the categories" do
     category = repo.create(name: "Test")
     get "/"
 

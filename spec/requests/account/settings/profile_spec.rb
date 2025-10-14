@@ -1,7 +1,7 @@
 require "nokolexbor"
 
 RSpec.describe "GET /account/settings/profile", type: :request do
-  it "renders avatar input" do
+  specify "I see an avatar input field" do
     user = Account::Container["repositories.account"].create(email: "test@test.com")
     Fixtures::Discussion.profile(account_id: user.id)
 

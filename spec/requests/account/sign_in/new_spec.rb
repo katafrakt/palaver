@@ -2,12 +2,12 @@
 
 url = "/account/sign_in"
 RSpec.describe "GET #{url}", type: :request do
-  specify "return success" do
+  specify "I can access the sign in page" do
     get url
     expect(last_response).to be_successful
   end
 
-  specify "redirect when user already signed in" do
+  specify "I am redirected away when already signed in" do
     user = Fixtures::Account.user
     sign_in(user: user)
     get url
