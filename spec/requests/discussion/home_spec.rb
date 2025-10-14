@@ -9,13 +9,13 @@ RSpec.describe "GET /", type: :request do
     end
 
     specify "signd in user without profile sees it" do
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
       get "/"
       expect(last_response.body).to include(no_profile_msg)
     end
 
     specify "signed in user with profile does not see it" do
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
       Discussion::Container["repositories.profile"].create(account_id: user.id, nickname: "janice")
       get "/"
       expect(last_response.body).not_to include(no_profile_msg)

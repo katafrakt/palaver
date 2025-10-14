@@ -17,7 +17,7 @@ RSpec.describe "POST /account/settings/profile", type: :request do
 
     before do
       Fixtures::Account.profile(user.id)
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
     end
 
     it "updates the avatar in the profile" do

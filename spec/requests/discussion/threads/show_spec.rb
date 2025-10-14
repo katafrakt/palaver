@@ -21,7 +21,7 @@ RSpec.describe "GET /th/:id", type: :request do
 
   describe "as a signed in user without profile set up" do
     specify "does not display reply form" do
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
       get "/th/#{thread_slug(thread)}"
 
       expect(last_response.body).to include("You need to set up your profile to start posting")
@@ -32,7 +32,7 @@ RSpec.describe "GET /th/:id", type: :request do
   describe "as a signed in user with profile set up" do
     specify "displays reply form" do
       Discussion::Container["repositories.profile"].create(nickname: "Joshua", account_id: user.id)
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
       get "/th/#{thread_slug(thread)}"
 
       expect(last_response.body).to include("Write your reply")

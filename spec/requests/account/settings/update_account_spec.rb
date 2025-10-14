@@ -17,7 +17,7 @@ RSpec.describe "POST /account/settings/account", type: :request do
 
     before do
       Fixtures::Account.profile(user.id)
-      env "rack.session", {usi: user.id}
+      sign_in(user: user)
     end
 
     it "shows error when new passwords do not match" do

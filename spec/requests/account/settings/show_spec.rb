@@ -5,7 +5,7 @@ RSpec.describe "GET /account/settings/account", type: :request do
   let(:profile) { Fixtures::Discussion.profile(account_id: user.id) }
 
   before do
-    env("rack.session", {usi: user_id}) if user_id
+    sign_in(id: user_id) if user_id
     get "/account/settings/account"
     @doc = Nokolexbor::HTML(last_response.body)
   end
