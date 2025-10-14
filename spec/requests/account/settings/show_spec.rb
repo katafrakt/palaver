@@ -2,7 +2,7 @@ require "nokolexbor"
 
 RSpec.describe "GET /account/settings/account", type: :request do
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
-  let(:profile) { Fixtures::Discussion.profile(account_id: user.id) }
+  let(:profile) { Fixtures::Discussion.profile(email: "test@test.com") }
 
   before do
     sign_in(id: user_id) if user_id

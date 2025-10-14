@@ -1,6 +1,6 @@
 RSpec.describe "GET /profile", type: :request do
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
-  let(:profile) { Fixtures::Discussion.profile(account_id: user.id) }
+  let(:profile) { Fixtures::Discussion.profile(email: "test@test.com") }
 
   context "as a user without profile set up" do
     before { sign_in(user: user) }
