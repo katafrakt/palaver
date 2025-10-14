@@ -28,7 +28,7 @@ module Ui
                     div(class: "navbar-item has-dropdown is-hoverable") do
                       a(class: "navbar-link") { current_user.email }
                       div(class: "navbar-dropdown") do
-                        a(class: "navbar-item", href: "/account/settings") { "Account settings" }
+                        a(class: "navbar-item", href: "/account/settings/account") { "Account settings" }
                         a(class: "navbar-item", href: "/profile") { "My Profile" }
                         a(class: "navbar-item", href: "/account/sign_out") { "Sign out" }
                       end

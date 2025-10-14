@@ -1,12 +1,12 @@
 require "nokolexbor"
 
-RSpec.describe "GET /account/settings", type: :request do
+RSpec.describe "GET /account/settings/account", type: :request do
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
   let(:profile) { Fixtures::Discussion.profile(account_id: user.id) }
 
   before do
-    env "rack.session", {usi: user_id}
-    get "/account/settings"
+    env("rack.session", {usi: user_id}) if user_id
+    get "/account/settings/account"
     @doc = Nokolexbor::HTML(last_response.body)
   end
 
@@ -18,8 +18,8 @@ RSpec.describe "GET /account/settings", type: :request do
     end
 
     specify "I cannot change my email" do
-      nickname_input = @doc.xpath("//input[@name='email']").first
-      expect(nickname_input.attributes["disabled"]).not_to be_nil
+      email_input = @doc.xpath("//input[@name='email']").first
+      expect(email_input.attributes["disabled"]).not_to be_nil
     end
   end
 
@@ -27,7 +27,6 @@ RSpec.describe "GET /account/settings", type: :request do
     let(:user_id) { profile.account_id }
 
     specify "I see a page with my nickname included" do
-      get "/account/settings"
       expect(last_response.body).to include(profile.nickname)
     end
 
@@ -39,6 +38,15 @@ RSpec.describe "GET /account/settings", type: :request do
     specify "I cannot change my email" do
       nickname_input = @doc.xpath("//input[@name='email']").first
       expect(nickname_input.attributes["disabled"]).not_to be_nil
+    end
+  end
+
+  describe "as an anonymous user" do
+    let(:user_id) { nil }
+
+    specify "I'm redirected to root" do
+      get "/account/settings/account"
+      expect(last_response.status).to eq(302)
     end
   end
 end

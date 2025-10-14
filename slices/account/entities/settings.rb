@@ -7,14 +7,12 @@ class Account::Entities::Settings < ROM::Struct
   attribute :user_id, Integer
   attribute :email, String
   attribute :nickname, String.optional
-  attribute :avatar_data, String.optional
 
   def self.from_rom(user)
     new(
       user_id: user.id,
       email: user.email,
-      nickname: user.profile&.nickname,
-      avatar_data: user.profile&.avatar_data
+      nickname: user.profile&.nickname
     )
   end
 end
