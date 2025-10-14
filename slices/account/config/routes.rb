@@ -8,7 +8,8 @@ module Account
     post "/sign_in", to: "sign_in.create"
     get "/sign_out", to: "sign_in.destroy"
 
-    get "/settings", to: "settings.show"
-    post "/settings", to: "settings.save"
+    get "/settings/:tab", to: "settings.show"
+    post "/settings/account", to: "settings.update_account"
+    post "/settings/profile", to: "settings.update_profile"
   end
 end

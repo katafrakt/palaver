@@ -1,9 +1,7 @@
-RSpec.describe "POST /account/settings", type: :request do
-  let(:url) { "/account/settings" }
-
+RSpec.describe "POST /account/settings/account", type: :request do
   def perform_request(params = {})
-    default_params = {avatar: "", current_password: "", new_password: "", new_password_confirmation: ""}
-    post url, default_params.merge(params)
+    default_params = {current_password: "", new_password: "", new_password_confirmation: ""}
+    post "/account/settings/account", default_params.merge(params)
   end
 
   context "as anonymous user" do
@@ -52,34 +50,6 @@ RSpec.describe "POST /account/settings", type: :request do
       perform_request current_password: password, new_password: "123123123", new_password_confirmation: "123123123"
       reloaded_user = Account::Repositories::Account.new.by_id(user.id)
       expect(Argon2::Password.verify_password("123123123", reloaded_user.password_hash)).to eq(true)
-    end
-
-    it "updates the avatar in the profile" do
-      file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
-      perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg")
-      profile = Account::Repositories::Profile.new.by_account_id(user.id)
-      expect(profile.avatar_data).not_to be_nil
-      data = JSON.parse(profile.avatar_data)
-      expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
-    end
-  end
-
-  context "as a signed in user without a profile yet" do
-    let(:password) { "12345678" }
-    let(:user) { Fixtures::Account.user(password:) }
-
-    before do
-      env "rack.session", {usi: user.id}
-    end
-
-    it "updates name and avatar in the profile" do
-      file_path = File.join(Hanami.app.root, "spec", "support", "files", "cat_small.jpg")
-      perform_request avatar: Rack::Test::UploadedFile.new(file_path, "image/jpeg"), nickname: "John"
-      profile = Account::Repositories::Profile.new.by_account_id(user.id)
-      expect(profile.avatar_data).not_to be_nil
-      data = JSON.parse(profile.avatar_data)
-      expect(data["metadata"]["filename"]).to eq("cat_small.jpg")
-      expect(profile.nickname).to eq("John")
     end
   end
 end
