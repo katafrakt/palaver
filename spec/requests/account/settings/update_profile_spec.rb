@@ -13,10 +13,10 @@ RSpec.describe "POST /account/settings/profile", type: :request do
 
   context "as signed in user" do
     let(:password) { "12345678" }
-    let(:user) { Fixtures::Account.user(password:) }
+    let(:user) { Factories::Account.user(password:) }
 
     before do
-      Fixtures::Account.profile(user.id)
+      Factories::Account.profile(user.id)
       sign_in(user: user)
     end
 

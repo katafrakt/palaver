@@ -1,5 +1,5 @@
 RSpec.describe "GET /cat/:id", type: :request do
-  let(:author) { Fixtures::Discussion.profile(email: "author@test.com") }
+  let(:author) { Factories::Discussion.profile(email: "author@test.com") }
   let(:repo) { Discussion::Container["repositories.category"] }
   let(:thread_repo) { Discussion::Container["repositories.thread"] }
 
@@ -15,7 +15,7 @@ RSpec.describe "GET /cat/:id", type: :request do
 
   specify "I can see threads when they exist in the category" do
     category = repo.create(name: "abcd")
-    Fixtures::Discussion.thread(
+    Factories::Discussion.thread(
       title: "A test thread", content: "Testiiiing",
       category:, author:
     )

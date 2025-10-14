@@ -8,7 +8,7 @@ RSpec.describe "GET #{url}", type: :request do
   end
 
   specify "I am redirected away when already signed in" do
-    user = Fixtures::Account.user
+    user = Factories::Account.user
     sign_in(user: user)
     get url
     expect(last_response.status).to eq(302)

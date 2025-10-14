@@ -1,10 +1,10 @@
 RSpec.describe "POST /th/:id/reply", type: :request do
   let(:user) { Account::Container["repositories.account"].create(email: "test@test.com") }
-  let(:author) { Fixtures::Discussion.profile(email: "test@test.com") }
+  let(:author) { Factories::Discussion.profile(email: "test@test.com") }
 
   let(:thread) do
-    category = Fixtures::Discussion.category
-    Fixtures::Discussion.thread(category:, author:)
+    category = Factories::Discussion.category
+    Factories::Discussion.thread(category:, author:)
   end
 
   context "as a signed in user" do
@@ -21,7 +21,7 @@ RSpec.describe "POST /th/:id/reply", type: :request do
 
     context "for locked thread" do
       before do
-        Fixtures::Moderation.lock_thread(thread.id)
+        Factories::Moderation.lock_thread(thread.id)
       end
 
       specify "I see a flash message that the thread is locked" do

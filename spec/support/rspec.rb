@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "helpers"
-require_relative "fixtures/account"
-require_relative "fixtures/discussion"
-require_relative "fixtures/moderation"
+require_relative "factories/account"
+require_relative "factories/discussion"
+require_relative "factories/moderation"
 
 RSpec.configure do |config|
   config.extend RSpecHelpers::ClassMethods
