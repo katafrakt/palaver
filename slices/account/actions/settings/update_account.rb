@@ -18,7 +18,6 @@ module Account
             optional(:current_password).maybe(:string)
             optional(:new_password).maybe(:string, min_size?: 8)
             optional(:new_password_confirmation).maybe(:string, min_size?: 8)
-            optional(:nickname).maybe(:string)
           end
 
           rule(:new_password_confirmation, :new_password) do

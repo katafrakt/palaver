@@ -8,6 +8,7 @@ module Account
 
         params do
           optional(:avatar)
+          optional(:nickname).maybe(:string)
         end
 
         def handle(req, res)

@@ -12,7 +12,6 @@ class Account::Views::Settings::Auth < Palaver::View
       render Ui::Components::Form.new(url: "/account/settings/account", multipart: true) do |form|
         form.csrf(csrf_token)
         form.horizontal_field(label: "Email", name: "email", value: @settings.email, disabled: true)
-        form.horizontal_field(label: "Name", name: "nickname", value: @settings.nickname, disabled: !@settings.nickname.nil?)
 
         form.section_title("Password reset", pad_top: true)
         form.horizontal_field(label: "Current password", name: "current_password", type: :password,
