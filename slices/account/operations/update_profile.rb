@@ -7,6 +7,8 @@ module Account
         profile = step ensure_profile_exists(user)
         step update_profile_attributes(profile, attrs)
         step set_avatar(profile, attrs[:avatar])
+        updated_profile = repo.by_account_id(user.id)
+        Success(updated_profile)
       end
 
       private
@@ -28,6 +30,12 @@ module Account
       def update_profile_attributes(profile, attrs)
         allowed_keys = [:nickname]
         filtered_attrs = attrs.slice(*allowed_keys)
+
+        # Don't allow nickname updates if nickname is already set
+        if profile.nickname && filtered_attrs.key?(:nickname)
+          filtered_attrs.delete(:nickname)
+        end
+
         repo.update(profile.id, filtered_attrs) unless filtered_attrs.empty?
         Success()
       end

@@ -6,13 +6,11 @@ class Account::Entities::Settings < ROM::Struct
 
   attribute :user_id, Integer
   attribute :email, String
-  attribute :nickname, String.optional
 
   def self.from_rom(user)
     new(
       user_id: user.id,
-      email: user.email,
-      nickname: user.profile&.nickname
+      email: user.email
     )
   end
 end

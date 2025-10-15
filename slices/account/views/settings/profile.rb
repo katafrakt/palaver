@@ -13,6 +13,8 @@ module Account
             render Ui::Components::Form.new(url: "/account/settings/profile", multipart: true) do |form|
               form.csrf(csrf_token)
 
+              form.horizontal_field(label: "Nickname", name: "nickname", value: @profile&.nickname, disabled: !@profile&.nickname.nil?)
+
               form.section_title("Avatar")
 
               div(class: "field is-horizontal") do
@@ -21,9 +23,9 @@ module Account
                 end
 
                 div(class: "field-body") do
-                  if @profile.avatar_data
+                  if @profile&.avatar_data
                     p(class: "image is-128x128 mb-3 mt-3") do
-                      img(src: @profile.avatar.url)
+                      img(src: @profile&.avatar&.url)
                     end
                   end
                 end

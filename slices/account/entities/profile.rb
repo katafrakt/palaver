@@ -7,6 +7,7 @@ module Account
       include Palaver::AvatarUploader::Attachment(:avatar)
 
       attribute :id, Integer
+      attribute :nickname, String.optional
       attribute :avatar_data, String.optional
     end
   end
