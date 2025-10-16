@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "correo"
+require "phlex"
+
 class Account::Actions::Registration::Create < Account::Action
   include Account::Deps["operations.register"]
 
@@ -23,6 +26,7 @@ class Account::Actions::Registration::Create < Account::Action
 
     case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
+      Account::Emails::PostRegister.new(account:).deliver
       res.render(Account::Views::Registration::AfterCreate, account:)
     else
       email_error = "must be unique"

@@ -1,3 +1,10 @@
+PATH
+  remote: gems/correo
+  specs:
+    correo (0.1.0)
+      dry-configurable
+      mail
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -184,18 +191,33 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.6.6)
     lumberjack (1.2.9)
+    mail (2.8.1)
+      mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
+    mini_mime (1.1.5)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (3.0.4)
       hansi (~> 0.2.0)
       mustermann (= 3.0.4)
     nenv (0.3.0)
+    net-imap (0.5.10)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.2)
+      timeout
+    net-smtp (0.5.1)
+      net-protocol
     nio4r (2.5.9)
     nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
@@ -338,6 +360,7 @@ GEM
     stringex (2.8.6)
     stringio (3.1.7)
     thor (1.2.2)
+    timeout (0.4.3)
     transproc (1.1.1)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
@@ -352,6 +375,7 @@ PLATFORMS
 DEPENDENCIES
   argon2 (~> 2.1)
   base64
+  correo!
   database_cleaner-sequel
   dotenv (~> 2.7)
   dry-monads
