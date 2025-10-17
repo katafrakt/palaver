@@ -2,6 +2,7 @@
 
 require_relative "correo/version"
 require_relative "correo/email"
+require_relative "correo/mailer"
 require_relative "correo/configuration"
 require "dry/configurable"
 
