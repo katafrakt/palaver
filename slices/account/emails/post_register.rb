@@ -1,15 +1,17 @@
 module Account
   module Emails
     class PostRegister < Account::Email
-      def initialize(account:)
-        @account = account
-      end
-
-      def to = @account.email
+      def to = nil
 
       def from = "accounts@palaver.dev"
 
       def subject = "Your account has been created"
+
+      def build(account:)
+        super.tap do |mail|
+          mail.to = account.email
+        end
+      end
 
       class Template < Phlex::HTML
         def initialize(account:)
@@ -28,10 +30,7 @@ module Account
           end
         end
       end
-
-      def html_part
-        Template.new(account: @account).call
-      end
+      self.html_template = Template
     end
   end
 end

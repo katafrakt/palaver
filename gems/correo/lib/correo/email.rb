@@ -1,7 +1,12 @@
 require "mail"
+require "hanami/utils/class_attribute"
 
 module Correo
   class Email
+    include Hanami::Utils::ClassAttribute
+
+    class_attribute :html_template
+
     def to
       raise NotImplementedError
     end
@@ -16,13 +21,15 @@ module Correo
 
     def html_part = nil
 
-    def deliver
-      html_content = html_part
+    def build(args)
+      # if class.html_template s not avaiable, this could fall back to Hanami's default
+      # template lookup logic
+      html_part = self.class.html_template.new(**args).call if self.class.html_template
 
       Mail.new.tap do |mail|
-        mail.delivery_method(Correo.config.delivery_method)
         mail.to = to
         mail.from = from
+        mail.subject = subject
 
         if html_part
           mail.html_part = Mail::Part.new do
@@ -30,7 +37,7 @@ module Correo
             body html_part
           end
         end
-      end.deliver
+      end
     end
   end
 end
