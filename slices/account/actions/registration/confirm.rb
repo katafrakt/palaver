@@ -13,9 +13,9 @@ class Account::Actions::Registration::Confirm < Account::Action
 
     case result
     in Failure(:invalid_params)
-      handle_failure("Incorrect confirmation link")
+      handle_failure(res, "Incorrect confirmation link")
     in Failure(:user_not_found)
-      handle_failure("Incorrect confirmation link", status: 404)
+      handle_failure(res, "Incorrect confirmation link", status: 404)
     in Failure(:already_confirmed)
       handle_failure(res, "User is already confirmed")
     in Failure(_)
