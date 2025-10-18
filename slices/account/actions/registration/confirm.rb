@@ -12,13 +12,15 @@ class Account::Actions::Registration::Confirm < Account::Action
     end
 
     case result
-    when Failure(:invalid_params)
+    in Failure(:invalid_params)
       handle_failure("Incorrect confirmation link")
-    when Failure(:user_not_found)
+    in Failure(:user_not_found)
       handle_failure("Incorrect confirmation link", status: 404)
-    when Failure(:already_confirmed)
+    in Failure(:already_confirmed)
       handle_failure(res, "User is already confirmed")
-    when Success()
+    in Failure(_)
+      handle_failure(res, "Unexpected error then confirming the account")
+    in Success(_)
       res.flash[:success] = "User confirmed. You can now sign in."
       res.redirect_to "/account/sign_in"
     end
