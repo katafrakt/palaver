@@ -68,10 +68,11 @@ RSpec.describe "POST /account/register", type: :request do
   end
 
   context "success" do
-    specify "I see a success message" do
+    specify "I am redirected to root" do
       post url, params
-      expect(last_response).to be_successful
-      expect(last_response.body).to include("Thank you for registering")
+
+      expect(last_response.status).to eq(302)
+      expect(last_response.headers["Location"]).to eq("/")
     end
   end
 

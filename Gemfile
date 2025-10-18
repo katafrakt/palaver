@@ -28,6 +28,8 @@ gem "base64"
 gem "stringex"
 gem "dry-operation", "~> 1.0"
 
+gem "correo", path: "gems/correo"
+
 group :cli, :development do
   gem "hanami-reloader"
 end

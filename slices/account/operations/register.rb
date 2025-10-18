@@ -1,11 +1,18 @@
 module Account
   module Operations
     class Register < Account::Operation
-      include Account::Deps[repo: "repositories.account", hasher: "utils.hasher"]
+      include Deps[
+        "mailer",
+        registration_email: "emails.post_register",
+        repo: "repositories.account",
+        hasher: "utils.hasher"
+              ]
 
       def call(email:, password:)
         confirmation_token = step generate_confirmation_token
-        step create_account(email:, password:, confirmation_token:)
+        account = step create_account(email:, password:, confirmation_token:)
+        step send_email(account)
+        account
       end
 
       private
@@ -25,6 +32,12 @@ module Account
         Success(account)
       rescue ROM::SQL::UniqueConstraintError
         Failure(:email_not_unique)
+      end
+
+      def send_email(account)
+        email = registration_email.build(account:)
+        mailer.deliver(email)
+        Success()
       end
     end
   end
