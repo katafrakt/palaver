@@ -25,7 +25,7 @@ module Account
 
           p do
             plain "In order to confirm your account, please click on the following link: "
-            a(href: "http://localhost:2300/account/confirm?id=#{@account.id}&token=#{@account.confirmation_token}") { "confirm account" }
+            a(href: "#{Hanami.app["settings"].email_links_base}/account/confirm?id=#{@account.id}&token=#{@account.confirmation_token}") { "confirm account" }
             plain "."
           end
         end

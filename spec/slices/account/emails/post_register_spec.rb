@@ -24,6 +24,6 @@ RSpec.describe Account::Emails::PostRegister do
 
   it "includes both id and token in confirmation URL" do
     html_content = email.html_part.body.to_s
-    expect(html_content).to include("http://localhost:2300/account/confirm?id=123&token=abc123token456")
+    expect(html_content).to include("http://test.localhost/account/confirm?id=123&token=abc123token456")
   end
 end
