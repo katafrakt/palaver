@@ -23,7 +23,8 @@ class Account::Actions::Registration::Create < Account::Action
 
     case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
-      res.render(Account::Views::Registration::AfterCreate, account:)
+      res.flash[:success] = "Your account has been created. Check your email inbox for confirmation instructions."
+      res.redirect("/")
     else
       email_error = "must be unique"
       res.status = 422
