@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require "correo"
-require "phlex"
-
 class Account::Actions::Registration::Create < Account::Action
-  include Account::Deps["operations.register", "emails.post_register", "mailer"]
+  include Account::Deps["operations.register"]
 
   require_signed_out_user!
 
@@ -26,8 +23,6 @@ class Account::Actions::Registration::Create < Account::Action
 
     case register.call(email: req.params[:email], password: req.params[:password])
     in Success(account)
-      email = post_register.build(account:)
-      mailer.deliver(email)
       res.render(Account::Views::Registration::AfterCreate, account:)
     else
       email_error = "must be unique"
