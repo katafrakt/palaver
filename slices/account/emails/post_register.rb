@@ -1,17 +1,11 @@
 module Account
   module Emails
     class PostRegister < Account::Email
-      def to = nil
+      def to(**args) = args.fetch(:account).email
 
-      def from = "accounts@palaver.dev"
+      def from(_) = "accounts@palaver.dev"
 
-      def subject = "Your account has been created"
-
-      def build(account:)
-        super.tap do |mail|
-          mail.to = account.email
-        end
-      end
+      def subject(_) = "Your account has been created"
 
       class Template < Phlex::HTML
         def initialize(account:)

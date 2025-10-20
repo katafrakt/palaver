@@ -14,7 +14,7 @@ RSpec.describe Account::Operations::Register do
   end
 
   it "sends a registration email" do
-    result = operation.call(email: "test@test.com", password: "123456")
+    operation.call(email: "test@test.com", password: "123456")
     email = Mail::TestMailer.deliveries.first
     expect(email).not_to be_nil
     expect(email.subject).to eq("Your account has been created")
