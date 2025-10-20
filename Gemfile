@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source "https://gems.coop"
 
 gem "rake"
 
-HANAMI_VERSION = "2.3.0.beta1"
+HANAMI_VERSION = "2.3.0.beta2"
 gem "hanami", HANAMI_VERSION
 gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
