@@ -8,6 +8,7 @@ module Discussion
       attribute :thread_id, Integer
       attribute :author, Discussion::Entities::Author
       attribute :content, String
+      attribute :message, Discussion::Entities::Message
     end
   end
 end

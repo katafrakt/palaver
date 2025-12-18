@@ -12,11 +12,21 @@ RSpec.describe "POST /th/:id/reply", type: :request do
       sign_in(user: user)
     end
 
-    specify "I am redirected to the thread" do
+    specify "I am redirected to the last page with anchor to my reply" do
       post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply"
 
       expect(last_response.status).to eq(302)
-      expect(last_response.headers["Location"]).to eq("/th/#{thread_slug(thread)}")
+      expect(last_response.headers["Location"]).to match(%r{^/th/#{thread_slug(thread)}\?page=1#message-\d+$})
+    end
+
+    specify "I am redirected to page 2 when thread has 15+ messages" do
+      # Create 15 existing replies to push new reply to page 2
+      15.times { |i| Factories::Discussion.message(thread: thread, author: author, content: "Reply #{i + 1}") }
+
+      post "/th/#{thread_slug(thread)}/reply", reply: "This is a reply on page 2"
+
+      expect(last_response.status).to eq(302)
+      expect(last_response.headers["Location"]).to match(%r{^/th/#{thread_slug(thread)}\?page=2#message-\d+$})
     end
 
     context "for locked thread" do
