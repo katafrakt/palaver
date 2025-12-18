@@ -35,7 +35,7 @@ class Discussion::Views::Thread::Show < Palaver::View
   private
 
   def message_row(message)
-    article(class: "mt-5 mb-5 box columns") do
+    article(id: "message-#{message.id}", class: "mt-5 mb-5 box columns") do
       div(class: "column is-one-quarter") do
         p(class: "is-size-4") do
           strong { message.author.nickname }
@@ -89,7 +89,10 @@ class Discussion::Views::Thread::Show < Palaver::View
         @pager.total_pages.times do |pg|
           page = pg + 1
           li do
-            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}", aria_label: "Go to page #{page}", href: "/th/#{thread_slug}?page=#{page}") { plain page }
+            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}",
+              aria_label: "Go to page #{page}", href: "/th/#{thread_slug}?page=#{page}") do
+              plain page
+            end
           end
         end
       end
