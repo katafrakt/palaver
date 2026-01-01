@@ -25,6 +25,6 @@ class Account::Repositories::Account < Palaver::DB::Repo[:accounts]
 
   def settings_by_user_id(id)
     accounts.by_pk(id).combine(:profile).one
-      .then { Account::Entities::Settings.from_rom(_1) }
+      .then { Account::Entities::Settings.from_rom(it) }
   end
 end

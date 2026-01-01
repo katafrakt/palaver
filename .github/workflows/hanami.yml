@@ -9,9 +9,9 @@ name: Hanami
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['3.2', '3.3', '3.4']
-    
+        ruby-version: ["3.4", "4.0"]
+
     services:
       postgres:
-        image: postgres:12.7
+        image: postgres:16.11
         env:
           POSTGRES_USER: palaver
           POSTGRES_DB: palaver_test
@@ -37,28 +37,28 @@ jobs:
         ports: ["5432:5432"]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Setup test database
-      run: bundle exec hanami db migrate --no-dump
-    - name: npm install
-      run: npm install
-    - name: Compile assets
-      run: bundle exec hanami assets compile
-    - name: Run tests
-      run: bundle exec rspec
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v3
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-    - name: Check style
-      run: bundle exec standardrb
-    - name: Run seeds
-      run: bundle exec rake db:seeds
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+        # change this to (see https://github.com/ruby/setup-ruby#versioning):
+        # uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Setup test database
+        run: bundle exec hanami db migrate --no-dump
+      - name: npm install
+        run: npm install
+      - name: Compile assets
+        run: bundle exec hanami assets compile
+      - name: Run tests
+        run: bundle exec rspec
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Check style
+        run: bundle exec standardrb
+      - name: Run seeds
+        run: bundle exec rake db:seeds

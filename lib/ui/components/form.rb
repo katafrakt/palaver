@@ -4,6 +4,7 @@ module Ui
   module Components
     class Form < Phlex::HTML
       include Ui::Form
+
       attr_reader :url
 
       def initialize(url:, multipart: false)

@@ -1,5 +1,6 @@
 RSpec.describe Account::Operations::ConfirmUser do
   include Dry::Monads[:result]
+
   subject(:operation) { described_class.new }
   let(:repo) { double(:repo) }
   stub(Account::Container, "repositories.account") { repo }

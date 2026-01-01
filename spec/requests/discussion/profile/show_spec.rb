@@ -8,7 +8,7 @@ RSpec.describe "GET /profile", type: :request do
     specify "I'm redirected to account settings page" do
       get "/profile"
       expect(last_response.status).to eq(302)
-      expect(last_response.header["Location"]).to eq("/account/settings")
+      expect(last_response.headers["Location"]).to eq("/account/settings")
     end
   end
 
