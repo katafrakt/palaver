@@ -21,7 +21,7 @@ module Discussion
           .group(categories[:id])
           .order(categories[:id].asc)
           .to_a
-          .map { to_category(_1) }
+          .map { to_category(it) }
       end
 
       def recent_threads
@@ -31,7 +31,7 @@ module Discussion
           .group(threads[:id], Sequel[:last_messages][:posted_at])
           .order(Sequel[:last_messages][:posted_at].desc)
           .to_a
-          .map { to_thread(_1) }
+          .map { to_thread(it) }
       end
 
       def new_threads
@@ -41,7 +41,7 @@ module Discussion
           .group(threads[:id], Sequel[:first_messages][:posted_at])
           .order(Sequel[:first_messages][:posted_at].desc)
           .to_a
-          .map { to_thread(_1) }
+          .map { to_thread(it) }
       end
 
       private def to_thread(relation)

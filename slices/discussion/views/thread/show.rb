@@ -89,7 +89,7 @@ class Discussion::Views::Thread::Show < Palaver::View
         @pager.total_pages.times do |pg|
           page = pg + 1
           li do
-            a(class: "pagination-link #{(page == @pager.current_page) ? "is-current" : nil}",
+            a(class: "pagination-link #{"is-current" if page == @pager.current_page}",
               aria_label: "Go to page #{page}", href: "/th/#{thread_slug}?page=#{page}") do
               plain page
             end
