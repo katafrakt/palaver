@@ -18,7 +18,7 @@ module Ui
             container do
               div(class: "navbar-brand") do
                 div(class: "navbar-item") do
-                  a(href: "/") { "Home" }
+                  a(href: "/") { t("nav.home") }
                 end
               end
 
@@ -28,13 +28,13 @@ module Ui
                     div(class: "navbar-item has-dropdown is-hoverable") do
                       a(class: "navbar-link") { current_user.email }
                       div(class: "navbar-dropdown") do
-                        a(class: "navbar-item", href: "/account/settings/account") { "Account settings" }
-                        a(class: "navbar-item", href: "/profile") { "My Profile" }
-                        a(class: "navbar-item", href: "/account/sign_out") { "Sign out" }
+                        a(class: "navbar-item", href: "/account/settings/account") { t("nav.account_settings") }
+                        a(class: "navbar-item", href: "/profile") { t("nav.my_profile") }
+                        a(class: "navbar-item", href: "/account/sign_out") { t("nav.sign_out") }
                       end
                     end
                   else
-                    a(href: "/account/sign_in", class: "navbar-item") { "Sign in" }
+                    a(href: "/account/sign_in", class: "navbar-item") { t("nav.sign_in") }
                   end
                 end
               end

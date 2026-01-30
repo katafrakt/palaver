@@ -5,14 +5,14 @@ source "https://gem.coop"
 gem "rake"
 
 HANAMI_VERSION = "2.3.0"
-gem "hanami", "2.3.1"
+gem "hanami", github: "hanami/hanami", branch: "i18n"
 gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
 gem "hanami-utils", HANAMI_VERSION
 gem "hanami-validations", HANAMI_VERSION
 gem "hanami-assets", HANAMI_VERSION
 gem "hanami-db", HANAMI_VERSION
-gem "hanami-cli", "2.3.2"
+gem "hanami-cli", "2.3.4"
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
@@ -28,6 +28,7 @@ gem "hashids"
 gem "base64"
 gem "stringex"
 gem "dry-operation", "~> 1.0"
+gem "i18n"
 
 gem "correo", path: "gems/correo"
 

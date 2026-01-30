@@ -1,3 +1,22 @@
+GIT
+  remote: https://github.com/hanami/hanami.git
+  revision: 512bfd997f09118bf50f874bf2426c4073c401f0
+  branch: i18n
+  specs:
+    hanami (2.3.2)
+      bundler (>= 2.0)
+      dry-configurable (~> 1.0, >= 1.2.0, < 2)
+      dry-core (~> 1.0, < 2)
+      dry-inflector (~> 1.0, >= 1.1.0, < 2)
+      dry-logger (~> 1.2, < 2)
+      dry-monitor (~> 1.0, >= 1.0.1, < 2)
+      dry-system (~> 1.1)
+      hanami-cli (>= 2.3.1)
+      hanami-utils (>= 2.3.0)
+      json (>= 2.7.2)
+      rack-session
+      zeitwerk (~> 2.6)
+
 PATH
   remote: gems/correo
   specs:
@@ -102,6 +121,7 @@ GEM
     erb (6.0.1)
     faker (3.5.3)
       i18n (>= 1.8.11, < 2)
+    ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x86_64-linux-gnu)
     ffi-compiler (1.3.2)
       ffi (>= 1.15.5)
@@ -124,26 +144,13 @@ GEM
       guard (~> 2.14)
       guard-compat (~> 1.2)
       puma (>= 4.0, < 8)
-    hanami (2.3.1)
-      bundler (>= 1.16, < 3)
-      dry-configurable (~> 1.0, >= 1.2.0, < 2)
-      dry-core (~> 1.0, < 2)
-      dry-inflector (~> 1.0, >= 1.1.0, < 2)
-      dry-logger (~> 1.2, < 2)
-      dry-monitor (~> 1.0, >= 1.0.1, < 2)
-      dry-system (~> 1.1)
-      hanami-cli (>= 2.3.1)
-      hanami-utils (>= 2.3.0)
-      json (>= 2.7.2)
-      rack-session
-      zeitwerk (~> 2.6)
     hanami-assets (2.3.0)
       zeitwerk (~> 2.6)
-    hanami-cli (2.3.2)
-      bundler (~> 2.1)
+    hanami-cli (2.3.4)
+      bundler (>= 2.1)
       dry-cli (~> 1.0, >= 1.1.0)
-      dry-files (~> 1.0, >= 1.0.2, < 2)
-      dry-inflector (~> 1.0, < 2)
+      dry-files (~> 1.0, >= 1.0.2)
+      dry-inflector (~> 1.0)
       irb
       rackup
       rake (~> 13.0)
@@ -232,6 +239,7 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.3-arm64-darwin)
     pg (1.6.3-x86_64-linux)
     phlex (2.3.1)
       zeitwerk (~> 2.7)
@@ -393,9 +401,9 @@ DEPENDENCIES
   dry-types (~> 1.6)
   faker
   guard-puma
-  hanami (= 2.3.1)
+  hanami!
   hanami-assets (= 2.3.0)
-  hanami-cli (= 2.3.2)
+  hanami-cli (= 2.3.4)
   hanami-controller (= 2.3.0)
   hanami-db (= 2.3.0)
   hanami-reloader
@@ -404,6 +412,7 @@ DEPENDENCIES
   hanami-utils (= 2.3.0)
   hanami-validations (= 2.3.0)
   hashids
+  i18n
   marcel (~> 1.1.0)
   nokolexbor
   pg

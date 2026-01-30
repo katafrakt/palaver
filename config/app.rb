@@ -22,6 +22,9 @@ module Palaver
     # disable default view inferrer
     config.actions.view_name_inferrer = FakeViewNameInferrer
 
-    config.shared_app_component_keys += ["mailer"]
+    config.shared_app_component_keys += ["mailer", "i18n"]
+
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, :pl]
   end
 end

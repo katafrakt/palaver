@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "stringex"
+Stringex::Localization.backend = :internal
 
 module Discussion
   module Utils
