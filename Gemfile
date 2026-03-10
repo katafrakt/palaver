@@ -4,15 +4,15 @@ source "https://gem.coop"
 
 gem "rake"
 
-HANAMI_VERSION = "2.3.0"
-gem "hanami", "2.3.1"
+HANAMI_VERSION = ">= 2.3"
+gem "hanami", HANAMI_VERSION
 gem "hanami-controller", HANAMI_VERSION
 gem "hanami-router", HANAMI_VERSION
 gem "hanami-utils", HANAMI_VERSION
 gem "hanami-validations", HANAMI_VERSION
 gem "hanami-assets", HANAMI_VERSION
 gem "hanami-db", HANAMI_VERSION
-gem "hanami-cli", "2.3.2"
+gem "hanami-cli", HANAMI_VERSION
 
 gem "argon2", "~> 2.1"
 gem "dry-monads"
