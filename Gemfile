@@ -27,6 +27,9 @@ gem "verifica"
 gem "hashids"
 gem "base64"
 gem "stringex"
+# required by stringex in Ruby 4.0
+gem "ostruct"
+
 gem "dry-operation", "~> 1.0"
 
 gem "correo", path: "gems/correo"
