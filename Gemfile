@@ -4,19 +4,15 @@ source "https://gem.coop"
 
 gem "rake"
 
-HANAMI_VERSION = ">= 2.3"
-gem "hanami", HANAMI_VERSION
-gem "hanami-controller", HANAMI_VERSION
-gem "hanami-router", HANAMI_VERSION
-gem "hanami-utils", HANAMI_VERSION
-gem "hanami-validations", HANAMI_VERSION
-gem "hanami-assets", HANAMI_VERSION
-gem "hanami-db", HANAMI_VERSION
-gem "hanami-cli", HANAMI_VERSION
+gem "hanami", "3.0.0.rc1"
+gem "hanami-action", "3.0.0.rc1"
+gem "hanami-router", "3.0.0.rc1"
+gem "hanami-utils", "3.0.0.rc1"
+gem "hanami-assets", "3.0.0.rc1"
+gem "hanami-db", "3.0.0.rc1"
+gem "hanami-cli", "3.0.0.rc1"
 
 gem "argon2", "~> 2.1"
-gem "dry-monads"
-gem "dry-types", "~> 1.6"
 gem "pg"
 gem "phlex", "~> 2.3.0"
 gem "puma"
@@ -28,18 +24,22 @@ gem "hashids"
 gem "base64"
 gem "diaeresis", git: "https://codeberg.org/katafrakt/diaeresis.git"
 
-gem "dry-operation", "~> 1.0"
+source "https://gem.coop/@dry" do
+  gem "dry-types", "~> 1.7"
+  gem "dry-operation", ">= 1.0.1"
+  gem "dry-validation", "~> 1.11"
+end
 
 gem "correo", path: "gems/correo"
 
 group :cli, :development do
-  gem "hanami-reloader"
+  gem "hanami-reloader", "3.0.0.rc1"
 end
 
 group :cli, :development, :test do
   gem "dotenv", "~> 2.7"
   gem "faker"
-  gem "hanami-rspec", HANAMI_VERSION
+  gem "hanami-rspec", "3.0.0.rc1"
   gem "standard"
 end
 
