@@ -13,10 +13,10 @@ module Discussion
           .left_join(:threads, {category_id: :id})
           .left_join(:messages, {thread_id: :id})
           .select_append {
-          [
-            integer.count(Sequel[:threads][:id]).as(:thread_count),
-            integer.count(Sequel[:messages][:id]).as(:message_count)
-          ]
+            [
+              integer.count(Sequel[:threads][:id]).as(:thread_count),
+              integer.count(Sequel[:messages][:id]).as(:message_count)
+            ]
         }
           .group(categories[:id])
           .order(categories[:id].asc)

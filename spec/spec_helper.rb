@@ -17,7 +17,6 @@ if ENV["GITHUB_ACTIONS"]
   SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 end
 
-require "pathname"
 SPEC_ROOT = Pathname(__dir__).realpath.freeze
 
 ENV["HANAMI_ENV"] ||= "test"

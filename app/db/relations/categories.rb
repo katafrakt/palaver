@@ -15,10 +15,10 @@ module Palaver
           .left_join(:messages, thread_id: :id)
           .group { `categories.id` }
           .select_append {
-          [
-            function(:count, `messages.id`).as(:message_count),
-            function(:count, `threads.title`).distinct.as(:thread_count)
-          ]
+            [
+              function(:count, `messages.id`).as(:message_count),
+              function(:count, `threads.title`).distinct.as(:thread_count)
+            ]
         }
       end
     end
