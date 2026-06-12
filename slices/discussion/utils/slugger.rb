@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 require "hashids"
+require "diaeresis"
 
 module Discussion
   module Utils
     class Slugger
-      include Deps["utils.slug_provider"]
-
       def to_slug(num, string, id)
         hashids = Hashids.new(ENV["HASHIDS_SALT"])
         hash = hashids.encode(num, id)
-        "#{slug_provider.call(string)}-#{hash}"
+        slug = Diaeresis.to_url(string)
+        "#{slug}-#{hash}"
       end
 
       def decode_id(slug)
