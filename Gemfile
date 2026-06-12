@@ -26,9 +26,7 @@ gem "shrine-rom"
 gem "verifica"
 gem "hashids"
 gem "base64"
-gem "stringex"
-# required by stringex in Ruby 4.0
-gem "ostruct"
+gem "diaeresis", git: "https://codeberg.org/katafrakt/diaeresis.git"
 
 gem "dry-operation", "~> 1.0"
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "stringex/unidecoder"
 require "hashids"
 
 class Discussion::Entities::Category < Dry::Struct
