@@ -8,20 +8,18 @@ class Discussion::Views::Home::Components::Tabs < Phlex::HTML
   end
 
   def view_template
-    div(class: "tabs pl-5 pr-5") do
-      ul do
-        tab("/", "Categories", :categories)
-        tab("/recent", "Recently updated", :recent)
-        tab("/new_threads", "New threads", :new)
-      end
+    ul(class: "nav nav-underline my-4") do
+      tab("/", "Categories", :categories)
+      tab("/recent", "Recently updated", :recent)
+      tab("/new_threads", "New threads", :new)
     end
   end
 
   def tab(url, label, type)
-    class_string = (type == @selected) ? "is-active" : ""
+    class_string = (type == @selected) ? " active" : ""
 
-    li(class: class_string) do
-      a(href: url) { label }
+    li(class: "nav-item") do
+      a(href: url, class: "nav-link#{class_string}") { label }
     end
   end
 end

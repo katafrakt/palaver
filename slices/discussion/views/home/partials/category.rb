@@ -25,24 +25,30 @@ class Discussion::Views::Home::Partials::Category < Phlex::HTML
   def view_template
     slug = @slugger.to_slug(Discussion::Entities::Category::HASHIDS_NUM, category.name, category.id)
 
-    article(class: "category mb-5") do
-      h4(class: "is-size-4") do
-        a(href: "/cat/#{slug}") { category.name }
-      end
+    div(class: "card mb-2") do
+      div(class: "card-body") do
+        div(class: "row row-0 flex-fill") do
+          div(class: "col-md-8") do
+            h4(class: "card-title") do
+              a(href: "/cat/#{slug}") { category.name }
+            end
+          end
 
-      div do
-        render Detail.new("Threads", category.thread_count)
-        raw safe(" &middot; ")
-        render Detail.new("Messages", category.message_count)
-        if most_recent_thread
-          raw safe(" &middot; ")
-          span do
-            plain "Last message by "
-            a(href: "/") { "Test" }
-            whitespace
-            plain "in"
-            whitespace
-            a(href: "/th/") { most_recent_thread.title }
+          div(class: "col") do
+            render Detail.new("Threads", category.thread_count)
+            raw safe(" &middot; ")
+            render Detail.new("Messages", category.message_count)
+            if most_recent_thread
+              raw safe(" &middot; ")
+              span do
+                plain "Last message by "
+                a(href: "/") { "Test" }
+                whitespace
+                plain "in"
+                whitespace
+                a(href: "/th/") { most_recent_thread.title }
+              end
+            end
           end
         end
       end

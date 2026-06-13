@@ -1,6 +1,6 @@
 RSpec.describe Discussion::Entities::CurrentUser do
   let(:anonymous) { described_class.build_anonymous }
-  let(:without_profile) { described_class.build_profileless(1) }
+  let(:without_profile) { described_class.build_profileless(Data.define(:id, :email).new(1, "john@example.com")) }
   let(:user) do
     described_class.new(
       account_id: 1,

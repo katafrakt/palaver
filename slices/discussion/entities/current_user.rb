@@ -27,9 +27,10 @@ module Discussion
       end
 
       # Builds a representation of a user that does not have a profile set up yet
-      def self.build_profileless(account_id)
+      def self.build_profileless(account)
         new(
-          account_id:,
+          account_id: account.id,
+          email: account.email,
           profile_id: nil,
           nickname: ANONYMOUS,
           message_count: 0
