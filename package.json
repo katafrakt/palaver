@@ -5,6 +5,7 @@
     "assets": "node config/assets.mjs"
   },
   "dependencies": {
+    "@tabler/core": "^1.4.0",
     "esbuild-sass-plugin": "^3.7.0",
     "hanami-assets": "^2.3.3"
   },

@@ -7,9 +7,11 @@ class Discussion::Views::Thread::Show < Palaver::View
   ]
 
   def view_template
-    div do
-      heading2(@thread.title)
+    div(class: "page-header") do
+      h2(class: "page-title") { @thread.title }
+    end
 
+    div(class: "page-body") do
       @pager.entries.each do |message|
         message_row(message)
       end
@@ -35,26 +37,27 @@ class Discussion::Views::Thread::Show < Palaver::View
   private
 
   def message_row(message)
-    article(id: "message-#{message.id}", class: "mt-5 mb-5 box columns") do
-      div(class: "column is-one-quarter") do
-        p(class: "is-size-4") do
-          strong { message.author.nickname }
-        end
-        p(class: "image is-96x96 is-hidden-mobile mb-3 mt-3") do
-          img(src: avatar_url(message))
-        end
-        p(class: "is-hidden-mobile is-size-7") do
-          plain "Posts: "
-          plain message.author.message_count
-        end
-      end
+    div(id: "message-#{message.id}", class: "card mb-2") do
+      div(class: "row row-0 flex-fill") do
+        div(class: "col-md-2 p-2") do
+          h3 { message.author.nickname }
 
-      div(class: "column") do
-        div(class: "pb-2 mb-3", style: "border-bottom: solid 1px gray") do
-          small { post_date(message) }
+          p(class: "image is-96x96 is-hidden-mobile mb-3 mt-3") do
+            img(src: avatar_url(message))
+          end
+          p(class: "is-hidden-mobile is-size-7") do
+            plain "Posts: "
+            plain message.author.message_count
+          end
         end
 
-        div(class: "content") { message.text }
+        div(class: "col p-2") do
+          div(class: "pb-2 mb-3", style: "border-bottom: solid 1px gray") do
+            small { post_date(message) }
+          end
+
+          div(class: "content") { message.text }
+        end
       end
     end
   end
@@ -78,8 +81,8 @@ class Discussion::Views::Thread::Show < Palaver::View
   def reply_form
     render Ui::Components::Form.new(url: "/th/#{thread_slug}/reply") do
       hidden_field("_csrf_token", csrf_token)
-      horizontal_field(label: "Write your reply", name: :reply, type: :textarea)
-      render Ui::Components::Form::HorizontalSubmit.new(label: "Reply")
+      field(label: "Write your reply", name: :reply, type: :textarea)
+      render Ui::Components::Form::Submit.new(label: "Reply")
     end
   end
 

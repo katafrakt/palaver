@@ -7,10 +7,10 @@ class Discussion::Views::Shared::Components::NoProfileWarning < Phlex::HTML
 
   def view_template
     if @current_user.signed_in? && !@current_user.profile_set_up?
-      article(class: "message is-warning") do
-        div(class: "message-body") do
+      article(class: "alert alert-warning") do
+        div(class: "alert-description") do
           plain "You need to set up your profile to start posting. You can do that "
-          a(href: "/profile") { "here" }
+          a(href: "/profile", class: "alert-link") { "here" }
           plain "."
         end
       end

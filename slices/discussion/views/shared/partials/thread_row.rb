@@ -11,24 +11,23 @@ class Discussion::Views::Shared::Partials::ThreadRow < Phlex::HTML
   def view_template
     slug = @slugger.to_slug(Discussion::Entities::Thread::HASHIDS_NUM, @thread.title, @thread.id)
 
-    article(class: "mt-5 mb-5 media thread-row") do
-      figure(class: "media-left") do
-        p(class: "image is-64x64") do
-          img(src: "https://bulma.io/assets/images/placeholders/128x128.png")
-        end
-      end
-      div(class: "media-content") do
-        div(class: "content") do
-          h4(class: "is-size-4") do
-            a(href: "/th/#{slug}") { @thread.title }
-            span(class: "ml-2 tag is-info is-light") { "Pinned" } if @thread.pinned
+    div(class: "card mb-2") do
+      div(class: "card-body") do
+        div(class: "row row-0 flex-fill") do
+          div(class: "col-md-8") do
+            h4(class: "is-size-4") do
+              a(href: "/th/#{slug}") { @thread.title }
+              span(class: "ms-2 badge bg-azure text-azure-fg") { "Pinned" } if @thread.pinned
+            end
           end
-        end
 
-        nav(class: "level is-mobile") do
-          span do
-            strong { "Replies: " }
-            plain @thread.message_count - 1
+          div(class: "col") do
+            nav(class: "level is-mobile") do
+              span do
+                strong { "Replies: " }
+                plain @thread.message_count - 1
+              end
+            end
           end
         end
       end

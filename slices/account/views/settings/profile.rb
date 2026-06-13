@@ -13,7 +13,7 @@ module Account
             render Ui::Components::Form.new(url: "/account/settings/profile", multipart: true) do |form|
               form.csrf(csrf_token)
 
-              form.horizontal_field(label: "Nickname", name: "nickname", value: @profile&.nickname, disabled: !@profile&.nickname.nil?)
+              form.field(label: "Nickname", name: "nickname", value: @profile&.nickname, disabled: !@profile&.nickname.nil?)
 
               form.section_title("Avatar")
 
@@ -32,7 +32,7 @@ module Account
               end
 
               form.input(type: "hidden", value: nil, name: :avatar)
-              form.horizontal_field(label: "Pick new", name: :avatar, type: :file)
+              form.field(label: "Pick new", name: :avatar, type: :file)
               div(class: "is-flex pt-4") do
                 form.submit("Save changes")
               end

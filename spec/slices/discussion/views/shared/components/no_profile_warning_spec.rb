@@ -2,7 +2,7 @@ RSpec.describe Discussion::Views::Shared::Components::NoProfileWarning do
   include ComponentTestingHelper
 
   let(:anonymous) { Discussion::Entities::CurrentUser.build_anonymous }
-  let(:without_profile) { Discussion::Entities::CurrentUser.build_profileless(1) }
+  let(:without_profile) { Discussion::Entities::CurrentUser.build_profileless(Data.define(:id, :email).new(1, "john@example.com")) }
   let(:user) do
     Discussion::Entities::CurrentUser.new(
       account_id: 1,

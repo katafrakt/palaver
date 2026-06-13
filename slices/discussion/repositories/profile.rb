@@ -4,7 +4,7 @@ class Discussion::Repositories::Profile < Palaver::DB::Repo[:profiles]
     return Discussion::Entities::CurrentUser.build_anonymous unless account
 
     profile = profiles.where(account_id: id).one
-    return Discussion::Entities::CurrentUser.build_profileless(id) unless profile
+    return Discussion::Entities::CurrentUser.build_profileless(account) unless profile
 
     Discussion::Entities::CurrentUser.new(
       account_id: id,

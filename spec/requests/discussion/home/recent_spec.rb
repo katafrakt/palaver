@@ -17,7 +17,7 @@ RSpec.describe "GET /recent", type: :request do
 
     expect(last_response).to be_successful
     doc = Nokolexbor::HTML(last_response.body)
-    titles = doc.css(".thread-row").map do |row|
+    titles = doc.css(".card-body>.row").map do |row|
       row.at_css("h4 a").text
     end
     expect(titles).to eq([th2.title, th3.title, th1.title])

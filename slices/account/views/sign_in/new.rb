@@ -14,10 +14,10 @@ class Account::Views::SignIn::New < Palaver::View
           div do
             render Ui::Components::Form.new(url: "/account/sign_in") do
               hidden_field("_csrf_token", csrf_token)
-              horizontal_field(label: "Email", name: "email", placeholder: "your-email@domain.com")
-              horizontal_field(label: "Password", name: "password", type: :password,
+              field(label: "Email", name: "email", placeholder: "your-email@domain.com")
+              field(label: "Password", name: "password", type: :password,
                 value: @values[:password], error: @errors[:password])
-              render Ui::Components::Form::HorizontalSubmit.new(label: "Sign in")
+              render Ui::Components::Form::Submit.new(label: "Sign in")
             end
           end
         end

@@ -15,7 +15,9 @@ module Ui
       def view_template(&content)
         params = {method: "POST", action: url}
         params[:enctype] = "multipart/form-data" if @multipart
-        form(**params, &content)
+        form(**params) do
+          div(class: "space-y", &content)
+        end
       end
 
       def section_title(title, pad_top: false)
