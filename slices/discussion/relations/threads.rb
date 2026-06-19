@@ -16,6 +16,7 @@ module Discussion
 
       def with_message_counts
         left_join(:messages, {thread_id: :id}, table_alias: :regular_messages)
+          .group(:id)
           .select_append { [integer.count(Sequel[:regular_messages][:id]).as(:message_count)] }
       end
     end

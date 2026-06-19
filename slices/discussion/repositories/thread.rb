@@ -5,9 +5,31 @@ module Discussion
     class Thread < Palaver::DB::Repo[:threads]
       def by_category(category_id)
         threads.where(category_id:)
+          .with_message_counts
           .combine(:last_message)
           .order([Sequel.case({pinned: 0}, 1)])
+          .as(:thread_list_item)
           .to_a
+      end
+
+      def recent_threads
+        threads
+          .left_join(:messages, {id: Sequel[:threads][:last_message_id]}, table_alias: :last_messages)
+          .left_join(:messages, {thread_id: Sequel[:threads][:id]}, table_alias: :regular_messages)
+          .group(threads[:id], Sequel[:last_messages][:posted_at])
+          .select_append { [integer.count(Sequel[:regular_messages][:id]).as(:message_count)] }
+          .order(Sequel[:last_messages][:posted_at].desc)
+          .as(:thread_list_item)
+      end
+
+      def new_threads
+        threads
+          .left_join(:messages, {id: Sequel[:threads][:first_message_id]}, table_alias: :first_messages)
+          .left_join(:messages, {thread_id: Sequel[:threads][:id]}, table_alias: :regular_messages)
+          .group(threads[:id], Sequel[:first_messages][:posted_at])
+          .select_append { [integer.count(Sequel[:regular_messages][:id]).as(:message_count)] }
+          .order(Sequel[:first_messages][:posted_at].desc)
+          .as(:thread_list_item)
       end
 
       def message_counts(thread_ids)
