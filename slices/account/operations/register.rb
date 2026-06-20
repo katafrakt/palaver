@@ -2,8 +2,7 @@ module Account
   module Operations
     class Register < Account::Operation
       include Deps[
-        "mailer",
-        registration_email: "emails.post_register",
+        "mailers.post_register",
         repo: "repositories.account",
         hasher: "utils.hasher"
               ]
@@ -35,8 +34,12 @@ module Account
       end
 
       def send_email(account)
-        email = registration_email.build(account:)
-        mailer.deliver(email)
+        post_register.deliver(
+          email: account.email,
+          account_id: account.id,
+          confirmation_token: account.confirmation_token
+        )
+
         Success()
       end
     end

@@ -4,13 +4,14 @@ source "https://gem.coop"
 
 gem "rake"
 
-gem "hanami", "3.0.0.rc1"
+gem "hanami", github: "hanami/hanami"
 gem "hanami-action", "3.0.0.rc1"
 gem "hanami-router", "3.0.0.rc1"
 gem "hanami-utils", "3.0.0.rc1"
 gem "hanami-assets", "3.0.0.rc1"
 gem "hanami-db", "3.0.0.rc1"
 gem "hanami-cli", "3.0.0.rc1"
+gem "hanami-mailer", "3.0.0.rc1"
 
 gem "argon2", "~> 2.1"
 gem "pg"

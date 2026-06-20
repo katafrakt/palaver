@@ -2,10 +2,9 @@ require "mail"
 
 RSpec.describe Account::Operations::Register do
   subject(:operation) { described_class.new }
+  let(:test_mailer) { Hanami.app["mailers.delivery_method"] }
 
-  before do
-    Mail::TestMailer.deliveries.clear
-  end
+  before { test_mailer.clear }
 
   it "returns success with account" do
     result = operation.call(email: "test@test.com", password: "123456")
@@ -15,10 +14,10 @@ RSpec.describe Account::Operations::Register do
 
   it "sends a registration email" do
     operation.call(email: "test@test.com", password: "123456")
-    email = Mail::TestMailer.deliveries.first
+    email = test_mailer.deliveries.first.message
     expect(email).not_to be_nil
-    expect(email.subject).to eq("Your account has been created")
-    expect(email.html_part.body.to_s).to match("test@test.com")
+    expect(email.subject).to eq("Welcome to Palaver!")
+    expect(email.html_body).to match("test@test.com")
   end
 
   describe "with non-unique email" do
