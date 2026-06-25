@@ -1,6 +1,5 @@
 Hanami.app.register_provider :mailers, namespace: true do
   prepare do
-    require "mail"
     require "mailer/logger_delivery"
   end
 

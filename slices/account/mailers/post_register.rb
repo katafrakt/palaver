@@ -4,6 +4,11 @@ module Account
       to { |email:| email }
       subject { "Welcome to Palaver!" }
 
+      template_input do
+        attribute :email, Types::Strict::String
+        attribute :confirmation_url, Types::Strict::String
+      end
+
       expose :email
 
       expose :confirmation_url do |account_id:, confirmation_token:|
@@ -12,13 +17,13 @@ module Account
       end
 
       html_template do |input|
-        h1 { "Welcome #{input[:email]}!" }
+        h1 { "Welcome #{input.email}!" }
 
         p { "Thank you for registering on Palaver!" }
 
         p do
           plain "In order to confirm your account, please click on the following link: "
-          a(href: input[:confirmation_url]) { "confirm account" }
+          a(href: input.confirmation_url) { "confirm account" }
           plain "."
         end
       end
