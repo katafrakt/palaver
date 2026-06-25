@@ -22,6 +22,6 @@ module Palaver
     # disable default view inferrer
     config.actions.view_name_inferrer = FakeViewNameInferrer
 
-    config.shared_app_component_keys += ["mailer", "mailers.delivery_method"]
+    config.shared_app_component_keys += ["mailers.delivery_method"]
   end
 end

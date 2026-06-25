@@ -31,8 +31,6 @@ source "https://gem.coop/@dry" do
   gem "dry-validation", "~> 1.11"
 end
 
-gem "correo", path: "gems/correo"
-
 group :cli, :development do
   gem "hanami-reloader", "3.0.0.rc1"
 end
