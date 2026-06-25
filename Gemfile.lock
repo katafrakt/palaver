@@ -4,24 +4,6 @@ GIT
   specs:
     diaeresis (0.1.0)
 
-GIT
-  remote: https://github.com/hanami/hanami.git
-  revision: e92c900a3f39c65c6cb5d2669c855866996867be
-  specs:
-    hanami (3.0.0.rc1)
-      bundler (>= 2.0)
-      dry-configurable (~> 1.0, >= 1.2.0, < 2)
-      dry-core (~> 1.0, < 2)
-      dry-inflector (~> 1.0, >= 1.1.0, < 2)
-      dry-logger (~> 1.2, < 2)
-      dry-monitor (~> 1.0, >= 1.0.1, < 2)
-      dry-system (~> 1.1)
-      hanami-cli (>= 2.3.1)
-      hanami-utils (>= 2.3.0)
-      json (>= 2.7.2)
-      rack-session
-      zeitwerk (~> 2.6)
-
 GEM
   remote: https://gem.coop/
   specs:
@@ -114,50 +96,16 @@ GEM
       guard (~> 2.14)
       guard-compat (~> 1.2)
       puma (>= 4.0, < 8)
-    hanami-action (3.0.0.rc1)
-      dry-configurable (~> 1.4)
-      dry-core (~> 1.0)
-      hanami-utils (~> 3.0.0.rc)
-      rack (>= 2.2.16)
-      zeitwerk (~> 2.6)
-    hanami-assets (3.0.0.rc1)
-      zeitwerk (~> 2.6)
-    hanami-cli (3.0.0.rc1)
-      bundler (>= 2.1)
-      dry-cli (~> 1.0, >= 1.4.0)
-      dry-files (~> 1.0, >= 1.0.2)
-      dry-inflector (~> 1.0)
-      irb
-      rackup
-      rake (~> 13.0)
-      zeitwerk (~> 2.6)
-    hanami-db (3.0.0.rc1)
-      rom (~> 5.4, >= 5.4.1)
-      rom-sql (~> 3.7)
-      zeitwerk (~> 2.6)
-    hanami-mailer (3.0.0.rc1)
-      dry-configurable (~> 1.0)
-      mail (~> 2.7)
-      zeitwerk
-    hanami-reloader (3.0.0.rc1)
+    hanami-reloader (3.0.0)
       guard (~> 2.19)
       guard-puma (~> 0.8)
-      hanami-cli (~> 3.0.0.rc)
+      hanami-cli (~> 3.0.0)
       zeitwerk (~> 2.6)
-    hanami-router (3.0.0.rc1)
-      csv (~> 3.3)
-      mustermann (~> 3.1)
-      rack (>= 2.2.16)
-    hanami-rspec (3.0.0.rc1)
-      hanami-cli (~> 3.0.0.rc)
+    hanami-rspec (3.0.0)
+      hanami-cli (~> 3.0.0)
       rake (~> 13.0)
       rspec (~> 3.12)
       zeitwerk (~> 2.6)
-    hanami-utils (3.0.0.rc1)
-      bigdecimal (~> 3.1)
-      concurrent-ruby (~> 1.0)
-      dry-core (~> 1.0, < 2)
-      dry-transformer (~> 1.0, < 2)
     hashids (1.0.6)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
@@ -390,6 +338,57 @@ GEM
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
 
+GEM
+  remote: https://gem.coop/@hanami/
+  specs:
+    hanami (3.0.0)
+      bundler (>= 2.0)
+      dry-configurable (~> 1.0, >= 1.2.0, < 2)
+      dry-core (~> 1.0, < 2)
+      dry-inflector (~> 1.0, >= 1.1.0, < 2)
+      dry-logger (~> 1.2, < 2)
+      dry-monitor (~> 1.0, >= 1.0.1, < 2)
+      dry-system (~> 1.1)
+      hanami-cli (>= 2.3.1)
+      hanami-utils (~> 3.0.0)
+      json (>= 2.7.2)
+      rack-session
+      zeitwerk (~> 2.6)
+    hanami-action (3.0.0)
+      dry-configurable (~> 1.4)
+      dry-core (~> 1.0)
+      hanami-utils (~> 3.0.0.rc)
+      rack (>= 2.2.16)
+      zeitwerk (~> 2.6)
+    hanami-assets (3.0.0)
+      zeitwerk (~> 2.6)
+    hanami-cli (3.0.0)
+      bundler (>= 2.1)
+      dry-cli (~> 1.0, >= 1.4.0)
+      dry-files (~> 1.0, >= 1.0.2)
+      dry-inflector (~> 1.0)
+      irb
+      rackup
+      rake (~> 13.0)
+      zeitwerk (~> 2.6)
+    hanami-db (3.0.0)
+      rom (~> 5.4, >= 5.4.1)
+      rom-sql (~> 3.7)
+      zeitwerk (~> 2.6)
+    hanami-mailer (3.0.0)
+      dry-configurable (~> 1.0)
+      mail (~> 2.7)
+      zeitwerk
+    hanami-router (3.0.0)
+      csv (~> 3.3)
+      mustermann (~> 3.1)
+      rack (>= 2.2.16)
+    hanami-utils (3.0.0)
+      bigdecimal (~> 3.1)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0, < 2)
+      dry-transformer (~> 1.0, < 2)
+
 PLATFORMS
   aarch64-linux
   aarch64-linux-gnu
@@ -412,16 +411,16 @@ DEPENDENCIES
   dry-validation (~> 1.11)!
   faker
   guard-puma
-  hanami!
-  hanami-action (= 3.0.0.rc1)
-  hanami-assets (= 3.0.0.rc1)
-  hanami-cli (= 3.0.0.rc1)
-  hanami-db (= 3.0.0.rc1)
-  hanami-mailer (= 3.0.0.rc1)
-  hanami-reloader (= 3.0.0.rc1)
-  hanami-router (= 3.0.0.rc1)
-  hanami-rspec (= 3.0.0.rc1)
-  hanami-utils (= 3.0.0.rc1)
+  hanami (= 3.0.0)!
+  hanami-action (= 3.0.0)!
+  hanami-assets (= 3.0.0)!
+  hanami-cli (= 3.0.0)!
+  hanami-db (= 3.0.0)!
+  hanami-mailer (= 3.0.0)!
+  hanami-reloader (= 3.0.0)
+  hanami-router (= 3.0.0)!
+  hanami-rspec (= 3.0.0)
+  hanami-utils (= 3.0.0)!
   hashids
   marcel (~> 1.1.0)
   nokolexbor
@@ -490,16 +489,16 @@ CHECKSUMS
   guard (2.20.1) sha256=ab9cd7873854e6b76080c0589f781ff3e390e441bdda20165804df54f977015a
   guard-compat (1.2.1) sha256=3ad21ab0070107f92edfd82610b5cdc2fb8e368851e72362ada9703443d646fe
   guard-puma (0.9.2) sha256=a8a9f7938b063737c6ed68cbc029cc05d8183426d65f877266fc0c243fe690d9
-  hanami (3.0.0.rc1)
-  hanami-action (3.0.0.rc1) sha256=5c9ea9ffb5aa39f3d5a84df43d8b9e3a75d32710896717ce8be347bc4560104d
-  hanami-assets (3.0.0.rc1) sha256=1177aa25005fbf38becdf211ac9feb512b9a0aabbbb5f98ef715d81ef268db2c
-  hanami-cli (3.0.0.rc1) sha256=8096897843303c285094d83054686263f409e397d9eca8943ed63cc61a4fd713
-  hanami-db (3.0.0.rc1) sha256=821b3bef82b85fe434ca397331ca50225d2dfe76998a23fecff3fa57f0edd99d
-  hanami-mailer (3.0.0.rc1) sha256=81e258ece49bd4c2d838378e19a4be4afce069499d09c73e58522c8e5cb0eaa9
-  hanami-reloader (3.0.0.rc1) sha256=e8a84198347cd9a0374a64f257235079132f816b251d64f395ad26a1d7fb66ad
-  hanami-router (3.0.0.rc1) sha256=2dd7f0b6ea5f01240a73b185bad0039b8c191fa29a3d50bb7ae2c776c272a1dd
-  hanami-rspec (3.0.0.rc1) sha256=ebd2742bc04bcdf450d2ccc8f28e5a23ed92e4f11847d605ac664ba0fd1c8e6a
-  hanami-utils (3.0.0.rc1) sha256=b0cc4970adf245c7fdb17f6fbd381e0cf001f1e1d6c9807c5354035d1b5f347c
+  hanami (3.0.0) sha256=f7531a8d73e3a5e32882b44c88f04b169f65fc2649c954e24894276735a2c7fe
+  hanami-action (3.0.0) sha256=7f816bcaf8f364a111a046a8b236c1492286705604c01a4a2c9b1806a663d493
+  hanami-assets (3.0.0) sha256=b9ce246ca12ffa8e79f71194e312a484ffbb0d8fd28582b22869706c0afbd3da
+  hanami-cli (3.0.0) sha256=9d51bb7b0f0b4eaf67ea1dc8b27774428ee831647b107d2e9f6ad3317b1598ec
+  hanami-db (3.0.0) sha256=01d25fd514896b355c9677730e2a45bc3a0b847e2d569a67cb50954c17b1d499
+  hanami-mailer (3.0.0) sha256=ebda1b0d2ca52910ef1de915227753d5ab8405dc97b6b32efbd79658d31943c6
+  hanami-reloader (3.0.0) sha256=83ec74452e29dbae1670f515fb697795461d643dbcc4404ad0e319214e4fd37b
+  hanami-router (3.0.0) sha256=2438db070c7ed7d3f28f1777fc32bdc86e7a9b744a29ab51098f4fa41408210b
+  hanami-rspec (3.0.0) sha256=14d3ffb2dd4b5a028007ddf5442028c3d05ea8126c95def1cd83c23fd3c82ee7
+  hanami-utils (3.0.0) sha256=b1f33675dcfe90b96c15ede503046b6a36bf446cbe61671b76f266b10ae723a2
   hashids (1.0.6) sha256=a344c05f249417492bf48451a93770558834ff7a445e1b64ef112954a0293019
   i18n (1.14.8) sha256=285778639134865c5e0f6269e0b818256017e8cde89993fdfcbfb64d088824a5
   ice_nine (0.11.2) sha256=5d506a7d2723d5592dc121b9928e4931742730131f22a1a37649df1c1e2e63db

@@ -4,14 +4,16 @@ source "https://gem.coop"
 
 gem "rake"
 
-gem "hanami", github: "hanami/hanami"
-gem "hanami-action", "3.0.0.rc1"
-gem "hanami-router", "3.0.0.rc1"
-gem "hanami-utils", "3.0.0.rc1"
-gem "hanami-assets", "3.0.0.rc1"
-gem "hanami-db", "3.0.0.rc1"
-gem "hanami-cli", "3.0.0.rc1"
-gem "hanami-mailer", "3.0.0.rc1"
+source "https://gem.coop/@hanami" do
+  gem "hanami", "3.0.0"
+  gem "hanami-action", "3.0.0"
+  gem "hanami-router", "3.0.0"
+  gem "hanami-utils", "3.0.0"
+  gem "hanami-assets", "3.0.0"
+  gem "hanami-db", "3.0.0"
+  gem "hanami-cli", "3.0.0"
+  gem "hanami-mailer", "3.0.0"
+end
 
 gem "argon2", "~> 2.1"
 gem "pg"
@@ -32,13 +34,13 @@ source "https://gem.coop/@dry" do
 end
 
 group :cli, :development do
-  gem "hanami-reloader", "3.0.0.rc1"
+  gem "hanami-reloader", "3.0.0"
 end
 
 group :cli, :development, :test do
   gem "dotenv", "~> 2.7"
   gem "faker"
-  gem "hanami-rspec", "3.0.0.rc1"
+  gem "hanami-rspec", "3.0.0"
   gem "standard"
 end
 
