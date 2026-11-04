@@ -3,7 +3,8 @@
 class Account::Actions::Registration::New < Account::Action
   require_signed_out_user!
 
-  def handle(req, res)
-    res.render(Account::Views::Registration::New, values: {}, errors: {})
+  def handle(_req, res)
+    res[:values] = {}
+    res[:errors]
   end
 end

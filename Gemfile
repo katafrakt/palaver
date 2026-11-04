@@ -13,11 +13,12 @@ source "https://gem.coop/@hanami" do
   gem "hanami-db", "~> 3.0.0"
   gem "hanami-cli", "~> 3.0.0"
   gem "hanami-mailer", "~> 3.0.0"
+  gem "hanami-view", "~> 3.0.0"
 end
 
 gem "argon2", "~> 2.1"
 gem "pg"
-gem "phlex", "~> 2.3.0"
+gem "phlex-hanami", "~> 0.2.0", source: "https://gem.coop/@aaron"
 gem "puma"
 gem "shrine", "~> 3.6"
 gem "marcel", "~> 1.1.0"
