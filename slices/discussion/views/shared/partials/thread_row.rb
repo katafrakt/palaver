@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class Discussion::Views::Shared::Partials::ThreadRow < Phlex::HTML
-  include Discussion::Deps["utils.slugger"]
-
-  def initialize(thread, slugger:)
+  def initialize(thread)
     @thread = thread
-    @slugger = slugger
+    @slugger = Discussion::Utils::Slugger.new
   end
 
   def view_template

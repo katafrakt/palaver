@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Discussion::Views::Home::NewThreads < Palaver::View
+  def initialize(threads:)
+    @threads = threads
+  end
+
   def view_template
     div do
       render Discussion::Views::Shared::Components::NoProfileWarning.new(current_user)

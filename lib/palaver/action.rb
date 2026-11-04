@@ -5,8 +5,6 @@ require "hanami/action"
 require "hanami/action/session"
 require "phlex"
 require "dry/monads"
-require "ui/layout"
-require "hanami_extensions"
 
 module Palaver
   class Action < Hanami::Action
@@ -17,6 +15,12 @@ module Palaver
     before :fetch_current_user_id
 
     private
+
+    # The view context is built when the response is rendered, so exposures
+    # set by before callbacks are available on it.
+    def view_context_options(req, res)
+      super.merge(current_user: res[:current_user])
+    end
 
     def validate_params(req)
       req.params.valid? ? Success() : Failure(:invalid_params)

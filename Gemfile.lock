@@ -286,7 +286,9 @@ GEM
     standard-performance (1.9.0)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.26.0)
+    temple (0.10.7)
     thor (1.5.0)
+    tilt (2.9.0)
     timeout (0.6.1)
     transproc (1.1.1)
     tsort (0.2.0)
@@ -295,6 +297,14 @@ GEM
     unicode-emoji (4.2.0)
     verifica (1.0.2)
     zeitwerk (2.8.2)
+
+GEM
+  remote: https://gem.coop/@aaron/
+  specs:
+    phlex-hanami (0.2.0)
+      hanami (~> 3)
+      phlex (~> 2)
+      zeitwerk (~> 2)
 
 GEM
   remote: https://gem.coop/@dry/
@@ -392,6 +402,13 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.0, < 2)
       dry-transformer (~> 1.0, < 2)
+    hanami-view (3.0.2)
+      dry-configurable (~> 1.4)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0, < 2)
+      temple (~> 0.10.0, >= 0.10.2)
+      tilt (~> 2.3)
+      zeitwerk (~> 2.6)
 
 PLATFORMS
   aarch64-linux
@@ -425,11 +442,12 @@ DEPENDENCIES
   hanami-router (~> 3.0.0)!
   hanami-rspec (= 3.0.0)
   hanami-utils (~> 3.0.0)!
+  hanami-view (~> 3.0.0)!
   hashids
   marcel (~> 1.1.0)
   nokolexbor
   pg
-  phlex (~> 2.3.0)
+  phlex-hanami (~> 0.2.0)!
   puma
   rack-test
   rake
@@ -503,6 +521,7 @@ CHECKSUMS
   hanami-router (3.0.0) sha256=2438db070c7ed7d3f28f1777fc32bdc86e7a9b744a29ab51098f4fa41408210b
   hanami-rspec (3.0.0) sha256=14d3ffb2dd4b5a028007ddf5442028c3d05ea8126c95def1cd83c23fd3c82ee7
   hanami-utils (3.0.1) sha256=0d46181bd86115127a04a6d0481df819eb558714ce58c6b4da7e0bb65c5dcd9b
+  hanami-view (3.0.2) sha256=b145c23a720e76b05f178ef087340ffe27ea00495ec4d4a53bd1bd391fbb0592
   hashids (1.0.6) sha256=a344c05f249417492bf48451a93770558834ff7a445e1b64ef112954a0293019
   i18n (1.15.2) sha256=00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5
   ice_nine (0.11.2) sha256=5d506a7d2723d5592dc121b9928e4931742730131f22a1a37649df1c1e2e63db
@@ -536,6 +555,7 @@ CHECKSUMS
   pg (1.6.3-aarch64-linux-musl) sha256=06a75f4ea04b05140146f2a10550b8e0d9f006a79cdaf8b5b130cde40e3ecc2c
   pg (1.6.3-arm64-darwin) sha256=7240330b572e6355d7c75a7de535edb5dfcbd6295d9c7777df4d9dddfb8c0e5f
   phlex (2.3.2) sha256=3a22d844efa80fecdfa1480422a3611f09c7185b2be3abf4d6b01c4abba922ea
+  phlex-hanami (0.2.0) sha256=07dae76d43fd9fff80222772cf954562f829933d7933a91bc1a6673c9436416f
   pp (0.6.4) sha256=dfcb0fce700c41456265922884f9fe195d7fbb0674a3578e6c0f69588e82b570
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
@@ -582,7 +602,9 @@ CHECKSUMS
   standard (1.55.0) sha256=8a8f2c3e681a4db3aafde1b301561b0f3d7c5f06c160167cb744a4d7baf0426e
   standard-custom (1.0.2) sha256=424adc84179a074f1a2a309bb9cf7cd6bfdb2b6541f20c6bf9436c0ba22a652b
   standard-performance (1.9.0) sha256=49483d31be448292951d80e5e67cdcb576c2502103c7b40aec6f1b6e9c88e3f2
+  temple (0.10.7) sha256=369fe560adb6534674ce232899c2232df614bcb29c5359b05efedff7a57ed9c0
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
+  tilt (2.9.0) sha256=da5735d0280bba96e9a91041bb14aee435ccad5c17b0fa519249ae543d9aa3a5
   timeout (0.6.1) sha256=78f57368a7e7bbadec56971f78a3f5ecbcfb59b7fcbb0a3ed6ddc08a5094accb
   transproc (1.1.1) sha256=b2f9a85ecaf7064f0b3893ffac929de9fd713b13f5aaf822b0bd091fd6f5c8c2
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f
