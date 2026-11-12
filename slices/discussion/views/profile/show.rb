@@ -3,6 +3,10 @@
 class Discussion::Views::Profile::Show < Palaver::View
   include Ui::Typography
 
+  def initialize(profile:)
+    @profile = profile
+  end
+
   def view_template
     div do
       heading2(@profile.nickname)

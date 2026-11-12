@@ -28,7 +28,8 @@ class Account::Actions::Registration::Create < Account::Action
     else
       email_error = "must be unique"
       res.status = 422
-      res.render(Account::Views::Registration::New, values: req.params.to_h, errors: {email: [email_error]})
+      res[:values] = req.params.to_h
+      res[:errors] = {email: [email_error]}
     end
   end
 end

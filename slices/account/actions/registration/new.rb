@@ -5,6 +5,6 @@ class Account::Actions::Registration::New < Account::Action
 
   def handle(_req, res)
     res[:values] = {}
-    res[:errors]
+    res[:errors] = {}
   end
 end

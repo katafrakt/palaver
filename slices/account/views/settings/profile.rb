@@ -6,6 +6,10 @@ module Account
         include Account::Components::Settings
         include Deps[repo: "repositories.profile"]
 
+        def initialize(repo:)
+          @repo = repo
+        end
+
         def view_template
           @profile = repo.by_account_id(current_user.id)
 

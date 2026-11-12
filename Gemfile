@@ -5,8 +5,8 @@ source "https://gem.coop"
 gem "rake"
 
 source "https://gem.coop/@hanami" do
-  gem "hanami", "~> 3.0.0"
-  gem "hanami-action", "~> 3.0.0"
+  gem "hanami", "~> 3.0.2"
+  gem "hanami-action", "~> 3.0.1"
   gem "hanami-router", "~> 3.0.0"
   gem "hanami-utils", "~> 3.0.0"
   gem "hanami-assets", "~> 3.0.0"
@@ -18,7 +18,7 @@ end
 
 gem "argon2", "~> 2.1"
 gem "pg"
-gem "phlex-hanami", "~> 0.2.0", source: "https://gem.coop/@aaron"
+gem "phlex-hanami", "~> 0.3", source: "https://gem.coop/@aaron"
 gem "puma"
 gem "shrine", "~> 3.6"
 gem "marcel", "~> 1.1.0"

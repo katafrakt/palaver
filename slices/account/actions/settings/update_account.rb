@@ -42,9 +42,7 @@ module Account
         private
 
         def render_show(req, res)
-          current_user = res[:current_user]
-          settings = repo.settings_by_user_id(current_user.id)
-          res.render(Account::Views::Settings::Auth, settings:, errors: req.params.errors, values: req.params.to_h)
+          res.render(Account::Views::Settings::Auth, errors: req.params.errors, values: req.params.to_h)
         end
       end
     end

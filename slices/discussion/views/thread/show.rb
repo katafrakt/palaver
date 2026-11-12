@@ -6,6 +6,13 @@ class Discussion::Views::Thread::Show < Palaver::View
     slugger: "utils.slugger"
   ]
 
+  def initialize(thread:, pager:, access_control:, slugger:)
+    @thread = thread
+    @pager = pager
+    @access_control = access_control
+    @slugger = slugger
+  end
+
   def view_template
     div(class: "page-header") do
       h2(class: "page-title") { @thread.title }

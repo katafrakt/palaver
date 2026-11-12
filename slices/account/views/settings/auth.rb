@@ -5,6 +5,12 @@ class Account::Views::Settings::Auth < Palaver::View
   include Account::Components::Settings
   include Account::Deps[repo: "repositories.account"]
 
+  def initialize(repo:, errors: {}, values: {})
+    @errors = errors
+    @values = values
+    @repo = repo
+  end
+
   def view_template
     @settings = repo.settings_by_user_id(current_user.id)
 

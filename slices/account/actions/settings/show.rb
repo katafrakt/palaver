@@ -9,9 +9,9 @@ module Account
         def handle(req, res)
           case req.params[:tab]
           when "account"
-            res.render(Account::Views::Settings::Auth, errors: {}, values: {})
+            res.render(Account::Views::Settings::Auth)
           when "profile"
-            res.render(Account::Views::Settings::Profile, errors: {}, values: {})
+            res.render(Account::Views::Settings::Profile)
           else
             res.flash[:error] = "Unknown settings area"
             res.redirect "/"
