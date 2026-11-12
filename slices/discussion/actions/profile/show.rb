@@ -11,9 +11,9 @@ class Discussion::Actions::Profile::Show < Discussion::Action
     profile = res[:current_user]
 
     if profile.profile_set_up?
-      res.render(Discussion::Views::Profile::Show, profile:)
+      res[:profile] = profile
     else
-      res.redirect "/account/settings"
+      res.redirect_to "/account/settings"
     end
   end
 end

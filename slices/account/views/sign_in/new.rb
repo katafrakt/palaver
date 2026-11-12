@@ -6,6 +6,11 @@ class Account::Views::SignIn::New < Palaver::View
   include ::Ui::Typography
   include ::Ui::Form
 
+  def initialize(errors: {}, values: {})
+    @errors = errors
+    @values = values
+  end
+
   def view_template
     div do
       heading2("Sign in")
